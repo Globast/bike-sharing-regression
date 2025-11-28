@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>7. Métodos robustos para datos temporales &#8212; Bike Sharing Regression</title>
+    <title>8. Validación y selección del modelo &#8212; Bike Sharing Regression</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/metodos_robustos';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/8_validacion_modelo';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8. Validación y selección del modelo" href="validacion_modelo.html" />
-    <link rel="prev" title="6. Diagnóstico de supuestos del modelo" href="diagnostico_supuestos.html" />
+    <link rel="next" title="9. Simulación Monte Carlo" href="9_monte_carlo.html" />
+    <link rel="prev" title="7. Métodos robustos para datos temporales" href="7_metodos_robustos.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="prefacio.html">
+<a class="navbar-brand logo" href="0_prefacio.html">
   
   
   
@@ -174,26 +174,30 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="prefacio.html">
+                <a class="reference internal" href="0_prefacio.html">
                     Prefacio
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="guia_reproduccion.html">0.1 Guía de reproducción</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demostraciones.html">0.2 Demostraciones solicitadas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ingenieria_temporal.html">2. Ingeniería de variables y preprocesamiento temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mco_matricial.html">4. Implementación matricial de MCO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="inferencia_temporal.html">5. Inferencia estadística en datos temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="diagnostico_supuestos.html">6. Diagnóstico de supuestos del modelo</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Métodos robustos para datos temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="validacion_modelo.html">8. Validación y selección del modelo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="monte_carlo.html">9. Simulación Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpretacion_operativa.html">10. Interpretación operativa y recomendaciones</a></li>
-<li class="toctree-l1"><a class="reference internal" href="conclusiones_extensiones.html">11. Conclusiones y extensiones futuras</a></li>
-<li class="toctree-l1"><a class="reference internal" href="referencias.html">12. Referencias</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prefacio</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0_guia_reproduccion.html">0.1 Guía de reproducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0_demostraciones.html">0.2 Demostraciones solicitadas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contenido</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">2. Ingeniería de variables y preprocesamiento temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Implementación matricial de MCO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_inferencia_temporal.html">5. Inferencia estadística en datos temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_diagnostico_supuestos.html">6. Diagnóstico de supuestos del modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_metodos_robustos.html">7. Métodos robustos para datos temporales</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Validación y selección del modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_monte_carlo.html">9. Simulación Monte Carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_interpretacion_operativa.html">10. Interpretación operativa y recomendaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_conclusiones_extensiones.html">11. Conclusiones y extensiones futuras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_referencias.html">12. Referencias</a></li>
 </ul>
 
     </div>
@@ -248,7 +252,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/metodos_robustos.md" target="_blank"
+      <li><a href="../_sources/notebooks/8_validacion_modelo.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -332,7 +336,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>7. Métodos robustos para datos temporales</h1>
+    <h1>8. Validación y selección del modelo</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -342,8 +346,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-robustos-hac">7.1 Errores estándar robustos HAC</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-alternativos">7.2 Modelos alternativos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particiones-temporales-con-timeseriessplit">8.1 Particiones temporales con <code class="docutils literal notranslate"><span class="pre">TimeSeriesSplit</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-especificaciones">8.2 Comparación de especificaciones</a></li>
 </ul>
             </nav>
         </div>
@@ -355,20 +359,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="metodos-robustos-para-datos-temporales">
-<h1>7. Métodos robustos para datos temporales<a class="headerlink" href="#metodos-robustos-para-datos-temporales" title="Link to this heading">#</a></h1>
-<p>Dado que los datos horarios presentan autocorrelación y posibles cambios de varianza, complementamos el análisis con métodos robustos.</p>
-<section id="errores-estandar-robustos-hac">
-<h2>7.1 Errores estándar robustos HAC<a class="headerlink" href="#errores-estandar-robustos-hac" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="validacion-y-seleccion-del-modelo">
+<h1>8. Validación y selección del modelo<a class="headerlink" href="#validacion-y-seleccion-del-modelo" title="Link to this heading">#</a></h1>
+<p>Para respetar la naturaleza temporal de los datos, utilizamos esquemas de validación cruzada específicos para series temporales.</p>
+<section id="particiones-temporales-con-timeseriessplit">
+<h2>8.1 Particiones temporales con <code class="docutils literal notranslate"><span class="pre">TimeSeriesSplit</span></code><a class="headerlink" href="#particiones-temporales-con-timeseriessplit" title="Link to this heading">#</a></h2>
 </section>
-<section id="modelos-alternativos">
-<h2>7.2 Modelos alternativos<a class="headerlink" href="#modelos-alternativos" title="Link to this heading">#</a></h2>
-<p>En esta sección se discuten posibles extensiones:</p>
-<ul class="simple">
-<li><p>Modelos con términos autorregresivos explícitos.</p></li>
-<li><p>Transformaciones de la respuesta (por ejemplo, raíz cuadrada o logaritmo).</p></li>
-<li><p>Penalización de coeficientes (ridge, lasso) respetando la estructura temporal mediante validación cruzada temporal.</p></li>
-</ul>
+<section id="comparacion-de-especificaciones">
+<h2>8.2 Comparación de especificaciones<a class="headerlink" href="#comparacion-de-especificaciones" title="Link to this heading">#</a></h2>
+<p>A partir de este esquema se pueden comparar distintas especificaciones de variables y transformaciones, eligiendo aquella con mejor desempeño promedio en el horizonte de validación.</p>
 </section>
 </section>
 
@@ -403,20 +402,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="diagnostico_supuestos.html"
+       href="7_metodos_robustos.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">6. Diagnóstico de supuestos del modelo</p>
+        <p class="prev-next-title">7. Métodos robustos para datos temporales</p>
       </div>
     </a>
     <a class="right-next"
-       href="validacion_modelo.html"
+       href="9_monte_carlo.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">8. Validación y selección del modelo</p>
+        <p class="prev-next-title">9. Simulación Monte Carlo</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -436,8 +435,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-robustos-hac">7.1 Errores estándar robustos HAC</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-alternativos">7.2 Modelos alternativos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particiones-temporales-con-timeseriessplit">8.1 Particiones temporales con <code class="docutils literal notranslate"><span class="pre">TimeSeriesSplit</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-especificaciones">8.2 Comparación de especificaciones</a></li>
 </ul>
   </nav></div>
 

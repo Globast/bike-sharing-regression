@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4. Implementación matricial de MCO &#8212; Bike Sharing Regression</title>
+    <title>5. Inferencia estadística en datos temporales &#8212; Bike Sharing Regression</title>
   
   
   
@@ -57,13 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"tex": {"tags": "ams", "useLabelIds": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/mco_matricial';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/5_inferencia_temporal';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. Inferencia estadística en datos temporales" href="inferencia_temporal.html" />
-    <link rel="prev" title="3. Análisis exploratorio de series temporales" href="exploratorio_temporal.html" />
+    <link rel="next" title="6. Diagnóstico de supuestos del modelo" href="6_diagnostico_supuestos.html" />
+    <link rel="prev" title="4. Implementación matricial de MCO" href="4_mco_matricial.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -144,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="prefacio.html">
+<a class="navbar-brand logo" href="0_prefacio.html">
   
   
   
@@ -176,26 +174,30 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="prefacio.html">
+                <a class="reference internal" href="0_prefacio.html">
                     Prefacio
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="guia_reproduccion.html">0.1 Guía de reproducción</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demostraciones.html">0.2 Demostraciones solicitadas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ingenieria_temporal.html">2. Ingeniería de variables y preprocesamiento temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Implementación matricial de MCO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="inferencia_temporal.html">5. Inferencia estadística en datos temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="diagnostico_supuestos.html">6. Diagnóstico de supuestos del modelo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metodos_robustos.html">7. Métodos robustos para datos temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="validacion_modelo.html">8. Validación y selección del modelo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="monte_carlo.html">9. Simulación Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpretacion_operativa.html">10. Interpretación operativa y recomendaciones</a></li>
-<li class="toctree-l1"><a class="reference internal" href="conclusiones_extensiones.html">11. Conclusiones y extensiones futuras</a></li>
-<li class="toctree-l1"><a class="reference internal" href="referencias.html">12. Referencias</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prefacio</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0_guia_reproduccion.html">0.1 Guía de reproducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0_demostraciones.html">0.2 Demostraciones solicitadas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contenido</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">2. Ingeniería de variables y preprocesamiento temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Implementación matricial de MCO</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Inferencia estadística en datos temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_diagnostico_supuestos.html">6. Diagnóstico de supuestos del modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_metodos_robustos.html">7. Métodos robustos para datos temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_validacion_modelo.html">8. Validación y selección del modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_monte_carlo.html">9. Simulación Monte Carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_interpretacion_operativa.html">10. Interpretación operativa y recomendaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_conclusiones_extensiones.html">11. Conclusiones y extensiones futuras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_referencias.html">12. Referencias</a></li>
 </ul>
 
     </div>
@@ -250,7 +252,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/mco_matricial.md" target="_blank"
+      <li><a href="../_sources/notebooks/5_inferencia_temporal.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -334,7 +336,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>4. Implementación matricial de MCO</h1>
+    <h1>5. Inferencia estadística en datos temporales</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -344,10 +346,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion-matricial">4.1 Formulación matricial</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-de-variables-y-construccion-de-la-matriz-de-diseno">4.2 Selección de variables y construcción de la matriz de diseño</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-directa-de-mco">4.3 Implementación directa de MCO</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-con-una-libreria-estandar">4.4 Comparación con una librería estándar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-clasicos-y-robustos">5.1 Errores estándar clásicos y robustos</a></li>
 </ul>
             </nav>
         </div>
@@ -359,25 +358,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="implementacion-matricial-de-mco">
-<h1>4. Implementación matricial de MCO<a class="headerlink" href="#implementacion-matricial-de-mco" title="Link to this heading">#</a></h1>
-<p>En este capítulo implementamos la estimación de mínimos cuadrados ordinarios (MCO) para un modelo lineal que relaciona el conteo total de bicicletas con un conjunto de variables explicativas.</p>
-<section id="formulacion-matricial">
-<h2>4.1 Formulación matricial<a class="headerlink" href="#formulacion-matricial" title="Link to this heading">#</a></h2>
-<p>Denotemos por (\mathbf{y}) el vector columna de respuestas (conteos) y por (\mathbf{X}) la matriz de diseño que incluye un término constante y las covariables seleccionadas. El estimador de MCO para los coeficientes (\hat{\boldsymbol{\beta}}) se define como</p>
-<div class="math notranslate nohighlight" id="equation-eq-ols-matrix">
-<span class="eqno">(1)<a class="headerlink" href="#equation-eq-ols-matrix" title="Link to this equation">#</a></span>\[\hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}.\]</div>
-<p>La ecuación <a class="reference internal" href="#equation-eq-ols-matrix">(1)</a> será el núcleo de nuestra implementación en NumPy.</p>
-</section>
-<section id="seleccion-de-variables-y-construccion-de-la-matriz-de-diseno">
-<h2>4.2 Selección de variables y construcción de la matriz de diseño<a class="headerlink" href="#seleccion-de-variables-y-construccion-de-la-matriz-de-diseno" title="Link to this heading">#</a></h2>
-</section>
-<section id="implementacion-directa-de-mco">
-<h2>4.3 Implementación directa de MCO<a class="headerlink" href="#implementacion-directa-de-mco" title="Link to this heading">#</a></h2>
-</section>
-<section id="comparacion-con-una-libreria-estandar">
-<h2>4.4 Comparación con una librería estándar<a class="headerlink" href="#comparacion-con-una-libreria-estandar" title="Link to this heading">#</a></h2>
-<p>En capítulos posteriores utilizaremos estos coeficientes para la inferencia estadística y la validación del modelo.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="inferencia-estadistica-en-datos-temporales">
+<h1>5. Inferencia estadística en datos temporales<a class="headerlink" href="#inferencia-estadistica-en-datos-temporales" title="Link to this heading">#</a></h1>
+<p>En este capítulo discutimos la inferencia sobre los coeficientes del modelo de regresión en presencia de dependencia temporal.</p>
+<section id="errores-estandar-clasicos-y-robustos">
+<h2>5.1 Errores estándar clásicos y robustos<a class="headerlink" href="#errores-estandar-clasicos-y-robustos" title="Link to this heading">#</a></h2>
+<p>Compararemos los intervalos de confianza obtenidos con supuestos clásicos frente a los robustos para evaluar la sensibilidad de la inferencia.</p>
 </section>
 </section>
 
@@ -412,20 +398,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="exploratorio_temporal.html"
+       href="4_mco_matricial.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">3. Análisis exploratorio de series temporales</p>
+        <p class="prev-next-title">4. Implementación matricial de MCO</p>
       </div>
     </a>
     <a class="right-next"
-       href="inferencia_temporal.html"
+       href="6_diagnostico_supuestos.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">5. Inferencia estadística en datos temporales</p>
+        <p class="prev-next-title">6. Diagnóstico de supuestos del modelo</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -445,10 +431,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion-matricial">4.1 Formulación matricial</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-de-variables-y-construccion-de-la-matriz-de-diseno">4.2 Selección de variables y construcción de la matriz de diseño</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-directa-de-mco">4.3 Implementación directa de MCO</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-con-una-libreria-estandar">4.4 Comparación con una librería estándar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-clasicos-y-robustos">5.1 Errores estándar clásicos y robustos</a></li>
 </ul>
   </nav></div>
 

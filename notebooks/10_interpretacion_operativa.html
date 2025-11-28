@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. Ingeniería de variables y preprocesamiento temporales &#8212; Bike Sharing Regression</title>
+    <title>10. Interpretación operativa y recomendaciones &#8212; Bike Sharing Regression</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/ingenieria_temporal';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/10_interpretacion_operativa';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Análisis exploratorio de series temporales" href="exploratorio_temporal.html" />
-    <link rel="prev" title="1. Introducción y contexto de movilidad urbana" href="intro_contexto.html" />
+    <link rel="next" title="11. Conclusiones y extensiones futuras" href="11_conclusiones_extensiones.html" />
+    <link rel="prev" title="9. Simulación Monte Carlo" href="9_monte_carlo.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -142,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="prefacio.html">
+<a class="navbar-brand logo" href="0_prefacio.html">
   
   
   
@@ -174,26 +174,30 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="prefacio.html">
+                <a class="reference internal" href="0_prefacio.html">
                     Prefacio
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="guia_reproduccion.html">0.1 Guía de reproducción</a></li>
-<li class="toctree-l1"><a class="reference internal" href="demostraciones.html">0.2 Demostraciones solicitadas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Ingeniería de variables y preprocesamiento temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mco_matricial.html">4. Implementación matricial de MCO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="inferencia_temporal.html">5. Inferencia estadística en datos temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="diagnostico_supuestos.html">6. Diagnóstico de supuestos del modelo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metodos_robustos.html">7. Métodos robustos para datos temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="validacion_modelo.html">8. Validación y selección del modelo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="monte_carlo.html">9. Simulación Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpretacion_operativa.html">10. Interpretación operativa y recomendaciones</a></li>
-<li class="toctree-l1"><a class="reference internal" href="conclusiones_extensiones.html">11. Conclusiones y extensiones futuras</a></li>
-<li class="toctree-l1"><a class="reference internal" href="referencias.html">12. Referencias</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Prefacio</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0_guia_reproduccion.html">0.1 Guía de reproducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0_demostraciones.html">0.2 Demostraciones solicitadas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contenido</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">2. Ingeniería de variables y preprocesamiento temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Implementación matricial de MCO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_inferencia_temporal.html">5. Inferencia estadística en datos temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_diagnostico_supuestos.html">6. Diagnóstico de supuestos del modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_metodos_robustos.html">7. Métodos robustos para datos temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_validacion_modelo.html">8. Validación y selección del modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_monte_carlo.html">9. Simulación Monte Carlo</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Interpretación operativa y recomendaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_conclusiones_extensiones.html">11. Conclusiones y extensiones futuras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_referencias.html">12. Referencias</a></li>
 </ul>
 
     </div>
@@ -248,7 +252,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/ingenieria_temporal.md" target="_blank"
+      <li><a href="../_sources/notebooks/10_interpretacion_operativa.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -332,7 +336,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>2. Ingeniería de variables y preprocesamiento temporales</h1>
+    <h1>10. Interpretación operativa y recomendaciones</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -342,9 +346,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-de-fechas-y-orden-temporal">2.1 Conversión de fechas y orden temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-de-calendario-enriquecidas">2.2 Variables de calendario enriquecidas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lags-y-promedios-moviles">2.3 Lags y promedios móviles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-de-la-demanda-a-variables-climaticas">10.1 Sensibilidad de la demanda a variables climáticas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicaciones-para-la-operacion-del-sistema">10.2 Implicaciones para la operación del sistema</a></li>
 </ul>
             </nav>
         </div>
@@ -356,18 +359,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ingenieria-de-variables-y-preprocesamiento-temporales">
-<h1>2. Ingeniería de variables y preprocesamiento temporales<a class="headerlink" href="#ingenieria-de-variables-y-preprocesamiento-temporales" title="Link to this heading">#</a></h1>
-<p>En este capítulo construimos variables derivadas que capturan patrones de tendencia, estacionalidad y efectos de calendario, así como lags útiles para el modelado de series temporales.</p>
-<section id="conversion-de-fechas-y-orden-temporal">
-<h2>2.1 Conversión de fechas y orden temporal<a class="headerlink" href="#conversion-de-fechas-y-orden-temporal" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="interpretacion-operativa-y-recomendaciones">
+<h1>10. Interpretación operativa y recomendaciones<a class="headerlink" href="#interpretacion-operativa-y-recomendaciones" title="Link to this heading">#</a></h1>
+<p>En este capítulo se traducen los resultados estadísticos a recomendaciones operativas para la planificación de sistemas de bicicletas compartidas.</p>
+<section id="sensibilidad-de-la-demanda-a-variables-climaticas">
+<h2>10.1 Sensibilidad de la demanda a variables climáticas<a class="headerlink" href="#sensibilidad-de-la-demanda-a-variables-climaticas" title="Link to this heading">#</a></h2>
+<p>A partir de los coeficientes estimados se pueden derivar elasticidades aproximadas y escenarios de demanda bajo distintos perfiles de clima y hora del día.</p>
 </section>
-<section id="variables-de-calendario-enriquecidas">
-<h2>2.2 Variables de calendario enriquecidas<a class="headerlink" href="#variables-de-calendario-enriquecidas" title="Link to this heading">#</a></h2>
-</section>
-<section id="lags-y-promedios-moviles">
-<h2>2.3 Lags y promedios móviles<a class="headerlink" href="#lags-y-promedios-moviles" title="Link to this heading">#</a></h2>
-<p>Estas nuevas variables temporales se utilizarán posteriormente en el modelo de regresión y en el análisis de diagnóstico.</p>
+<section id="implicaciones-para-la-operacion-del-sistema">
+<h2>10.2 Implicaciones para la operación del sistema<a class="headerlink" href="#implicaciones-para-la-operacion-del-sistema" title="Link to this heading">#</a></h2>
+<p>Los resultados pueden ayudar a:</p>
+<ul class="simple">
+<li><p>Dimensionar la flota de bicicletas y puntos de anclaje.</p></li>
+<li><p>Diseñar estrategias de reubicación en horas pico.</p></li>
+<li><p>Ajustar tarifas o incentivos en función de la demanda esperada.</p></li>
+</ul>
 </section>
 </section>
 
@@ -402,20 +408,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro_contexto.html"
+       href="9_monte_carlo.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">1. Introducción y contexto de movilidad urbana</p>
+        <p class="prev-next-title">9. Simulación Monte Carlo</p>
       </div>
     </a>
     <a class="right-next"
-       href="exploratorio_temporal.html"
+       href="11_conclusiones_extensiones.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">3. Análisis exploratorio de series temporales</p>
+        <p class="prev-next-title">11. Conclusiones y extensiones futuras</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -435,9 +441,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-de-fechas-y-orden-temporal">2.1 Conversión de fechas y orden temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-de-calendario-enriquecidas">2.2 Variables de calendario enriquecidas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lags-y-promedios-moviles">2.3 Lags y promedios móviles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-de-la-demanda-a-variables-climaticas">10.1 Sensibilidad de la demanda a variables climáticas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicaciones-para-la-operacion-del-sistema">10.2 Implicaciones para la operación del sistema</a></li>
 </ul>
   </nav></div>
 
