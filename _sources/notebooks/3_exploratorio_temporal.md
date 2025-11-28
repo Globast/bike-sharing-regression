@@ -21,6 +21,9 @@ Se realiza una exploracion sobre el promedio de bicis rentadas respecto a difere
 ```{code-cell} ipython3
 from pathlib import Path
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from datetime import datetime
 
 DATA_PATH = Path("../data/hour.csv")
 data = pd.read_csv(DATA_PATH)
