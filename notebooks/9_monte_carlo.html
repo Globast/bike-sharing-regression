@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -189,7 +189,9 @@
 <li class="toctree-l1"><a class="reference internal" href="1_intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">2. Ingeniería de variables y preprocesamiento temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Implementación matricial de MCO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">3. Implementación Matricial de MCO</a></li>
+
+
 <li class="toctree-l1"><a class="reference internal" href="5_inferencia_temporal.html">5. Inferencia estadística en datos temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_diagnostico_supuestos.html">6. Diagnóstico de supuestos del modelo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="7_metodos_robustos.html">7. Métodos robustos para datos temporales</a></li>
@@ -323,9 +325,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -341,15 +341,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esquema-basico-de-simulacion">9.1 Esquema básico de simulación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-con-el-caso-de-demanda-de-bicicletas">9.2 Relación con el caso de demanda de bicicletas</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -362,13 +353,6 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="simulacion-monte-carlo">
 <h1>9. Simulación Monte Carlo<a class="headerlink" href="#simulacion-monte-carlo" title="Link to this heading">#</a></h1>
 <p>En este capítulo empleamos simulaciones Monte Carlo para estudiar la variabilidad de los estimadores bajo escenarios controlados.</p>
-<section id="esquema-basico-de-simulacion">
-<h2>9.1 Esquema básico de simulación<a class="headerlink" href="#esquema-basico-de-simulacion" title="Link to this heading">#</a></h2>
-</section>
-<section id="relacion-con-el-caso-de-demanda-de-bicicletas">
-<h2>9.2 Relación con el caso de demanda de bicicletas<a class="headerlink" href="#relacion-con-el-caso-de-demanda-de-bicicletas" title="Link to this heading">#</a></h2>
-<p>Aunque esta simulación usa un modelo muy simplificado, sirve para ilustrar la distribución muestral de los estimadores definidos por la ecuación <a class="reference internal" href="4_mco_matricial.html#equation-eq-ols-matrix">(1)</a> y compararla con los resultados observados en el conjunto de datos real.</p>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -425,22 +409,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esquema-basico-de-simulacion">9.1 Esquema básico de simulación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-con-el-caso-de-demanda-de-bicicletas">9.2 Relación con el caso de demanda de bicicletas</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
