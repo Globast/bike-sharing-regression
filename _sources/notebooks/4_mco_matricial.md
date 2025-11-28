@@ -5,10 +5,10 @@ jupytext:
 kernelspec: {name: python3, display_name: Python 3}
 ---
 
-# 3. Implementación Matricial de MCO
+# 4. Implementación Matricial de MCO
 En esta etapa se utilizaran los datos previamente preparados para el planteamiento del modelo por MCO, utilizando su forma matricial, comparandolo con los resiudalsultados arrojados por la libreria statsmodels.OLS y junto con ello la validacion de supuetos que acompañan la teoria.
 
-## 3.1. Importacion de librerias
+## 4.1. Importacion de librerias
 
 ```{code-cell} ipython3
 # Librerías científicas básicas
@@ -31,13 +31,13 @@ from sklearn.feature_selection import RFE
 from sklearn.linear_model import LinearRegression
 ```
 
-## 3.2. Lectura de datos
+## 4.2. Lectura de datos
 
 ```{code-cell} ipython3
 df = pd.read_csv('../data/hour_clean.csv', sep =";")
 ```
 
-## 3.3 Split data set (Training and test)
+## 4.3. Split data set (Training and test)
 En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.
 
 ```{code-cell} ipython3
@@ -47,7 +47,7 @@ print("tamaño set de entrenemaiento ", train.shape)
 print("tamaño set de prueba ", test.shape)
 ```
 
-## 3.4 cosntruccion de matrices $X$ y $y$
+## 4.4. Cosntruccion de matrices $X$ y $y$
 
 Para el modelo lineal clasisco expresiudalsado como:
 $$
@@ -128,7 +128,7 @@ vif_1
 
 Eliminamos Weekend, y nos quedamos solo con holiday y working day, ya que con estas se captura de manera menos redundante si es dia de semana (trabajo) o fin de semana.
 
-# 3.4.1 Calculo de Coeficientes Regresion
+# 4.5. Calculo de Coeficientes Regresion
 
 ```{code-cell} ipython3
 X_np = train_ols[['yr', 'temp', 'hum', 'windspeed', 'peak_hour', 'hr_sin', 'hr_cos',
@@ -169,8 +169,8 @@ print("\nTabla comparativa de coeficientes:")
 coef_table
 ```
 
-## 3.5. Interpretación de coeficientes OLS – Alquiler de bicicletas
-### 3.5.1 Tabla de coeficientes
+## 4.6. Interpretación de coeficientes OLS – Alquiler de bicicletas
+### 4.6.1 Tabla de coeficientes
 
 | Variable       | Coeficiente | Interpretación económica/urbana |
 |----------------|-------------|---------------------------------
@@ -191,7 +191,7 @@ coef_table
 | weathersit_4   | -117.22     | Lluvia fuerte desploma la demanda, mostrando alta sensibildad al clima. |
 | holiday_1      | -32.36      | En días festivos la demanda cae, probablemente por menor mo o de clima adverso.|
 
-## Síntesis económica y urbana
+## 4.6.7. Síntesis económica y urbana
  
 El modelo confirma que la **demanda de bicicletas está determinada por factoresiudals climáticos, temporales y estacionales**.   
 - **Clima**: la temperatura impulsa fuertemente la demanda, mientras que la humedad, el viento y la lluvia la reducen.  
@@ -217,10 +217,10 @@ ols_model = OLS(y, X_sm).fit()
 print(ols_model.summary())
 ```
 
-# 4. Diagnostico de supuestos del modelo
+# 4.7. Diagnostico de supuestos del modelo
 En esta seccion, a partir del modelo anterior, se revisara elñ cumplimiento de la teoria sobre los errores, para entender si el modelo es valido o no
 
-### 4.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)
+### 4.7.1 Revision de residuos (Normalidad, Homocedasticidad e independencia)
 
 Se parte de la inspeccion visual de residuos
 - Disribucion de residuos
@@ -295,7 +295,7 @@ print("\nDurbin-Watson Test:")
 print("Statistic =", dw_stat)
 ```
 
-## 4.2 Resultados validacion supuestos
+## 4.7.2. Resultados validacion supuestos
 
 **Shapiro-Wilk Test**  
 Estadistico = 0.964, p-value = 0.0  
