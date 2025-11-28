@@ -23,12 +23,12 @@ from statsmodels.stats.stattools import durbin_watson
 from scipy.stats import shapiro
 
 # 1. Normalidad de residuos (Shapiro-Wilk)
-with warnings.catch_warnings():
-    warnings.filterwarnings(
-        "ignore",
-        message="scipy.stats.shapiro: For N > 5000, computed p-value may not be accurate.*",
-        category=UserWarning
-    )
+import warnings
+warnings.filterwarnings(
+    "ignore",
+    message="scipy.stats.shapiro: For N > 5000, computed p-value may not be accurate.*",
+    category=UserWarning
+)
     shapiro_test = shapiro(residuals)
 shapiro_test = shapiro(residuals)
 print("Shapiro-Wilk Test:")
@@ -53,18 +53,9 @@ print("Statistic =", dw_stat)
 ------------------
 
 
-[31m---------------------------------------------------------------------------[39m
-[31mNameError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[15][39m[32m, line 6[39m
-[32m      3[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mscipy[39;00m[34;01m.[39;00m[34;01mstats[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m shapiro
-[32m      5[39m [38;5;66;03m# 1. Normalidad de residuos (Shapiro-Wilk)[39;00m
-[32m----> [39m[32m6[39m [38;5;28;01mwith[39;00m [43mwarnings[49m.catch_warnings():
-[32m      7[39m     warnings.filterwarnings(
-[32m      8[39m         [33m"[39m[33mignore[39m[33m"[39m,
-[32m      9[39m         message=[33m"[39m[33mscipy.stats.shapiro: For N > 5000, computed p-value may not be accurate.*[39m[33m"[39m,
-[32m     10[39m         category=[38;5;167;01mUserWarning[39;00m
-[32m     11[39m     )
-[32m     12[39m     shapiro_test = shapiro(residuals)
+  [36mCell[39m[36m [39m[32mIn[15][39m[32m, line 12[39m
+[31m    [39m[31mshapiro_test = shapiro(residuals)[39m
+    ^
+[31mIndentationError[39m[31m:[39m unexpected indent
 
-[31mNameError[39m: name 'warnings' is not defined
 

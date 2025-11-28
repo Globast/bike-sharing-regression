@@ -1011,7 +1011,7 @@ Dep. Variable:                    cnt   R-squared:                       0.643
 Model:                            OLS   Adj. R-squared:                  0.643
 Method:                 Least Squares   F-statistic:                     1461.
 Date:                Fri, 28 Nov 2025   Prob (F-statistic):               0.00
-Time:                        23:03:12   Log-Likelihood:                -74356.
+Time:                        23:06:01   Log-Likelihood:                -74356.
 No. Observations:               12165   AIC:                         1.487e+05
 Df Residuals:                   12149   BIC:                         1.489e+05
 Df Model:                          15                                         
@@ -1067,7 +1067,7 @@ Dep. Variable:                    cnt   R-squared:                       0.643
 Model:                            OLS   Adj. R-squared:                  0.643
 Method:                 Least Squares   F-statistic:                     1565.
 Date:                Fri, 28 Nov 2025   Prob (F-statistic):               0.00
-Time:                        23:03:12   Log-Likelihood:                -74357.
+Time:                        23:06:01   Log-Likelihood:                -74357.
 No. Observations:               12165   AIC:                         1.487e+05
 Df Residuals:                   12150   BIC:                         1.489e+05
 Df Model:                          14                                         
@@ -1170,12 +1170,12 @@ Notes:
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">shapiro</span>
 
 <span class="c1"># 1. Normalidad de residuos (Shapiro-Wilk)</span>
-<span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
-    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span>
-        <span class="s2">&quot;ignore&quot;</span><span class="p">,</span>
-        <span class="n">message</span><span class="o">=</span><span class="s2">&quot;scipy.stats.shapiro: For N &gt; 5000, computed p-value may not be accurate.*&quot;</span><span class="p">,</span>
-        <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span>
-    <span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span>
+    <span class="s2">&quot;ignore&quot;</span><span class="p">,</span>
+    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;scipy.stats.shapiro: For N &gt; 5000, computed p-value may not be accurate.*&quot;</span><span class="p">,</span>
+    <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span>
+<span class="p">)</span>
     <span class="n">shapiro_test</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
 <span class="n">shapiro_test</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shapiro-Wilk Test:&quot;</span><span class="p">)</span>
@@ -1201,20 +1201,10 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">shapiro</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># 1. Normalidad de residuos (Shapiro-Wilk)</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="s2">&quot;ignore&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="n">message</span><span class="o">=</span><span class="s2">&quot;scipy.stats.shapiro: For N &gt; 5000, computed p-value may not be accurate.*&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>         <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">shapiro_test</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;warnings&#39; is not defined
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
+    <span class="n">shapiro_test</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+    <span class="o">^</span>
+<span class="ne">IndentationError</span>: unexpected indent
 </pre></div>
 </div>
 </div>
