@@ -22,9 +22,10 @@ Se realiza una exploracion sobre el promedio de bicis rentadas respecto a difere
 from pathlib import Path
 import pandas as pd
 
-DATA_PATH = Path("../data/hour_clean.csv")
+DATA_PATH = Path("../data/hour.csv")
 df = pd.read_csv(DATA_PATH)
-df.shape
+data["dteday"] = pd.to_datetime(data["dteday"])
+data.shape
 
 # Suavizacion de series temporales
 ## Agrupar por día y calcular total de bicis rentadas

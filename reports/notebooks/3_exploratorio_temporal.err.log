@@ -21,9 +21,10 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 from pathlib import Path
 import pandas as pd
 
-DATA_PATH = Path("../data/hour_clean.csv")
+DATA_PATH = Path("../data/hour.csv")
 df = pd.read_csv(DATA_PATH)
-df.shape
+data["dteday"] = pd.to_datetime(data["dteday"])
+data.shape
 
 # Suavizacion de series temporales
 ## Agrupar por día y calcular total de bicis rentadas
@@ -64,16 +65,13 @@ plt.show()
 
 [31m---------------------------------------------------------------------------[39m
 [31mNameError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 10[39m
-[32m      6[39m df.shape
-[32m      8[39m [38;5;66;03m# Suavizacion de series temporales[39;00m
-[32m      9[39m [38;5;66;03m## Agrupar por día y calcular total de bicis rentadas[39;00m
-[32m---> [39m[32m10[39m df_daily = [43mdata[49m.groupby([33m"[39m[33mdteday[39m[33m"[39m).agg({
-[32m     11[39m     [33m"[39m[33mcasual[39m[33m"[39m: [33m"[39m[33mmean[39m[33m"[39m,
-[32m     12[39m     [33m"[39m[33mregistered[39m[33m"[39m: [33m"[39m[33mmean[39m[33m"[39m
-[32m     13[39m })
-[32m     15[39m [38;5;66;03m# suavizaion de 7 dias[39;00m
-[32m     16[39m df_daily[[33m"[39m[33mcasual_suavizada[39m[33m"[39m] = df_daily[[33m"[39m[33mcasual[39m[33m"[39m].rolling(window=[32m7[39m).mean()
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 6[39m
+[32m      4[39m DATA_PATH = Path([33m"[39m[33m../data/hour.csv[39m[33m"[39m)
+[32m      5[39m df = pd.read_csv(DATA_PATH)
+[32m----> [39m[32m6[39m data[[33m"[39m[33mdteday[39m[33m"[39m] = pd.to_datetime([43mdata[49m[[33m"[39m[33mdteday[39m[33m"[39m])
+[32m      7[39m data.shape
+[32m      9[39m [38;5;66;03m# Suavizacion de series temporales[39;00m
+[32m     10[39m [38;5;66;03m## Agrupar por día y calcular total de bicis rentadas[39;00m
 
 [31mNameError[39m: name 'data' is not defined
 
