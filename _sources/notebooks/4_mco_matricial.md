@@ -284,27 +284,28 @@ warnings.filterwarnings(
     category=UserWarning
 )
 
-    shapiro_test = shapiro(residuals)
+# 1. Normalidad de residuos (Shapiro-Wilk)
 shapiro_test = shapiro(residuals)
 print("Shapiro-Wilk Test:")
 print("Statistic =", shapiro_test.statistic, "p-value =", shapiro_test.pvalue)
- 
+
 # 2. Homocedasticidad (Breusch-Pagan)
 bp_test = het_breuschpagan(residuals, ols_model.model.exog)
 print("\nBreusch-Pagan Test:")
 print("LM stat =", bp_test[0], "p-value =", bp_test[1])
 print("F stat =", bp_test[2], "p-value =", bp_test[3])
- 
+
 # 3. Homocedasticidad (White test)
 white_test = het_white(residuals, ols_model.model.exog)
 print("\nWhite Test:")
 print("LM stat =", white_test[0], "p-value =", white_test[1])
 print("F stat =", white_test[2], "p-value =", white_test[3])
- 
+
 # 4. Independencia de residuos (Durbin-Watson)
 dw_stat = durbin_watson(residuals)
 print("\nDurbin-Watson Test:")
 print("Statistic =", dw_stat)
+
 ```
 
 ## 4.7.2. Resultados validacion supuestos
