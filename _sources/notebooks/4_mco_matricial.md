@@ -5,6 +5,7 @@ jupytext:
 kernelspec: {name: python3, display_name: Python 3}
 ---
 
+
 # 4. Implementación Matricial de MCO
 En esta etapa se utilizaran los datos previamente preparados para el planteamiento del modelo por MCO, utilizando su forma matricial, comparandolo con los resiudalsultados arrojados por la libreria statsmodels.OLS y junto con ello la validacion de supuetos que acompañan la teoria.
 
@@ -37,7 +38,7 @@ from sklearn.linear_model import LinearRegression
 df = pd.read_csv('../data/hour_clean.csv', sep =";")
 ```
 
-## 4.3. Split data set (Training and test)
+## 4.3 Split data set (Training and test)
 En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.
 
 ```{code-cell} ipython3
@@ -47,7 +48,7 @@ print("tamaño set de entrenemaiento ", train.shape)
 print("tamaño set de prueba ", test.shape)
 ```
 
-## 4.4. Cosntruccion de matrices $X$ y $y$
+## 4.4 cosntruccion de matrices $X$ y $y$
 
 Para el modelo lineal clasisco expresiudalsado como:
 $$
@@ -92,6 +93,7 @@ rfe =rfe.fit(X,y)
 print("Variables seleccionadas:")
 print("===================")
 list(zip(X.columns, rfe.support_))
+
 ```
 
 ```{code-cell} ipython3
@@ -128,7 +130,7 @@ vif_1
 
 Eliminamos Weekend, y nos quedamos solo con holiday y working day, ya que con estas se captura de manera menos redundante si es dia de semana (trabajo) o fin de semana.
 
-## 4.5. Calculo de Coeficientes Regresion
+## 4.5 Calculo de Coeficientes Regresion
 
 ```{code-cell} ipython3
 X_np = train_ols[['yr', 'temp', 'hum', 'windspeed', 'peak_hour', 'hr_sin', 'hr_cos',
@@ -170,7 +172,7 @@ coef_table
 ```
 
 ## 4.6. Interpretación de coeficientes OLS – Alquiler de bicicletas
-### 4.6.1 Tabla de coeficientes
+### 3.6.1. Tabla de coeficientes
 
 | Variable       | Coeficiente | Interpretación económica/urbana |
 |----------------|-------------|---------------------------------
@@ -191,7 +193,7 @@ coef_table
 | weathersit_4   | -117.22     | Lluvia fuerte desploma la demanda, mostrando alta sensibildad al clima. |
 | holiday_1      | -32.36      | En días festivos la demanda cae, probablemente por menor mo o de clima adverso.|
 
-### 4.6.7. Síntesis económica y urbana
+## Síntesis económica y urbana
  
 El modelo confirma que la **demanda de bicicletas está determinada por factoresiudals climáticos, temporales y estacionales**.   
 - **Clima**: la temperatura impulsa fuertemente la demanda, mientras que la humedad, el viento y la lluvia la reducen.  
@@ -201,6 +203,7 @@ El modelo confirma que la **demanda de bicicletas está determinada por factores
 - **Festivos**: la caída en días festivos sugiere que la movilidad laboral es el principal determinante de la demanda, con el ocio como complemento.  
 
 En términos de planificación urbana, esto implica que el sistema de alquiler debe considerar tanto la **variabilidad climática** como los **patrones de movilidad laboral y estacional**, reforzando la disponibilidad en horas pico y temporadas favorables, y anticipando caídas en días festivos o de clima adverso.
+ 
 
 ```{code-cell} ipython3
 print(ols_model.summary())
@@ -220,7 +223,7 @@ print(ols_model.summary())
 ## 4.7. Diagnostico de supuestos del modelo
 En esta seccion, a partir del modelo anterior, se revisara elñ cumplimiento de la teoria sobre los errores, para entender si el modelo es valido o no
 
-## 4.7.1 Revision de residuos (Normalidad, Homocedasticidad e independencia)
+### 4.7.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)
 
 Se parte de la inspeccion visual de residuos
 - Disribucion de residuos
@@ -260,6 +263,7 @@ axes[1,1].set_xlabel("resiudals")
 plt.tight_layout()
 
 plt.show()
+ 
 ```
 
 Se observa que los residuos forman patrones y que no siguen una distribucion normal, lo cual validaremos con las pruebas estadisticas:
@@ -295,7 +299,7 @@ print("\nDurbin-Watson Test:")
 print("Statistic =", dw_stat)
 ```
 
-### 4.7.2. Resultados validacion supuestos
+## 4.7.2. Resultados validacion supuestos
 
 **Shapiro-Wilk Test**  
 Estadistico = 0.964, p-value = 0.0  
@@ -315,7 +319,10 @@ Confirma lo mismo que Breusch-Pagan, indicando **heterocedasticidad** de los res
 **Durbin-Watson Test**  
 Estadistico = 2.01  
 Valores cercanos a 2 indican ausencia de autocorrelación.  
-**Conclusión:** los residuos no presentan autocorrelación, lo que valida la indeendencia de los residuos.
+**Conclusión:** los residuos no presentan autocorrelación, lo que valida la indeendencia de los residuos.  
+ 
+ 
+ 
 
 ```{code-cell} ipython3
 import pickle
@@ -324,4 +331,3 @@ import pickle
 with open("ols_model.pkl", "wb") as f:
     pickle.dump(ols_model, f)
 ```
-

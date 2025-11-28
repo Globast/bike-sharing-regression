@@ -4,90 +4,102 @@ jupytext:
   text_representation: {extension: .md, format_name: myst}
 kernelspec: {name: python3, display_name: Python 3}
 ---
-# 2. Ingeniería de variables y preprocesamiento temporales
 
-En este capítulo construimos variables derivadas que capturan patrones de tendencia, estacionalidad y se prepararan los datos para el modelado, asegurando consistencia y calidad.
 
-## 2.1. Importacion de librerias
+# 1. Ingenieria de Variables y Procesamiento Temporal
+En esta etapa se prepararan los datos para el modelado, asegurando consistencia y calidad
+
+## 1.1. Importacion de librerias
 
 ```{code-cell} ipython3
+# Librerías científicas básicas
 import numpy as np
 import pandas as pd
+ 
+# Visualización
 import matplotlib.pyplot as plt
 import seaborn as sns
-from datetime import datetime
+ 
+# Modelos estadísticos
+import statsmodels.api as sm
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+ 
+# Machine Learning
+from sklearn.model_selection import train_test_split
+```
 
-# Opciones de visualización de pandas
-pd.set_option('display.max_columns', None)
-pd.set_option('display.max_rows', 100)
+## 1.2. Lectura de datos
 
-from pathlib import Path
-data = pd.read_csv(Path('../data/hour.csv'), sep =",")
+```{code-cell} ipython3
+data = pd.read_csv('../data/hour.csv', sep =",")
 data['dteday'] = pd.to_datetime(data['dteday'])
 data
 ```
 
-## 2.2. Descripcion de variables del dataset
+## 1.3. Descripcion de variables del dataset
 Se muestra por variable, su tipo, su rango, y la interpretaciona utilizar en el analisis
 
-| Variable       | Tipo                             | Rango / Valores         | Interpretación / Comentarios                                              |
-| -------------- | -------------------------------- | ----------------------- | ------------------------------------------------------------------------- |
-| **instant**    | Numérica (entero)                | 1 – 17379               | Índice de observación, representa el número de registro. No tiene interpretación analítica directa.            |
-| **dteday**     | Fecha                            | 2011-01-01 a 2012-12-31 | Fecha del registro diario. Permite análisis temporal y estacional.       |
-| **season**     | Categórica (1 a 4)               | 1: Invierno, 2: Primavera, 3: Verano, 4: Otoño | Estación del año (climatológica), influye en la demanda de bicicletas.   |
-| **yr**         | Categórica (0,1)                 | 0: 2011, 1: 2012        | Año del registro. Permite observar cambios entre años (tendencias).      |
-| **mnth**       | Categórica (1 a 12)              | 1 – 12                  | Mes del año. También permite capturar patrones estacionales mensuales.   |
-| **hr**         | Numérica (entero)                | 0 – 23                  | Hora del día. Fundamental para capturar variaciones intradía.            |
-| **holiday**    | Categórica (0,1)                 | 0: No festivo, 1: Festivo | Indica si el día es festivo. Afecta el patrón de demanda.              |
-| **weekday**    | Categórica (0 a 6)               | 0: Domingo – 6: Sábado  | Día de la semana. Permite distinguir entre días laborales y fines de semana. |
-| **workingday** | Categórica (0,1)                 | 0: No laboral, 1: Laboral | Día laboral (excluye fines de semana y festivos). Afecta los patrones de movilidad. |
-| **weathersit** | Categórica (1 a 4)               | 1: Despejado – 4: Condiciones extremas | Condición climática general. La demanda depende fuertemente del clima. |
-| **temp**       | Numérica (continua)              | 0 – 1 (normalizada)     | Temperatura normalizada. Representa la sensación térmica.                |
-| **atemp**      | Numérica (continua)              | 0 – 1 (normalizada)     | Temperatura percibida (sensación). Similar a `temp` pero ajustada.       |
-| **hum**        | Numérica (continua)              | 0 – 1 (normalizada)     | Humedad relativa normalizada. Puede afectar el confort al usar bicicleta. |
-| **windspeed**  | Numérica (continua)              | 0 – 1 (normalizada)     | Velocidad del viento normalizada. Vientos fuertes reducen el uso de bicicleta. |
-| **casual**     | Numérica (entero)                | 0 – 367                 | Número de usuarios casuales (no registrados) en la hora.                 |
-| **registered** | Numérica (entero)                | 0 – 886                 | Número de usuarios registrados en la hora.                               |
-| **cnt**        | Numérica (entero, variable objetivo) | 1 – 977             | Total de bicicletas rentadas por hora (`casual + registered`).           |
+| Variable       | Tipo                             | Rango / Valores         | Descripción                                                                  |
+| -------------- | -------------------------------- | ----------------------- | ---------------------------------------------------------------------------- |
+| **instant**    | Numérica (entero)                | 1 – 17379               | Índice del registro. No tiene interpretación analítica directa.              |
+| **dteday**     | Temporal (fecha)                 | 2011-01-01 – 2012-12-31 | Fecha del registro horario.                                                  |
+| **season**     | Categórica (1–4)                 | {1, 2, 3, 4}            | Estación: 1=invierno, 2=primavera, 3=verano, 4=otoño.                        |
+| **yr**         | Categórica (binaria)             | {0, 1}                  | Año: 0=2011, 1=2012.                                                         |
+| **mnth**       | Categórica                       | 1 – 12                  | Mes del año.                                                                 |
+| **hr**         | Categórica              | 0 – 23                  | Hora del día.                                                                |
+| **holiday**    | Categórica (binaria)             | {0, 1}                  | 1 si es día festivo.                                                         |
+| **weekday**    | Categórica                       | 0 – 6                   | Día de la semana (0 = domingo).                                              |
+| **workingday** | Categórica (binaria)             | {0, 1}                  | 1 si es día laboral (no festivo ni fin de semana).                           |
+| **weathersit** | Categórica (1–4)                 | {1, 2, 3, 4}            | Estado del clima: 1=despejado, 2=nublado, 3=lluvia ligera, 4=clima severo.   |
+| **temp**       | Numérica (continua, normalizada) | 0.02 – 1.00             | Temperatura normalizada.                                            |
+| **atemp**      | Numérica (continua, normalizada) | 0.00 – 1.00             | Sensación térmica normalizada.                                      |
+| **hum**        | Numérica (continua, normalizada) | 0.00 – 1.00             | Humedad relativa normalizada por 100%.                                       |
+| **windspeed**  | Numérica (continua, normalizada) | 0.00 – ~0.85            | Velocidad del viento normalizada.                                |
+| **casual**     | Numérica (entero)                | 0 – 367                 | Usuarios casuales (no registrados).                                          |
+| **registered** | Numérica (entero)                | 0 – 886                 | Usuarios registrados.                                                        |
+| **cnt**        | Numérica (entero)                | 1 – 977                 | Total de bicicletas alquiladas (casual + registered). **Variable objetivo**. |
 
-## 2.3. Exploracion de datos faltantes 
-Se revisa cada variable para observar su cantidad de datos faltantes y posterior imputacion
+## 1.4. Exploracion de datos faltantes 
+Se revisa cada variable para observar sus faltantes, en caso de existir, se imputaran utilizando la mediana
 
 ```{code-cell} ipython3
 # Vemos por variable si hay algun faltante
 print(data.isna().sum())
 # los imputamos usando la mediana en caso de haber
 data = data.fillna(data.median(numeric_only=True))
+
 ```
-En este dataset no hay valores faltantes en ninguna variable. Sin embargo hay *datos no observados*. Se observan "huecos de tiempo". En el dataset hay unas cuantas horas menos, del orden de ~0,8 % del total. Es posible que el sistema pudo estar apagado, problemas de registro, posible limpieza previa, etc. En el modelo de regresión que usamos, simplemente se ignoran y el análisis se hace sobre las horas observadas.
-## 2.4. Conteo de outliers 
-Se realiza solo conteo de outliers, no se corrigen dada su interpretacion y valor al modelo
+
+## 1.5. Conteo de outliers 
+Se realiza solo conteo de outliers, no se corrigen debido a que son condiciones ambientals las cuales influyen dentro del modelo y estan fuera del control humano, es decir, son validas.
 
 ```{code-cell} ipython3
 ## Columnas numericas no categoricas
-num_cols = ["temp", "atemp", "hum", "windspeed", "cnt"]
+num_cols = ["temp", "hum", "windspeed", "cnt"]
 outlier_counts = {}
 
 for col in num_cols:
     Q1 = data[col].quantile(0.25)
     Q3 = data[col].quantile(0.75)
     IQR = Q3 - Q1
-    lower_fence = Q1 - 1.5 * IQR
-    upper_fence = Q3 + 1.5 * IQR
-    
-    outliers = data[(data[col] < lower_fence) | (data[col] > upper_fence)]
-    outlier_counts[col] = outliers.shape[0]
+    lower = Q1 - 1.5 * IQR
+    upper = Q3 + 1.5 * IQR
+
+    ## valores fuera de rango
+    n_outliers = ((data[col] < lower) | (data[col] > upper)).sum()
+    outlier_counts[col] = n_outliers
 
 outlier_counts
+
 ```
-En el dataset, cnt tiene: percentil 95 ≈ 563, percentil 99 ≈ 782, máximo = 977. Son horas de demanda muy alta, pero plausibles (horas pico en días favorables). No parecen errores de registro, sino casos extremos reales. **Lo razonable es No eliminarlos. Estabilizando con log(cnt+1): se reduce la influencia relativa de los valores extremos, los residuos suelen ser más estables y el ajuste es más robusto, a costa de que la interpretación de los coeficientes pase al dominio logarítmico (efectos porcentuales, no absolutos).**
 
-## 2.5 Creacion, Transformacion y adecuacion de variables
+# 1.6. Creacion, Transformacion y adecuacion de variables
 
-1. Se crean variables de hora pico de la noche y mañana: La demanda tiene picos claros asociados a entrada/salida de trabajo/estudio. 
-2. Se transforman variables ciclicas (hora, mes, día de la semana) usando seno y coseno. 
-3. Se crean variables dummies para las categorías relevantes
-4. Se eliminan columnas redundantes para el modelo
+1. Se crean variables categoricas a partir de momentos como Horas pico, fin de semana
+2. Transformaciones SEN y COS, esto permite que variables temporales que naturalmente son circulares (hora, día, mes)
+sean representadas en un espacio donde puntos cercanos evitan saltos artificiales y permitiendo al modelo aprender patrones periódicos
+4. Conversion d variables categoricas a binarias
+
 
 ```{code-cell} ipython3
 # Hora pico
@@ -127,7 +139,7 @@ df.drop(columns=['instant', 'hr','dteday', 'mnth', 'weekday','casual', 'register
 # Pprint de datos
 print("Columnas finales:")
 print(df.columns.tolist()[:20])
-df.to_csv(Path('../data/hour_clean.csv'), sep=";",index = False) ## Guardamos las variables listas para empezar a correr los modelos
+df.to_csv('hour_clean.csv', sep=";",index = False) ## Guardamos las variables listas para empezar a correr los modelos
 df
 ```
 

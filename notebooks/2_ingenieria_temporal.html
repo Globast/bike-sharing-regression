@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. Ingeniería de variables y preprocesamiento temporales &#8212; Bike Sharing Regression</title>
+    <title>1. Ingenieria de Variables y Procesamiento Temporal &#8212; Bike Sharing Regression</title>
   
   
   
@@ -187,7 +187,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contenido</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Ingeniería de variables y preprocesamiento temporales</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Ingenieria de Variables y Procesamiento Temporal</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="3_exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Implementación matricial de MCO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_inferencia_temporal.html">5. Inferencia estadística en datos temporales</a></li>
@@ -336,7 +337,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>2. Ingeniería de variables y preprocesamiento temporales</h1>
+    <h1>1. Ingenieria de Variables y Procesamiento Temporal</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -346,12 +347,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">2.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-variables-del-dataset">2.2. Descripcion de variables del dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-faltantes">2.3. Exploracion de datos faltantes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-outliers">2.4. Conteo de outliers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-transformacion-y-adecuacion-de-variables">2.5 Creacion, Transformacion y adecuacion de variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Ingenieria de Variables y Procesamiento Temporal</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">1.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">1.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-variables-del-dataset">1.3. Descripcion de variables del dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-faltantes">1.4. Exploracion de datos faltantes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-outliers">1.5. Conteo de outliers</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-transformacion-y-adecuacion-de-variables">1.6. Creacion, Transformacion y adecuacion de variables</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -362,25 +368,37 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ingenieria-de-variables-y-preprocesamiento-temporales">
-<h1>2. Ingeniería de variables y preprocesamiento temporales<a class="headerlink" href="#ingenieria-de-variables-y-preprocesamiento-temporales" title="Link to this heading">#</a></h1>
-<p>En este capítulo construimos variables derivadas que capturan patrones de tendencia, estacionalidad y se prepararan los datos para el modelado, asegurando consistencia y calidad.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="ingenieria-de-variables-y-procesamiento-temporal">
+<h1>1. Ingenieria de Variables y Procesamiento Temporal<a class="headerlink" href="#ingenieria-de-variables-y-procesamiento-temporal" title="Link to this heading">#</a></h1>
+<p>En esta etapa se prepararan los datos para el modelado, asegurando consistencia y calidad</p>
 <section id="importacion-de-librerias">
-<h2>2.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
+<h2>1.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Librerías científicas básicas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+ 
+<span class="c1"># Visualización</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
-
-<span class="c1"># Opciones de visualización de pandas</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../data/hour.csv&#39;</span><span class="p">),</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+ 
+<span class="c1"># Modelos estadísticos</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+ 
+<span class="c1"># Machine Learning</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lectura-de-datos">
+<h2>1.2. Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/hour.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dteday&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dteday&#39;</span><span class="p">])</span>
 <span class="n">data</span>
 </pre></div>
@@ -652,109 +670,109 @@ document.write(`
 </div>
 </section>
 <section id="descripcion-de-variables-del-dataset">
-<h2>2.2. Descripcion de variables del dataset<a class="headerlink" href="#descripcion-de-variables-del-dataset" title="Link to this heading">#</a></h2>
+<h2>1.3. Descripcion de variables del dataset<a class="headerlink" href="#descripcion-de-variables-del-dataset" title="Link to this heading">#</a></h2>
 <p>Se muestra por variable, su tipo, su rango, y la interpretaciona utilizar en el analisis</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Variable</p></th>
 <th class="head"><p>Tipo</p></th>
 <th class="head"><p>Rango / Valores</p></th>
-<th class="head"><p>Interpretación / Comentarios</p></th>
+<th class="head"><p>Descripción</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>instant</strong></p></td>
 <td><p>Numérica (entero)</p></td>
 <td><p>1 – 17379</p></td>
-<td><p>Índice de observación, representa el número de registro. No tiene interpretación analítica directa.</p></td>
+<td><p>Índice del registro. No tiene interpretación analítica directa.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>dteday</strong></p></td>
-<td><p>Fecha</p></td>
-<td><p>2011-01-01 a 2012-12-31</p></td>
-<td><p>Fecha del registro diario. Permite análisis temporal y estacional.</p></td>
+<td><p>Temporal (fecha)</p></td>
+<td><p>2011-01-01 – 2012-12-31</p></td>
+<td><p>Fecha del registro horario.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>season</strong></p></td>
-<td><p>Categórica (1 a 4)</p></td>
-<td><p>1: Invierno, 2: Primavera, 3: Verano, 4: Otoño</p></td>
-<td><p>Estación del año (climatológica), influye en la demanda de bicicletas.</p></td>
+<td><p>Categórica (1–4)</p></td>
+<td><p>{1, 2, 3, 4}</p></td>
+<td><p>Estación: 1=invierno, 2=primavera, 3=verano, 4=otoño.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>yr</strong></p></td>
-<td><p>Categórica (0,1)</p></td>
-<td><p>0: 2011, 1: 2012</p></td>
-<td><p>Año del registro. Permite observar cambios entre años (tendencias).</p></td>
+<td><p>Categórica (binaria)</p></td>
+<td><p>{0, 1}</p></td>
+<td><p>Año: 0=2011, 1=2012.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>mnth</strong></p></td>
-<td><p>Categórica (1 a 12)</p></td>
+<td><p>Categórica</p></td>
 <td><p>1 – 12</p></td>
-<td><p>Mes del año. También permite capturar patrones estacionales mensuales.</p></td>
+<td><p>Mes del año.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>hr</strong></p></td>
-<td><p>Numérica (entero)</p></td>
+<td><p>Categórica</p></td>
 <td><p>0 – 23</p></td>
-<td><p>Hora del día. Fundamental para capturar variaciones intradía.</p></td>
+<td><p>Hora del día.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>holiday</strong></p></td>
-<td><p>Categórica (0,1)</p></td>
-<td><p>0: No festivo, 1: Festivo</p></td>
-<td><p>Indica si el día es festivo. Afecta el patrón de demanda.</p></td>
+<td><p>Categórica (binaria)</p></td>
+<td><p>{0, 1}</p></td>
+<td><p>1 si es día festivo.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>weekday</strong></p></td>
-<td><p>Categórica (0 a 6)</p></td>
-<td><p>0: Domingo – 6: Sábado</p></td>
-<td><p>Día de la semana. Permite distinguir entre días laborales y fines de semana.</p></td>
+<td><p>Categórica</p></td>
+<td><p>0 – 6</p></td>
+<td><p>Día de la semana (0 = domingo).</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>workingday</strong></p></td>
-<td><p>Categórica (0,1)</p></td>
-<td><p>0: No laboral, 1: Laboral</p></td>
-<td><p>Día laboral (excluye fines de semana y festivos). Afecta los patrones de movilidad.</p></td>
+<td><p>Categórica (binaria)</p></td>
+<td><p>{0, 1}</p></td>
+<td><p>1 si es día laboral (no festivo ni fin de semana).</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>weathersit</strong></p></td>
-<td><p>Categórica (1 a 4)</p></td>
-<td><p>1: Despejado – 4: Condiciones extremas</p></td>
-<td><p>Condición climática general. La demanda depende fuertemente del clima.</p></td>
+<td><p>Categórica (1–4)</p></td>
+<td><p>{1, 2, 3, 4}</p></td>
+<td><p>Estado del clima: 1=despejado, 2=nublado, 3=lluvia ligera, 4=clima severo.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>temp</strong></p></td>
-<td><p>Numérica (continua)</p></td>
-<td><p>0 – 1 (normalizada)</p></td>
-<td><p>Temperatura normalizada. Representa la sensación térmica.</p></td>
+<td><p>Numérica (continua, normalizada)</p></td>
+<td><p>0.02 – 1.00</p></td>
+<td><p>Temperatura normalizada.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>atemp</strong></p></td>
-<td><p>Numérica (continua)</p></td>
-<td><p>0 – 1 (normalizada)</p></td>
-<td><p>Temperatura percibida (sensación). Similar a <code class="docutils literal notranslate"><span class="pre">temp</span></code> pero ajustada.</p></td>
+<td><p>Numérica (continua, normalizada)</p></td>
+<td><p>0.00 – 1.00</p></td>
+<td><p>Sensación térmica normalizada.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>hum</strong></p></td>
-<td><p>Numérica (continua)</p></td>
-<td><p>0 – 1 (normalizada)</p></td>
-<td><p>Humedad relativa normalizada. Puede afectar el confort al usar bicicleta.</p></td>
+<td><p>Numérica (continua, normalizada)</p></td>
+<td><p>0.00 – 1.00</p></td>
+<td><p>Humedad relativa normalizada por 100%.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>windspeed</strong></p></td>
-<td><p>Numérica (continua)</p></td>
-<td><p>0 – 1 (normalizada)</p></td>
-<td><p>Velocidad del viento normalizada. Vientos fuertes reducen el uso de bicicleta.</p></td>
+<td><p>Numérica (continua, normalizada)</p></td>
+<td><p>0.00 – ~0.85</p></td>
+<td><p>Velocidad del viento normalizada.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>casual</strong></p></td>
 <td><p>Numérica (entero)</p></td>
 <td><p>0 – 367</p></td>
-<td><p>Número de usuarios casuales (no registrados) en la hora.</p></td>
+<td><p>Usuarios casuales (no registrados).</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>registered</strong></p></td>
 <td><p>Numérica (entero)</p></td>
 <td><p>0 – 886</p></td>
-<td><p>Número de usuarios registrados en la hora.</p></td>
+<td><p>Usuarios registrados.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>cnt</strong></p></td>
-<td><p>Numérica (entero, variable objetivo)</p></td>
+<td><p>Numérica (entero)</p></td>
 <td><p>1 – 977</p></td>
-<td><p>Total de bicicletas rentadas por hora (<code class="docutils literal notranslate"><span class="pre">casual</span> <span class="pre">+</span> <span class="pre">registered</span></code>).</p></td>
+<td><p>Total de bicicletas alquiladas (casual + registered). <strong>Variable objetivo</strong>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </section>
 <section id="exploracion-de-datos-faltantes">
-<h2>2.3. Exploracion de datos faltantes<a class="headerlink" href="#exploracion-de-datos-faltantes" title="Link to this heading">#</a></h2>
-<p>Se revisa cada variable para observar su cantidad de datos faltantes y posterior imputacion</p>
+<h2>1.4. Exploracion de datos faltantes<a class="headerlink" href="#exploracion-de-datos-faltantes" title="Link to this heading">#</a></h2>
+<p>Se revisa cada variable para observar sus faltantes, en caso de existir, se imputaran utilizando la mediana</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vemos por variable si hay algun faltante</span>
@@ -787,46 +805,49 @@ dtype: int64
 </div>
 </div>
 </div>
-<p>En este dataset no hay valores faltantes en ninguna variable. Sin embargo hay <em>datos no observados</em>. Se observan “huecos de tiempo”. En el dataset hay unas cuantas horas menos, del orden de ~0,8 % del total. Es posible que el sistema pudo estar apagado, problemas de registro, posible limpieza previa, etc. En el modelo de regresión que usamos, simplemente se ignoran y el análisis se hace sobre las horas observadas.</p>
 </section>
 <section id="conteo-de-outliers">
-<h2>2.4. Conteo de outliers<a class="headerlink" href="#conteo-de-outliers" title="Link to this heading">#</a></h2>
-<p>Se realiza solo conteo de outliers, no se corrigen dada su interpretacion y valor al modelo</p>
+<h2>1.5. Conteo de outliers<a class="headerlink" href="#conteo-de-outliers" title="Link to this heading">#</a></h2>
+<p>Se realiza solo conteo de outliers, no se corrigen debido a que son condiciones ambientals las cuales influyen dentro del modelo y estan fuera del control humano, es decir, son validas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Columnas numericas no categoricas</span>
-<span class="n">num_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span> <span class="s2">&quot;atemp&quot;</span><span class="p">,</span> <span class="s2">&quot;hum&quot;</span><span class="p">,</span> <span class="s2">&quot;windspeed&quot;</span><span class="p">,</span> <span class="s2">&quot;cnt&quot;</span><span class="p">]</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span> <span class="s2">&quot;hum&quot;</span><span class="p">,</span> <span class="s2">&quot;windspeed&quot;</span><span class="p">,</span> <span class="s2">&quot;cnt&quot;</span><span class="p">]</span>
 <span class="n">outlier_counts</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">num_cols</span><span class="p">:</span>
     <span class="n">Q1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
     <span class="n">Q3</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
     <span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
-    <span class="n">lower_fence</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
-    <span class="n">upper_fence</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
-    
-    <span class="n">outliers</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_fence</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_fence</span><span class="p">)]</span>
-    <span class="n">outlier_counts</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">outliers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">lower</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+    <span class="n">upper</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+    <span class="c1">## valores fuera de rango</span>
+    <span class="n">n_outliers</span> <span class="o">=</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">outlier_counts</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_outliers</span>
 
 <span class="n">outlier_counts</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;temp&#39;: 0, &#39;atemp&#39;: 0, &#39;hum&#39;: 22, &#39;windspeed&#39;: 342, &#39;cnt&#39;: 505}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;temp&#39;: np.int64(0),
+ &#39;hum&#39;: np.int64(22),
+ &#39;windspeed&#39;: np.int64(342),
+ &#39;cnt&#39;: np.int64(505)}
 </pre></div>
 </div>
 </div>
 </div>
-<p>En el dataset, cnt tiene: percentil 95 ≈ 563, percentil 99 ≈ 782, máximo = 977. Son horas de demanda muy alta, pero plausibles (horas pico en días favorables). No parecen errores de registro, sino casos extremos reales. <strong>Lo razonable es No eliminarlos. Estabilizando con log(cnt+1): se reduce la influencia relativa de los valores extremos, los residuos suelen ser más estables y el ajuste es más robusto, a costa de que la interpretación de los coeficientes pase al dominio logarítmico (efectos porcentuales, no absolutos).</strong></p>
 </section>
-<section id="creacion-transformacion-y-adecuacion-de-variables">
-<h2>2.5 Creacion, Transformacion y adecuacion de variables<a class="headerlink" href="#creacion-transformacion-y-adecuacion-de-variables" title="Link to this heading">#</a></h2>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="creacion-transformacion-y-adecuacion-de-variables">
+<h1>1.6. Creacion, Transformacion y adecuacion de variables<a class="headerlink" href="#creacion-transformacion-y-adecuacion-de-variables" title="Link to this heading">#</a></h1>
 <ol class="arabic simple">
-<li><p>Se crean variables de hora pico de la noche y mañana: La demanda tiene picos claros asociados a entrada/salida de trabajo/estudio.</p></li>
-<li><p>Se transforman variables ciclicas (hora, mes, día de la semana) usando seno y coseno.</p></li>
-<li><p>Se crean variables dummies para las categorías relevantes</p></li>
-<li><p>Se eliminan columnas redundantes para el modelo</p></li>
+<li><p>Se crean variables categoricas a partir de momentos como Horas pico, fin de semana</p></li>
+<li><p>Transformaciones SEN y COS, esto permite que variables temporales que naturalmente son circulares (hora, día, mes)
+sean representadas en un espacio donde puntos cercanos evitan saltos artificiales y permitiendo al modelo aprender patrones periódicos</p></li>
+<li><p>Conversion d variables categoricas a binarias</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -867,7 +888,7 @@ dtype: int64
 <span class="c1"># Pprint de datos</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Columnas finales:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[:</span><span class="mi">20</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../data/hour_clean.csv&#39;</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span><span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1">## Guardamos las variables listas para empezar a correr los modelos</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;hour_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span><span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1">## Guardamos las variables listas para empezar a correr los modelos</span>
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -1177,7 +1198,6 @@ dtype: int64
 </div></div></div>
 </div>
 </section>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1243,12 +1263,17 @@ dtype: int64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">2.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-variables-del-dataset">2.2. Descripcion de variables del dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-faltantes">2.3. Exploracion de datos faltantes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-outliers">2.4. Conteo de outliers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-transformacion-y-adecuacion-de-variables">2.5 Creacion, Transformacion y adecuacion de variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Ingenieria de Variables y Procesamiento Temporal</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">1.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">1.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-variables-del-dataset">1.3. Descripcion de variables del dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-faltantes">1.4. Exploracion de datos faltantes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-outliers">1.5. Conteo de outliers</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-transformacion-y-adecuacion-de-variables">1.6. Creacion, Transformacion y adecuacion de variables</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>

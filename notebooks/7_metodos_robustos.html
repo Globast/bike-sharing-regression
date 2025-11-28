@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -57,10 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"tags": "ams", "useLabelIds": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/7_metodos_robustos';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8. Validación y selección del modelo" href="8_validacion_modelo.html" />
+    <link rel="next" title="6. Validación y Selección del Modelo" href="8_validacion_modelo.html" />
     <link rel="prev" title="6. Diagnóstico de supuestos del modelo" href="6_diagnostico_supuestos.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -187,11 +189,10 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contenido</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">2. Ingeniería de variables y preprocesamiento temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">1. Ingenieria de Variables y Procesamiento Temporal</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="3_exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">3. Implementación Matricial de MCO</a></li>
-
-
+<li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Implementación matricial de MCO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_inferencia_temporal.html">5. Inferencia estadística en datos temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_diagnostico_supuestos.html">6. Diagnóstico de supuestos del modelo</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Métodos robustos para datos temporales</a></li>
@@ -325,7 +326,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -341,6 +344,41 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">7.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">7.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">7.3 Split data set (Training and test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">7.4 Errores estándar HAC (Newey–West).</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">7.4.1. Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">7.4.2. Modelo OLS</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">7.4.3. Estimador HAC</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">7.4.4. Parámetros</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">7.4.5. Interpretación</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-m-robust-huber-y-tukey">7.5. Estimadores M Robust (Huber y Tukey)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-sobre-un-modelo-ols">7.5.1. Aplicación sobre un modelo OLS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-m-general">7.5.2. Estimador M general</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-de-huber">7.5.3. Estimador de Huber</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-tukey-bisquare-biweight">7.5.4. Estimador Tukey Bisquare (Biweight)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">7.5.5. Metodo Huber y Tukey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">7.5.6. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-de-la-longitud-de-bloque-ell">7.5.7. Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">7.5.8. Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-que-un-coeficiente-es-robusto">¿Qué significa que un coeficiente es “robusto”?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-robustez-utilizados">7.5.9. ¿Criterios de Robustez utilizados?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -352,7 +390,1158 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="metodos-robustos-para-datos-temporales">
 <h1>7. Métodos robustos para datos temporales<a class="headerlink" href="#metodos-robustos-para-datos-temporales" title="Link to this heading">#</a></h1>
-<p>Dado que los datos horarios presentan autocorrelación y posibles cambios de varianza, complementamos el análisis con métodos robustos.</p>
+<p>Dado los desarrollos anteriores, se obtuvo que en el modelo de ajuste lineal los errores no satisfacen los supuestos de normalidad y homocedasticidad (varianza costante)<br />
+Para lo anterior, en esta seccion estaremos explorando el uso de tecnicas como:</p>
+<ol class="arabic simple">
+<li><p>Errores estandar HAC (Newey West)</p></li>
+<li><p>Estimadores robustos M (Huber, Tukey)</p></li>
+<li><p>Boostrap temporal (Block boostrap)</p></li>
+</ol>
+<section id="importacion-de-librerias">
+<h2>7.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Librerías científicas básicas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+
+<span class="c1"># Visualización</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># Modelos estadísticos</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">OLS</span><span class="p">,</span> <span class="n">add_constant</span>
+ 
+<span class="c1"># Machine Learning</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">RFE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lectura-de-datos">
+<h2>7.2. Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/hour_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="split-data-set-training-and-test">
+<h2>7.3 Split data set (Training and test)<a class="headerlink" href="#split-data-set-training-and-test" title="Link to this heading">#</a></h2>
+<p>En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span> <span class="c1">## aqui separamos uno en 70% del data set y otro 30%, la separacion es aleatoria</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de entrenemaiento &quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de prueba &quot;</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tamaño set de entrenemaiento  (12165, 20)
+tamaño set de prueba  (5214, 20)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="errores-estandar-hac-neweywest">
+<h2>7.4 Errores estándar HAC (Newey–West).<a class="headerlink" href="#errores-estandar-hac-neweywest" title="Link to this heading">#</a></h2>
+<section id="metodo-hac-neweywest">
+<h3>7.4.1. Método HAC (Newey–West)<a class="headerlink" href="#metodo-hac-neweywest" title="Link to this heading">#</a></h3>
+<p>El estimador de <strong>Errores estándar HAC (Heteroskedasticity and Autocorrelation Consistent)</strong> ajusta la matriz de varianzas y covarianzas de los coeficientes OLS para ser robusta frente a heterocedasticidad y autocorrelación.</p>
+<section id="modelo-ols">
+<h4>7.4.2. Modelo OLS<a class="headerlink" href="#modelo-ols" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+y_t = X_t \beta + u_t
+\]</div>
+</section>
+<section id="estimador-hac">
+<h4>7.4.3. Estimador HAC<a class="headerlink" href="#estimador-hac" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+\widehat{V}_{HAC} = (X'X)^{-1} \, \widehat{S} \, (X'X)^{-1}
+\]</div>
+<p>donde:
+$$
+\widehat{S} = \sum_{t=1}^{T} \hat{u}_t^2 X_t X_t’</p>
+<ul class="simple">
+<li><p>\sum_{l=1}^{q} w_l \sum_{t=l+1}^{T} \hat{u}<em>t \hat{u}</em>{t-l}
+\big( X_t X_{t-l}’ + X_{t-l} X_t’ \big)
+$$</p></li>
+</ul>
+</section>
+<section id="parametros">
+<h4>7.4.4. Parámetros<a class="headerlink" href="#parametros" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{u}_t\)</span>: residuos estimados del modelo OLS</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_t\)</span>: vector de regresores en el tiempo <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(q\)</span>: número de rezagos (<code class="docutils literal notranslate"><span class="pre">maxlags</span></code>) especificado</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_l = 1 - \frac{l}{q+1}\)</span>: pesos de Bartlett que decrecen linealmente con el rezago</p></li>
+</ul>
+</section>
+<section id="interpretacion">
+<h4>7.4.5. Interpretación<a class="headerlink" href="#interpretacion" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>El primer término corrige la <strong>heterocedasticidad</strong>.</p></li>
+<li><p>El segundo término corrige la <strong>autocorrelación</strong> hasta el rezago <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
+<li><p>Los coeficientes <span class="math notranslate nohighlight">\(\beta\)</span> no cambian, pero los errores estándar y las pruebas de significancia se ajustan.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.diagnostic</span><span class="w"> </span><span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+
+<span class="c1"># 1) Cargar el modelo OLS guardado</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;ols_model.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">ols_model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># 2) Heurística de maxlags según tamaño de muestra (Newey–West)</span>
+<span class="n">resid</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">resid</span>
+<span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">resid</span><span class="p">)</span>
+<span class="n">heuristic_maxlags</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="mf">9.0</span><span class="p">)))</span>
+<span class="n">heuristic_maxlags</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">heuristic_maxlags</span><span class="p">)</span>
+
+<span class="c1"># 3) Opcional: ajustar por frecuencia (ejemplo: mensual, cap en 12)</span>
+<span class="c1"># freq_cap = 12</span>
+<span class="c1"># maxlags = min(heuristic_maxlags, freq_cap)</span>
+
+<span class="n">maxlags</span> <span class="o">=</span> <span class="n">heuristic_maxlags</span>
+
+<span class="c1"># 4) Diagnóstico rápido con Ljung–Box en el lag elegido</span>
+<span class="n">lb</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="n">maxlags</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ljung–Box p-value at lag=</span><span class="si">{</span><span class="n">maxlags</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">lb</span><span class="p">[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 5) Aplicar HAC (Newey–West)</span>
+<span class="n">modelo_hac</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span><span class="o">=</span><span class="s2">&quot;HAC&quot;</span><span class="p">,</span> <span class="n">maxlags</span><span class="o">=</span><span class="n">maxlags</span><span class="p">)</span>
+
+<span class="c1"># 6) Resumen con errores estándar corregidos</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">modelo_hac</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ljung–Box p-value at lag=11: 0.4937
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    cnt   R-squared:                       0.643
+Model:                            OLS   Adj. R-squared:                  0.643
+Method:                 Least Squares   F-statistic:                     1231.
+Date:                Fri, 28 Nov 2025   Prob (F-statistic):               0.00
+Time:                        17:23:19   Log-Likelihood:                -74357.
+No. Observations:               12165   AIC:                         1.487e+05
+Df Residuals:                   12150   BIC:                         1.489e+05
+Df Model:                          14                                         
+Covariance Type:                  HAC                                         
+================================================================================
+                   coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+const           23.3316      6.133      3.804      0.000      11.310      35.353
+yr              86.2867      2.025     42.612      0.000      82.317      90.256
+temp           224.7626      9.255     24.284      0.000     206.620     242.905
+hum            -68.6713      6.645    -10.334      0.000     -81.697     -55.646
+windspeed      -37.3655      8.548     -4.371      0.000     -54.120     -20.611
+peak_hour      160.8230      3.169     50.755      0.000     154.612     167.034
+hr_sin         -83.4088      1.687    -49.429      0.000     -86.717     -80.101
+hr_cos         -74.7869      1.339    -55.839      0.000     -77.412     -72.162
+month_sin       -8.9803      3.090     -2.906      0.004     -15.037      -2.923
+season_2        45.1736      3.358     13.454      0.000      38.592      51.755
+season_3        23.0468      5.542      4.159      0.000      12.183      33.910
+season_4        56.9512      4.333     13.144      0.000      48.458      65.444
+weathersit_2   -13.0818      2.349     -5.569      0.000     -17.686      -8.478
+weathersit_3   -64.3430      3.998    -16.094      0.000     -72.179     -56.507
+holiday_1      -32.3356      5.963     -5.423      0.000     -44.024     -20.647
+==============================================================================
+Omnibus:                     1417.561   Durbin-Watson:                   2.013
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2610.025
+Skew:                           0.772   Prob(JB):                         0.00
+Kurtosis:                       4.662   Cond. No.                         17.0
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity and autocorrelation robust (HAC) using 11 lags and without small sample correction
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="estimadores-m-robust-huber-y-tukey">
+<h2>7.5. Estimadores M Robust (Huber y Tukey)<a class="headerlink" href="#estimadores-m-robust-huber-y-tukey" title="Link to this heading">#</a></h2>
+<section id="aplicacion-sobre-un-modelo-ols">
+<h3>7.5.1. Aplicación sobre un modelo OLS<a class="headerlink" href="#aplicacion-sobre-un-modelo-ols" title="Link to this heading">#</a></h3>
+<p>Cuando hacemos regresión OLS, los coeficientes se estiman minimizando:</p>
+<div class="math notranslate nohighlight">
+\[
+\min_\beta \sum_{i=1}^n (y_i - x_i^\top \beta)^2
+\]</div>
+<p>Esto hace que OLS sea <strong>muy sensible a valores atípicos</strong>, porque los residuos grandes se elevan al cuadrado.</p>
+<p>Los <strong>estimadores M</strong> reducen la influencia de estos valores usando una función de pérdida <span class="math notranslate nohighlight">\( \rho(\cdot) \)</span> que penaliza menos a los outliers.</p>
+</section>
+<section id="estimador-m-general">
+<h3>7.5.2. Estimador M general<a class="headerlink" href="#estimador-m-general" title="Link to this heading">#</a></h3>
+<p>Los estimadores M encuentran los coeficientes resolviendo:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\beta} = \arg\min_\beta \sum_{i=1}^n \rho(r_i)
+\]</div>
+<p>donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( r_i = \frac{y_i - x_i^\top\beta}{\hat{\sigma}}\)</span> es el residuo estandarizado</p></li>
+<li><p><span class="math notranslate nohighlight">\( \rho(\cdot)\)</span> es una función de pérdida robusta</p></li>
+</ul>
+<p>La ecuación de primer orden usa la función <span class="math notranslate nohighlight">\(\psi(r) = \rho'(r)\)</span>, y se resuelve:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^n \psi(r_i)x_i = 0
+\]</div>
+</section>
+<section id="estimador-de-huber">
+<h3>7.5.3. Estimador de Huber<a class="headerlink" href="#estimador-de-huber" title="Link to this heading">#</a></h3>
+<p>La función de pérdida es:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\rho(r)=
+\begin{cases}
+\frac{1}{2}r^2 &amp; |r| \le c \\
+c|r| - \frac{1}{2}c^2 &amp; |r| &gt; c
+\end{cases}
+\end{split}\]</div>
+<p>La función derivada <span class="math notranslate nohighlight">\(\psi(r)\)</span> es:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\psi(r)=
+\begin{cases}
+r &amp; |r|\le c \\
+c \,\text{sign}(r) &amp; |r| &gt; c
+\end{cases}
+\end{split}\]</div>
+<p>Reduce la influencia de outliers moderados sin descartarlos.</p>
+</section>
+<section id="estimador-tukey-bisquare-biweight">
+<h3>7.5.4. Estimador Tukey Bisquare (Biweight)<a class="headerlink" href="#estimador-tukey-bisquare-biweight" title="Link to this heading">#</a></h3>
+<p>Función de pérdida:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\rho(r) =
+\begin{cases}
+\frac{c^2}{6}\left[1 - \left(1 - \left(\frac{r}{c}\right)^2\right)^3\right] &amp; |r| \le c \\
+\frac{c^2}{6} &amp; |r| &gt; c
+\end{cases}
+\end{split}\]</div>
+<p>Derivada <span class="math notranslate nohighlight">\(\psi(r)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\psi(r)=
+\begin{cases}
+r \left(1 - \left(\frac{r}{c}\right)^2\right)^2 &amp; |r| \le c \\
+0 &amp; |r| &gt; c
+\end{cases}
+\end{split}\]</div>
+<p>Los outliers muy extremos reciben peso <span class="math notranslate nohighlight">\(0\)</span> (se excluyen del ajuste).</p>
+</section>
+<section id="metodo-huber-y-tukey">
+<h3>7.5.5. Metodo Huber y Tukey<a class="headerlink" href="#metodo-huber-y-tukey" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recuperar X y y con nombres reales desde el modelo</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">endog</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">ols_model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">endog_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Huber</span>
+<span class="n">huber_model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">RLM</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="n">sm</span><span class="o">.</span><span class="n">robust</span><span class="o">.</span><span class="n">norms</span><span class="o">.</span><span class="n">HuberT</span><span class="p">())</span>
+<span class="n">huber_results</span> <span class="o">=</span> <span class="n">huber_model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Tukey</span>
+<span class="n">tukey_model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">RLM</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="n">sm</span><span class="o">.</span><span class="n">robust</span><span class="o">.</span><span class="n">norms</span><span class="o">.</span><span class="n">TukeyBiweight</span><span class="p">())</span>
+<span class="n">tukey_results</span> <span class="o">=</span> <span class="n">tukey_model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Huber ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">huber_results</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Tukey ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tukey_results</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Huber ===
+                    Robust linear Model Regression Results                    
+==============================================================================
+Dep. Variable:                    cnt   No. Observations:                12165
+Model:                            RLM   Df Residuals:                    12150
+Method:                          IRLS   Df Model:                           14
+Norm:                          HuberT                                         
+Scale Est.:                       mad                                         
+Cov Type:                          H1                                         
+Date:                Fri, 28 Nov 2025                                         
+Time:                        17:23:19                                         
+No. Iterations:                    21                                         
+================================================================================
+                   coef    std err          z      P&gt;|z|      [0.025      0.975]
+--------------------------------------------------------------------------------
+const           34.5854      5.538      6.245      0.000      23.732      45.439
+yr              67.2269      1.683     39.942      0.000      63.928      70.526
+temp           201.5070      7.802     25.828      0.000     186.215     216.799
+hum            -61.1026      5.827    -10.487      0.000     -72.523     -49.683
+windspeed      -34.4256      7.371     -4.670      0.000     -48.873     -19.978
+peak_hour      146.0845      1.973     74.039      0.000     142.217     149.952
+hr_sin         -85.4283      1.371    -62.328      0.000     -88.115     -82.742
+hr_cos         -66.7608      1.324    -50.415      0.000     -69.356     -64.165
+month_sin       -5.1141      2.612     -1.958      0.050     -10.233       0.005
+season_2        38.6692      3.047     12.690      0.000      32.697      44.642
+season_3        22.2128      4.735      4.691      0.000      12.932      31.494
+season_4        50.5786      3.903     12.959      0.000      42.929      58.228
+weathersit_2   -10.8693      2.067     -5.259      0.000     -14.920      -6.818
+weathersit_3   -58.2525      3.461    -16.829      0.000     -65.037     -51.468
+holiday_1      -21.6217      5.068     -4.267      0.000     -31.554     -11.690
+================================================================================
+
+If the model instance has been used for another fit with different fit parameters, then the fit options might not be the correct ones anymore .
+=== Tukey ===
+                    Robust linear Model Regression Results                    
+==============================================================================
+Dep. Variable:                    cnt   No. Observations:                12165
+Model:                            RLM   Df Residuals:                    12150
+Method:                          IRLS   Df Model:                           14
+Norm:                   TukeyBiweight                                         
+Scale Est.:                       mad                                         
+Cov Type:                          H1                                         
+Date:                Fri, 28 Nov 2025                                         
+Time:                        17:23:19                                         
+No. Iterations:                    25                                         
+================================================================================
+                   coef    std err          z      P&gt;|z|      [0.025      0.975]
+--------------------------------------------------------------------------------
+const           38.9333      5.314      7.326      0.000      28.517      49.349
+yr              55.9369      1.615     34.631      0.000      52.771      59.103
+temp           192.4677      7.487     25.706      0.000     177.793     207.143
+hum            -57.3302      5.592    -10.253      0.000     -68.290     -46.371
+windspeed      -32.3247      7.074     -4.569      0.000     -46.190     -18.460
+peak_hour      124.8994      1.893     65.962      0.000     121.188     128.611
+hr_sin         -85.7798      1.315    -65.214      0.000     -88.358     -83.202
+hr_cos         -63.3493      1.271    -49.849      0.000     -65.840     -60.859
+month_sin       -2.1407      2.507     -0.854      0.393      -7.054       2.772
+season_2        36.0979      2.924     12.344      0.000      30.366      41.829
+season_3        22.8059      4.544      5.019      0.000      13.899      31.713
+season_4        49.4585      3.745     13.205      0.000      42.118      56.800
+weathersit_2    -8.7927      1.983     -4.433      0.000     -12.680      -4.905
+weathersit_3   -54.7796      3.322    -16.491      0.000     -61.290     -48.269
+holiday_1      -16.8898      4.863     -3.473      0.001     -26.421      -7.358
+================================================================================
+
+If the model instance has been used for another fit with different fit parameters, then the fit options might not be the correct ones anymore .
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="bootstrap-temporal-moving-block-bootstrap-2000-replicas">
+<h3>7.5.6. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas<a class="headerlink" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas" title="Link to this heading">#</a></h3>
+<p>Cuando los datos son temporales (autocorrelación, dependencias en el tiempo) no se puede re-muestrear observaciones individuales de forma independiente sin romper la estructura temporal. El <strong>block bootstrap</strong> re-muestrea <strong>bloques contiguos</strong> de observaciones para preservar la dependencia local.</p>
+<p>En el <strong>Moving Block Bootstrap (MBB)</strong>:</p>
+<ul class="simple">
+<li><p>Elegimos una longitud de bloque <span class="math notranslate nohighlight">\( \ell \)</span>.</p></li>
+<li><p>Construimos bloques superpuestos de longitud <span class="math notranslate nohighlight">\( \ell\)</span>: bloque 0 = observaciones [0:<span class="math notranslate nohighlight">\(\ell\)</span>-1], bloque 1 = [1:<span class="math notranslate nohighlight">\(\ell\)</span>], …, hasta el final.</p></li>
+<li><p>Para generar una muestra bootstrap de tamaño <span class="math notranslate nohighlight">\(T\)</span>, extraemos <span class="math notranslate nohighlight">\(k = \lceil T / \ell \rceil\)</span> bloques <em>con reemplazo</em> de la lista de bloques y los concatenamos; finalmente recortamos a longitud <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
+<li><p>Repetimos esto <span class="math notranslate nohighlight">\(B\)</span> veces (para el ejercicio <span class="math notranslate nohighlight">\(B=2000\)</span>), y para cada muestra bootstrap re-estimamos el modelo OLS y guardamos los coeficientes.</p></li>
+<li><p>Las inferencias se hacen sobre la distribución empírica de los coeficientes media, desviación estándar, intervalos percentiles, y demas.</p></li>
+</ul>
+</section>
+<section id="eleccion-de-la-longitud-de-bloque-ell">
+<h3>7.5.7. Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span><a class="headerlink" href="#eleccion-de-la-longitud-de-bloque-ell" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Regla de pulgar común: <span class="math notranslate nohighlight">\(\ell \approx T^{1/3}\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parametros para el bootstrap</span>
+<span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tamaño de la muestra T = </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2">, variables = </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="mi">2000</span>  <span class="c1"># número de replicas</span>
+
+<span class="c1"># regla de pulgar para longitud de bloque: l = int(T**(1/3))</span>
+<span class="n">l</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">T</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Block length l = </span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2"> (regla ~ T^(1/3))&quot;</span><span class="p">)</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="n">l</span><span class="p">))</span>  <span class="c1"># número de bloques a concatenar por réplica</span>
+
+<span class="c1"># listado de indice de bloques</span>
+<span class="c1"># cada bloque comienza en i y cubre [i, i+l-1]</span>
+<span class="n">block_starts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span> <span class="o">+</span> <span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">block_starts</span><span class="p">]</span>
+<span class="n">n_blocks</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Número de bloques = </span><span class="si">{</span><span class="n">n_blocks</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># funcion para el muestreo</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_mbb_indices</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">blocks</span><span class="p">,</span> <span class="n">n_blocks</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Genera un vector de indices de longitud T usando Moving Block Bootstrap (MBB)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="n">l</span><span class="p">))</span>
+    
+    <span class="c1"># elegir k bloques con reemplazo</span>
+    <span class="n">chosen_block_idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_blocks</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+    
+    <span class="n">chosen_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">chosen_block_idxs</span><span class="p">])</span>
+    
+    <span class="c1"># recortar a longitud T</span>
+    <span class="n">chosen_indices</span> <span class="o">=</span> <span class="n">chosen_indices</span><span class="p">[:</span><span class="n">T</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">chosen_indices</span>
+
+
+<span class="c1"># Ejecutar bootstrap y estimar modelo OLS en cada replica</span>
+<span class="n">coefs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">B</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>  <span class="c1"># guardar coeficientes por réplica</span>
+
+<span class="c1"># Para reproducibilidad, puedes fijar semilla:</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">generate_mbb_indices</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">blocks</span><span class="p">,</span> <span class="n">n_blocks</span><span class="p">)</span>
+
+    <span class="n">Xb</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">yb</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">model_b</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">yb</span><span class="p">,</span> <span class="n">Xb</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+        <span class="n">coefs</span><span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">model_b</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">values</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># En caso de error numérico, asignar Nan</span>
+        <span class="n">coefs</span><span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Replica </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> falló: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># quitar replicas malas</span>
+<span class="n">valid</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">coefs</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">n_valid</span> <span class="o">=</span> <span class="n">valid</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Réplicas válidas: </span><span class="si">{</span><span class="n">n_valid</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">B</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">coefs_valid</span> <span class="o">=</span> <span class="n">coefs</span><span class="p">[</span><span class="n">valid</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="c1"># metricas para el bootstrap </span>
+<span class="n">coef_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">coefs_valid</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">coef_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">coefs_valid</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ci_lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">coefs_valid</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ci_upper</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">coefs_valid</span><span class="p">,</span> <span class="mf">97.5</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;coef_mean&quot;</span><span class="p">:</span> <span class="n">coef_mean</span><span class="p">,</span>
+    <span class="s2">&quot;coef_std&quot;</span><span class="p">:</span> <span class="n">coef_std</span><span class="p">,</span>
+    <span class="s2">&quot;ci_2.5%&quot;</span><span class="p">:</span> <span class="n">ci_lower</span><span class="p">,</span>
+    <span class="s2">&quot;ci_97.5%&quot;</span><span class="p">:</span> <span class="n">ci_upper</span>
+<span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Resultados bootstrap (MBB, 2000 réplicas):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tamaño de la muestra T = 12165, variables = 15
+Block length l = 23 (regla ~ T^(1/3))
+Número de bloques = 12143
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Réplicas válidas: 2000 / 2000
+
+Resultados bootstrap (MBB, 2000 réplicas):
+               coef_mean  coef_std     ci_2.5%    ci_97.5%
+const          23.357242  6.252814   10.890000   35.059965
+yr             86.073827  2.024567   82.060823   89.963275
+temp          224.261383  9.122760  207.223261  242.687186
+hum           -68.391115  6.781188  -81.765458  -55.238105
+windspeed     -36.939071  8.508933  -54.120549  -20.722557
+peak_hour     160.449308  3.163271  154.503470  166.677450
+hr_sin        -83.456488  1.648362  -86.585126  -80.213221
+hr_cos        -74.776586  1.347150  -77.439847  -72.222094
+month_sin      -8.842116  3.005336  -15.000086   -2.940172
+season_2       45.252521  3.243603   38.994410   51.404657
+season_3       23.337730  5.366185   13.061213   33.652415
+season_4       56.995750  4.369593   48.863737   65.625090
+weathersit_2  -13.210599  2.346359  -17.949368   -8.617807
+weathersit_3  -64.260708  4.125453  -72.228090  -55.924833
+holiday_1     -32.493171  5.890450  -43.565422  -21.202107
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="tabla-comparativa-robustez-de-los-coeficientes-por-metodo">
+<h2>7.5.8. Tabla comparativa, robustez de los coeficientes por metodo<a class="headerlink" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extraccion de coeficientes</span>
+<span class="n">ols_coef</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">params</span>
+<span class="n">hac_coef</span> <span class="o">=</span> <span class="n">modelo_hac</span><span class="o">.</span><span class="n">params</span>
+<span class="n">huber_coef</span> <span class="o">=</span> <span class="n">huber_results</span><span class="o">.</span><span class="n">params</span>
+<span class="n">tukey_coef</span> <span class="o">=</span> <span class="n">tukey_results</span><span class="o">.</span><span class="n">params</span>
+
+<span class="c1"># 2) Bootstrap: ya tienes results_df con:</span>
+<span class="c1"># coef_mean, coef_std, ci_2.5%, ci_97.5%</span>
+<span class="n">boot_mean</span> <span class="o">=</span> <span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;coef_mean&quot;</span><span class="p">]</span>
+
+<span class="c1"># 3) Combinar todo en una sola tabla</span>
+
+<span class="n">comparativa</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;OLS&quot;</span><span class="p">:</span> <span class="n">ols_coef</span><span class="p">,</span>
+    <span class="s2">&quot;HAC (Newey-West)&quot;</span><span class="p">:</span> <span class="n">hac_coef</span><span class="p">,</span>
+    <span class="s2">&quot;Huber&quot;</span><span class="p">:</span> <span class="n">huber_coef</span><span class="p">,</span>
+    <span class="s2">&quot;Tukey&quot;</span><span class="p">:</span> <span class="n">tukey_coef</span><span class="p">,</span>
+    <span class="s2">&quot;Bootstrap Mean&quot;</span><span class="p">:</span> <span class="n">boot_mean</span><span class="p">,</span>
+    <span class="s2">&quot;Bootstrap Std&quot;</span><span class="p">:</span> <span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;coef_std&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Boot CI 2.5%&quot;</span><span class="p">:</span> <span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;ci_2.5%&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Boot CI 97.5%&quot;</span><span class="p">:</span> <span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;ci_97.5%&quot;</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Tabla comparativa de robustez de coeficientes:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">comparativa</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabla comparativa de robustez de coeficientes:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>OLS</th>
+      <th>HAC (Newey-West)</th>
+      <th>Huber</th>
+      <th>Tukey</th>
+      <th>Bootstrap Mean</th>
+      <th>Bootstrap Std</th>
+      <th>Boot CI 2.5%</th>
+      <th>Boot CI 97.5%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>const</th>
+      <td>23.331572</td>
+      <td>23.331572</td>
+      <td>34.585438</td>
+      <td>38.933296</td>
+      <td>23.357242</td>
+      <td>6.252814</td>
+      <td>10.890000</td>
+      <td>35.059965</td>
+    </tr>
+    <tr>
+      <th>yr</th>
+      <td>86.286657</td>
+      <td>86.286657</td>
+      <td>67.226871</td>
+      <td>55.936880</td>
+      <td>86.073827</td>
+      <td>2.024567</td>
+      <td>82.060823</td>
+      <td>89.963275</td>
+    </tr>
+    <tr>
+      <th>temp</th>
+      <td>224.762641</td>
+      <td>224.762641</td>
+      <td>201.506952</td>
+      <td>192.467703</td>
+      <td>224.261383</td>
+      <td>9.122760</td>
+      <td>207.223261</td>
+      <td>242.687186</td>
+    </tr>
+    <tr>
+      <th>hum</th>
+      <td>-68.671321</td>
+      <td>-68.671321</td>
+      <td>-61.102633</td>
+      <td>-57.330197</td>
+      <td>-68.391115</td>
+      <td>6.781188</td>
+      <td>-81.765458</td>
+      <td>-55.238105</td>
+    </tr>
+    <tr>
+      <th>windspeed</th>
+      <td>-37.365453</td>
+      <td>-37.365453</td>
+      <td>-34.425591</td>
+      <td>-32.324670</td>
+      <td>-36.939071</td>
+      <td>8.508933</td>
+      <td>-54.120549</td>
+      <td>-20.722557</td>
+    </tr>
+    <tr>
+      <th>peak_hour</th>
+      <td>160.822992</td>
+      <td>160.822992</td>
+      <td>146.084549</td>
+      <td>124.899362</td>
+      <td>160.449308</td>
+      <td>3.163271</td>
+      <td>154.503470</td>
+      <td>166.677450</td>
+    </tr>
+    <tr>
+      <th>hr_sin</th>
+      <td>-83.408825</td>
+      <td>-83.408825</td>
+      <td>-85.428323</td>
+      <td>-85.779755</td>
+      <td>-83.456488</td>
+      <td>1.648362</td>
+      <td>-86.585126</td>
+      <td>-80.213221</td>
+    </tr>
+    <tr>
+      <th>hr_cos</th>
+      <td>-74.786893</td>
+      <td>-74.786893</td>
+      <td>-66.760775</td>
+      <td>-63.349339</td>
+      <td>-74.776586</td>
+      <td>1.347150</td>
+      <td>-77.439847</td>
+      <td>-72.222094</td>
+    </tr>
+    <tr>
+      <th>month_sin</th>
+      <td>-8.980338</td>
+      <td>-8.980338</td>
+      <td>-5.114054</td>
+      <td>-2.140743</td>
+      <td>-8.842116</td>
+      <td>3.005336</td>
+      <td>-15.000086</td>
+      <td>-2.940172</td>
+    </tr>
+    <tr>
+      <th>season_2</th>
+      <td>45.173595</td>
+      <td>45.173595</td>
+      <td>38.669242</td>
+      <td>36.097873</td>
+      <td>45.252521</td>
+      <td>3.243603</td>
+      <td>38.994410</td>
+      <td>51.404657</td>
+    </tr>
+    <tr>
+      <th>season_3</th>
+      <td>23.046767</td>
+      <td>23.046767</td>
+      <td>22.212772</td>
+      <td>22.805918</td>
+      <td>23.337730</td>
+      <td>5.366185</td>
+      <td>13.061213</td>
+      <td>33.652415</td>
+    </tr>
+    <tr>
+      <th>season_4</th>
+      <td>56.951170</td>
+      <td>56.951170</td>
+      <td>50.578587</td>
+      <td>49.458522</td>
+      <td>56.995750</td>
+      <td>4.369593</td>
+      <td>48.863737</td>
+      <td>65.625090</td>
+    </tr>
+    <tr>
+      <th>weathersit_2</th>
+      <td>-13.081769</td>
+      <td>-13.081769</td>
+      <td>-10.869271</td>
+      <td>-8.792708</td>
+      <td>-13.210599</td>
+      <td>2.346359</td>
+      <td>-17.949368</td>
+      <td>-8.617807</td>
+    </tr>
+    <tr>
+      <th>weathersit_3</th>
+      <td>-64.343044</td>
+      <td>-64.343044</td>
+      <td>-58.252517</td>
+      <td>-54.779565</td>
+      <td>-64.260708</td>
+      <td>4.125453</td>
+      <td>-72.228090</td>
+      <td>-55.924833</td>
+    </tr>
+    <tr>
+      <th>holiday_1</th>
+      <td>-32.335557</td>
+      <td>-32.335557</td>
+      <td>-21.621737</td>
+      <td>-16.889808</td>
+      <td>-32.493171</td>
+      <td>5.890450</td>
+      <td>-43.565422</td>
+      <td>-21.202107</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="que-significa-que-un-coeficiente-es-robusto">
+<h3>¿Qué significa que un coeficiente es “robusto”?<a class="headerlink" href="#que-significa-que-un-coeficiente-es-robusto" title="Link to this heading">#</a></h3>
+<p>Un estimador de un coeficiente es robusto cuando al violar alguno de los supuestos del modelo lineal <strong>NO  cambian mucho</strong> su valor ni su significancia, es decir, se mantiene estable.</p>
+<p>Los supuestos típicos que se violan en datos reales son:</p>
+<ul class="simple">
+<li><p>heteroscedasticidad</p></li>
+<li><p>autocorrelación</p></li>
+<li><p>colas pesadas / outliers</p></li>
+<li><p>dependencia temporal</p></li>
+<li><p>no normalidad de residuos</p></li>
+</ul>
+<p>Es por ello que al revisar los diferentes metodos, estos abordan cada uno un aspecto distinto:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metodo</p></th>
+<th class="head"><p>Corrige o soluciona</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>HAC (Newey-West)</strong></p></td>
+<td><p>Autocorrelacion + heteroscedasticidad</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Huber (M-estimation)</strong></p></td>
+<td><p>Outliers moderados</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Tukey biweight</strong></p></td>
+<td><p>Outliers severos</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Bootstrap (block bootstrap)</strong></p></td>
+<td><p>Distribucion no normal, dependencia temporal</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="criterios-de-robustez-utilizados">
+<h3>7.5.9. ¿Criterios de Robustez utilizados?<a class="headerlink" href="#criterios-de-robustez-utilizados" title="Link to this heading">#</a></h3>
+<p>En la evaluacion de robustez, se aplica entonces validaciones entre coeficientes de los diferentes metodos para evaluar:</p>
+<ol class="arabic simple">
+<li><p><strong>Estabilidad del coeficiente entre metodos:</strong><br />
+La magbitud del coeficiente debe ser “parecida” (toleremos una variacion del 20%, tomando por base OLS), por lo que si el valor cambia mucho, entonces el efecto no es tan fiable.</p></li>
+<li><p><strong>Estabilidad del signo:</strong><br />
+El signo del coeficiente debe ser el mismo en todas los metodos. Si se mueve entre positivo y negativo, la relación no es robusta, ya que la relacion no puede indicar “a veces aumenta, aveces disminuye”.</p></li>
+<li><p><strong>Estabilidad de la significancia estadística:</strong><br />
+Si en para OLS, HACy Huber/Tukey para el coeficiente su <span class="math notranslate nohighlight">\(p-value &lt; 0.05\)</span>, y el intervalo de bootstrap no contiene al 0, el coeficnicoeficiente es <strong>robusto</strong>.</p></li>
+<li><p><strong>Ancho del intervalo bootstrap vs tamaño del coeficiente OLS:</strong>
+Caundo el intervalo de confianza, en este caso 95%, el ancho o tamaño del inetervalo es igual a la magnitud del coeficiente es reflejo de una alta variabilidad, por lo que no es tan “robusto” entonces.<br />
+Es por esto que 1.5 veces (IC95%) la desviacion de bootstrap determinamos sea menor que la magnitud del coeficiente OLS</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_rob</span> <span class="o">=</span> <span class="n">comparativa</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Criterios de robustez</span>
+
+<span class="c1">## signo estable</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_sign_stable</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="n">signs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;OLS&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Huber&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Tukey&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Bootstrap Mean&#39;</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">signs</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span>  <span class="c1"># todos iguales</span>
+
+<span class="c1">## Consistencia entre metodos (tolerancia 20%)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_consistent_methods</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.20</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cambios menores al 20% entre:</span>
+<span class="sd">    - OLS vs Huber</span>
+<span class="sd">    - OLS vs Tukey</span>
+<span class="sd">    - OLS vs Bootstrap Mean</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;OLS&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">base</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    
+    <span class="n">ratios</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="nb">abs</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Huber&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">base</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">base</span><span class="p">),</span>
+        <span class="nb">abs</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Tukey&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">base</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">base</span><span class="p">),</span>
+        <span class="nb">abs</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Bootstrap Mean&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">base</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="n">tol</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ratios</span><span class="p">)</span>
+
+<span class="c1">## Se encuentran dentro del intervalo de bootstrap</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_inside_bootstrap_CI</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="n">ci_low</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Boot CI 2.5%&#39;</span><span class="p">]</span>
+    <span class="n">ci_high</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Boot CI 97.5%&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">ci_low</span> <span class="o">&lt;=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Huber&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ci_high</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">ci_low</span> <span class="o">&lt;=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Tukey&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ci_high</span><span class="p">)</span>
+
+<span class="c1">##Intervalo bootstrap es estable </span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_bootstrap_stable</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Intervalo no excesivamente ancho.</span>
+<span class="sd">    Definimos inestabilidad si: Std &gt; 1.5 * |coef|</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Bootstrap Std&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;OLS&#39;</span><span class="p">])</span>
+
+<span class="c1">#evaluar criterios</span>
+
+<span class="n">df_rob</span><span class="p">[</span><span class="s1">&#39;Signo estable&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comparativa</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">is_sign_stable</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_rob</span><span class="p">[</span><span class="s1">&#39;Métodos consistentes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comparativa</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">is_consistent_methods</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_rob</span><span class="p">[</span><span class="s1">&#39;Dentro CI bootstrap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comparativa</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">is_inside_bootstrap_CI</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_rob</span><span class="p">[</span><span class="s1">&#39;Bootstrap estable&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comparativa</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">is_bootstrap_stable</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Criterio final</span>
+<span class="n">df_rob</span><span class="p">[</span><span class="s1">&#39;ROBUSTO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+    <span class="n">df_rob</span><span class="p">[[</span><span class="s1">&#39;Signo estable&#39;</span><span class="p">,</span><span class="s1">&#39;Métodos consistentes&#39;</span><span class="p">,</span><span class="s1">&#39;Dentro CI bootstrap&#39;</span><span class="p">,</span><span class="s1">&#39;Bootstrap estable&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s2">&quot;Sí&quot;</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Mostrar tabla final de robustez</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">============================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; TABLA FINAL DE ROBUSTEZ&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============================</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">df_rob</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================
+ TABLA FINAL DE ROBUSTEZ
+============================
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>OLS</th>
+      <th>HAC (Newey-West)</th>
+      <th>Huber</th>
+      <th>Tukey</th>
+      <th>Bootstrap Mean</th>
+      <th>Bootstrap Std</th>
+      <th>Boot CI 2.5%</th>
+      <th>Boot CI 97.5%</th>
+      <th>Signo estable</th>
+      <th>Métodos consistentes</th>
+      <th>Dentro CI bootstrap</th>
+      <th>Bootstrap estable</th>
+      <th>ROBUSTO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>const</th>
+      <td>23.331572</td>
+      <td>23.331572</td>
+      <td>34.585438</td>
+      <td>38.933296</td>
+      <td>23.357242</td>
+      <td>6.252814</td>
+      <td>10.890000</td>
+      <td>35.059965</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>yr</th>
+      <td>86.286657</td>
+      <td>86.286657</td>
+      <td>67.226871</td>
+      <td>55.936880</td>
+      <td>86.073827</td>
+      <td>2.024567</td>
+      <td>82.060823</td>
+      <td>89.963275</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>temp</th>
+      <td>224.762641</td>
+      <td>224.762641</td>
+      <td>201.506952</td>
+      <td>192.467703</td>
+      <td>224.261383</td>
+      <td>9.122760</td>
+      <td>207.223261</td>
+      <td>242.687186</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>hum</th>
+      <td>-68.671321</td>
+      <td>-68.671321</td>
+      <td>-61.102633</td>
+      <td>-57.330197</td>
+      <td>-68.391115</td>
+      <td>6.781188</td>
+      <td>-81.765458</td>
+      <td>-55.238105</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>Sí</td>
+    </tr>
+    <tr>
+      <th>windspeed</th>
+      <td>-37.365453</td>
+      <td>-37.365453</td>
+      <td>-34.425591</td>
+      <td>-32.324670</td>
+      <td>-36.939071</td>
+      <td>8.508933</td>
+      <td>-54.120549</td>
+      <td>-20.722557</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>Sí</td>
+    </tr>
+    <tr>
+      <th>peak_hour</th>
+      <td>160.822992</td>
+      <td>160.822992</td>
+      <td>146.084549</td>
+      <td>124.899362</td>
+      <td>160.449308</td>
+      <td>3.163271</td>
+      <td>154.503470</td>
+      <td>166.677450</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>hr_sin</th>
+      <td>-83.408825</td>
+      <td>-83.408825</td>
+      <td>-85.428323</td>
+      <td>-85.779755</td>
+      <td>-83.456488</td>
+      <td>1.648362</td>
+      <td>-86.585126</td>
+      <td>-80.213221</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>Sí</td>
+    </tr>
+    <tr>
+      <th>hr_cos</th>
+      <td>-74.786893</td>
+      <td>-74.786893</td>
+      <td>-66.760775</td>
+      <td>-63.349339</td>
+      <td>-74.776586</td>
+      <td>1.347150</td>
+      <td>-77.439847</td>
+      <td>-72.222094</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>month_sin</th>
+      <td>-8.980338</td>
+      <td>-8.980338</td>
+      <td>-5.114054</td>
+      <td>-2.140743</td>
+      <td>-8.842116</td>
+      <td>3.005336</td>
+      <td>-15.000086</td>
+      <td>-2.940172</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>season_2</th>
+      <td>45.173595</td>
+      <td>45.173595</td>
+      <td>38.669242</td>
+      <td>36.097873</td>
+      <td>45.252521</td>
+      <td>3.243603</td>
+      <td>38.994410</td>
+      <td>51.404657</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>season_3</th>
+      <td>23.046767</td>
+      <td>23.046767</td>
+      <td>22.212772</td>
+      <td>22.805918</td>
+      <td>23.337730</td>
+      <td>5.366185</td>
+      <td>13.061213</td>
+      <td>33.652415</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>Sí</td>
+    </tr>
+    <tr>
+      <th>season_4</th>
+      <td>56.951170</td>
+      <td>56.951170</td>
+      <td>50.578587</td>
+      <td>49.458522</td>
+      <td>56.995750</td>
+      <td>4.369593</td>
+      <td>48.863737</td>
+      <td>65.625090</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>Sí</td>
+    </tr>
+    <tr>
+      <th>weathersit_2</th>
+      <td>-13.081769</td>
+      <td>-13.081769</td>
+      <td>-10.869271</td>
+      <td>-8.792708</td>
+      <td>-13.210599</td>
+      <td>2.346359</td>
+      <td>-17.949368</td>
+      <td>-8.617807</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>weathersit_3</th>
+      <td>-64.343044</td>
+      <td>-64.343044</td>
+      <td>-58.252517</td>
+      <td>-54.779565</td>
+      <td>-64.260708</td>
+      <td>4.125453</td>
+      <td>-72.228090</td>
+      <td>-55.924833</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>holiday_1</th>
+      <td>-32.335557</td>
+      <td>-32.335557</td>
+      <td>-21.621737</td>
+      <td>-16.889808</td>
+      <td>-32.493171</td>
+      <td>5.890450</td>
+      <td>-43.565422</td>
+      <td>-21.202107</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Variables ROBUSTAS, luego de aplicar las validaciones definidas:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_rob</span><span class="p">[</span><span class="n">df_rob</span><span class="p">[</span><span class="s1">&#39;ROBUSTO&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;Sí&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables ROBUSTAS, luego de aplicar las validaciones definidas:
+hum
+windspeed
+hr_sin
+season_3
+season_4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -399,7 +1588,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">8. Validación y selección del modelo</p>
+        <p class="prev-next-title">6. Validación y Selección del Modelo</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -409,6 +1598,48 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">7.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">7.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">7.3 Split data set (Training and test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">7.4 Errores estándar HAC (Newey–West).</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">7.4.1. Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">7.4.2. Modelo OLS</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">7.4.3. Estimador HAC</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">7.4.4. Parámetros</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">7.4.5. Interpretación</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-m-robust-huber-y-tukey">7.5. Estimadores M Robust (Huber y Tukey)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-sobre-un-modelo-ols">7.5.1. Aplicación sobre un modelo OLS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-m-general">7.5.2. Estimador M general</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-de-huber">7.5.3. Estimador de Huber</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-tukey-bisquare-biweight">7.5.4. Estimador Tukey Bisquare (Biweight)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">7.5.5. Metodo Huber y Tukey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">7.5.6. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-de-la-longitud-de-bloque-ell">7.5.7. Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">7.5.8. Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-que-un-coeficiente-es-robusto">¿Qué significa que un coeficiente es “robusto”?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-robustez-utilizados">7.5.9. ¿Criterios de Robustez utilizados?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

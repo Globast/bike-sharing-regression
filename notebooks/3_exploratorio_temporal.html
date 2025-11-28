@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/3_exploratorio_temporal';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. Implementación matricial de MCO" href="4_mco_matricial.html" />
-    <link rel="prev" title="2. Ingeniería de variables y preprocesamiento temporales" href="2_ingenieria_temporal.html" />
+    <link rel="next" title="4. Implementación Matricial de MCO" href="4_mco_matricial.html" />
+    <link rel="prev" title="1. Ingenieria de Variables y Procesamiento Temporal" href="2_ingenieria_temporal.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -187,7 +187,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contenido</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">2. Ingeniería de variables y preprocesamiento temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">1. Ingenieria de Variables y Procesamiento Temporal</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Análisis exploratorio de series temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Implementación matricial de MCO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_inferencia_temporal.html">5. Inferencia estadística en datos temporales</a></li>
@@ -348,7 +349,6 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1. Analisis exploratorio de Series Temporales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#influencia-de-factores-ambientales">3.2. Influencia de factores ambientales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2. Influencia de factores ambientales</a></li>
 </ul>
             </nav>
         </div>
@@ -362,7 +362,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-series-temporales">
 <h1>3. Análisis exploratorio de series temporales<a class="headerlink" href="#analisis-exploratorio-de-series-temporales" title="Link to this heading">#</a></h1>
-<p>En esta sección realizamos un análisis exploratorio básico de la serie temporal de demanda horaria.</p>
 <section id="id1">
 <h2>3.1. Analisis exploratorio de Series Temporales<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>Se realiza una exploracion sobre el promedio de bicis rentadas respecto a diferentes temporalidades</p>
@@ -389,6 +388,7 @@ document.write(`
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DATA_PATH_CLEAN</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
 
+
 <span class="c1"># Suavizacion de series temporales</span>
 <span class="c1">## Agrupar por día y calcular total de bicis rentadas</span>
 <span class="n">df_daily</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;dteday&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
@@ -399,7 +399,13 @@ document.write(`
 <span class="c1"># suavizaion de 7 dias</span>
 <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;casual_suavizada&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;casual&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;registered_suavizada&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;registered&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
  
 <span class="c1"># Gráfico diario suavizado</span>
 <span class="n">df_daily</span><span class="p">[[</span><span class="s2">&quot;casual_suavizada&quot;</span><span class="p">,</span> <span class="s2">&quot;registered_suavizada&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
@@ -452,9 +458,6 @@ Los registrados mantienen un volumen alto incluso en meses fríos, mientras que 
 </section>
 <section id="influencia-de-factores-ambientales">
 <h2>3.2. Influencia de factores ambientales<a class="headerlink" href="#influencia-de-factores-ambientales" title="Link to this heading">#</a></h2>
-</section>
-<section id="id2">
-<h2>2.2. Influencia de factores ambientales<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>Para entender el efecto de las diferentes variables ambientales se traza un grafico de dispersion de la temperatura, humedad y velocidad del viento vs el promedio de bicis rentadas, esto con el fin de encontrar relaciones o influencias de las variables en la variable objetivo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -542,7 +545,7 @@ Por otro lado, la velocidad del viento, no denota una relacion lineal clara a la
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">2. Ingeniería de variables y preprocesamiento temporales</p>
+        <p class="prev-next-title">1. Ingenieria de Variables y Procesamiento Temporal</p>
       </div>
     </a>
     <a class="right-next"
@@ -550,7 +553,7 @@ Por otro lado, la velocidad del viento, no denota una relacion lineal clara a la
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">4. Implementación matricial de MCO</p>
+        <p class="prev-next-title">4. Implementación Matricial de MCO</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -572,7 +575,6 @@ Por otro lado, la velocidad del viento, no denota una relacion lineal clara a la
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1. Analisis exploratorio de Series Temporales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#influencia-de-factores-ambientales">3.2. Influencia de factores ambientales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2. Influencia de factores ambientales</a></li>
 </ul>
   </nav></div>
 

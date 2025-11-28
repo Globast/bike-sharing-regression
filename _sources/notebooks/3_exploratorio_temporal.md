@@ -7,10 +7,6 @@ kernelspec: {name: python3, display_name: Python 3}
 
 # 3. Análisis exploratorio de series temporales
 
-En esta sección realizamos un análisis exploratorio básico de la serie temporal de demanda horaria.
-
-
-
 ## 3.1. Analisis exploratorio de Series Temporales
 Se realiza una exploracion sobre el promedio de bicis rentadas respecto a diferentes temporalidades
 1. Bicis rentadas diariamente
@@ -34,6 +30,7 @@ DATA_PATH_CLEAN = Path("../data/hour_clean.csv")
 df = pd.read_csv(DATA_PATH_CLEAN)
 df.shape
 
+
 # Suavizacion de series temporales
 ## Agrupar por día y calcular total de bicis rentadas
 df_daily = data.groupby("dteday").agg({
@@ -44,6 +41,9 @@ df_daily = data.groupby("dteday").agg({
 # suavizaion de 7 dias
 df_daily["casual_suavizada"] = df_daily["casual"].rolling(window=7).mean()
 df_daily["registered_suavizada"] = df_daily["registered"].rolling(window=7).mean()
+```
+
+```{code-cell} ipython3
 fig, axs = plt.subplots(2, 2, figsize=(12, 8))
  
 # Gráfico diario suavizado
@@ -69,6 +69,7 @@ data.groupby("mnth").agg({"casual":"mean", "registered":"mean"}).plot(
 plt.tight_layout()
 plt.show()
 ```
+
 1. **Casual vs Registered (diario suavizado)**
     Este gráfico muestra la evolución diaria del uso de bicicletas por parte de usuarios casuales y registrados entre enero de 2011 y diciembre de 2012.
     Se aplicó un suavizado de 7 días para eliminar el ruido diario y resaltar la tendencia general.
@@ -91,8 +92,6 @@ plt.show()
     Los registrados mantienen un volumen alto incluso en meses fríos, mientras que los casuales disminuyen notablemente, lo que refuerza la idea de que el uso casual está más ligado al clima.
 
 ## 3.2. Influencia de factores ambientales
-
-## 2.2. Influencia de factores ambientales
 Para entender el efecto de las diferentes variables ambientales se traza un grafico de dispersion de la temperatura, humedad y velocidad del viento vs el promedio de bicis rentadas, esto con el fin de encontrar relaciones o influencias de las variables en la variable objetivo.
 
 ```{code-cell} ipython3
@@ -115,7 +114,6 @@ axs[2].set_title("Dispersión: Windvelocity vs cnt")
 #--------------------------
 plt.tight_layout()
 plt.show()
-
 ```
 
 ```{code-cell} ipython3
@@ -130,4 +128,4 @@ plt.show()
 
 Notemos que la influencia de la temperatura es positiva sobre la cantidad de bicis rentadas, no es la razon principal de su demanada pero si explica en parte la tendencia a que cuando hace buen clima, las personas prefieran este medio de transporte.
 A su vez, la humedad muestra disminuir las rentas de bicis a medida esta aumenta, indicador de que si el clima se torna con mucha humedad, existira un efecto a la baja en la renta de bicicletas. 
-Por otro lado, la velocidad del viento, no denota una relacion lineal clara a la renta de bicicletas, esto puede denotar corrientes de aire moderadas dentro de la ciudad que no afectan a la utilizacion de este medio de transporte o variaciones a lo largo del dia. 
+Por otro lado, la velocidad del viento, no denota una relacion lineal clara a la renta de bicicletas, esto puede denotar corrientes de aire moderadas dentro de la ciudad que no afectan a la utilizacion de este medio de transporte o variaciones a lo largo del dia.

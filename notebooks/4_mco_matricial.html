@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -189,7 +189,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contenido</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">2. Ingeniería de variables y preprocesamiento temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">1. Ingenieria de Variables y Procesamiento Temporal</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="3_exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Implementación matricial de MCO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_inferencia_temporal.html">5. Inferencia estadística en datos temporales</a></li>
@@ -350,19 +351,19 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">4.1. Importacion de librerias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">4.2. Lectura de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">4.3. Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cosntruccion-de-matrices-x-y-y">4.4. Cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">4.5. Calculo de Coeficientes Regresion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">4.3 Split data set (Training and test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cosntruccion-de-matrices-x-y-y">4.4 cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">4.5 Calculo de Coeficientes Regresion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-coeficientes-ols-alquiler-de-bicicletas">4.6. Interpretación de coeficientes OLS – Alquiler de bicicletas</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-coeficientes">4.6.1 Tabla de coeficientes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-economica-y-urbana">4.6.7. Síntesis económica y urbana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-coeficientes">3.6.1. Tabla de coeficientes</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-de-supuestos-del-modelo">4.7. Diagnostico de supuestos del modelo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia">4.7.1 Revision de residuos (Normalidad, Homocedasticidad e independencia)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-validacion-supuestos">4.7.2. Resultados validacion supuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-economica-y-urbana">Síntesis económica y urbana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-de-supuestos-del-modelo">4.7. Diagnostico de supuestos del modelo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia">4.7.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-validacion-supuestos">4.7.2. Resultados validacion supuestos</a></li>
 </ul>
             </nav>
         </div>
@@ -415,7 +416,7 @@ document.write(`
 </div>
 </section>
 <section id="split-data-set-training-and-test">
-<h2>4.3. Split data set (Training and test)<a class="headerlink" href="#split-data-set-training-and-test" title="Link to this heading">#</a></h2>
+<h2>4.3 Split data set (Training and test)<a class="headerlink" href="#split-data-set-training-and-test" title="Link to this heading">#</a></h2>
 <p>En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -435,7 +436,7 @@ tamaño set de prueba  (5214, 20)
 </div>
 </section>
 <section id="cosntruccion-de-matrices-x-y-y">
-<h2>4.4. Cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span><a class="headerlink" href="#cosntruccion-de-matrices-x-y-y" title="Link to this heading">#</a></h2>
+<h2>4.4 cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span><a class="headerlink" href="#cosntruccion-de-matrices-x-y-y" title="Link to this heading">#</a></h2>
 <p>Para el modelo lineal clasisco expresiudalsado como:
 $<span class="math notranslate nohighlight">\(
 Y = X\beta + \varepsilon
@@ -697,7 +698,7 @@ Y = X\beta + \varepsilon
 <p>Eliminamos Weekend, y nos quedamos solo con holiday y working day, ya que con estas se captura de manera menos redundante si es dia de semana (trabajo) o fin de semana.</p>
 </section>
 <section id="calculo-de-coeficientes-regresion">
-<h2>4.5. Calculo de Coeficientes Regresion<a class="headerlink" href="#calculo-de-coeficientes-regresion" title="Link to this heading">#</a></h2>
+<h2>4.5 Calculo de Coeficientes Regresion<a class="headerlink" href="#calculo-de-coeficientes-regresion" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_np</span> <span class="o">=</span> <span class="n">train_ols</span><span class="p">[[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;peak_hour&#39;</span><span class="p">,</span> <span class="s1">&#39;hr_sin&#39;</span><span class="p">,</span> <span class="s1">&#39;hr_cos&#39;</span><span class="p">,</span>
@@ -907,7 +908,7 @@ dtype: float64
 <section id="interpretacion-de-coeficientes-ols-alquiler-de-bicicletas">
 <h2>4.6. Interpretación de coeficientes OLS – Alquiler de bicicletas<a class="headerlink" href="#interpretacion-de-coeficientes-ols-alquiler-de-bicicletas" title="Link to this heading">#</a></h2>
 <section id="tabla-de-coeficientes">
-<h3>4.6.1 Tabla de coeficientes<a class="headerlink" href="#tabla-de-coeficientes" title="Link to this heading">#</a></h3>
+<h3>3.6.1. Tabla de coeficientes<a class="headerlink" href="#tabla-de-coeficientes" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Variable</p></th>
@@ -984,8 +985,9 @@ dtype: float64
 </table>
 </div>
 </section>
+</section>
 <section id="sintesis-economica-y-urbana">
-<h3>4.6.7. Síntesis económica y urbana<a class="headerlink" href="#sintesis-economica-y-urbana" title="Link to this heading">#</a></h3>
+<h2>Síntesis económica y urbana<a class="headerlink" href="#sintesis-economica-y-urbana" title="Link to this heading">#</a></h2>
 <p>El modelo confirma que la <strong>demanda de bicicletas está determinada por factoresiudals climáticos, temporales y estacionales</strong>.</p>
 <ul class="simple">
 <li><p><strong>Clima</strong>: la temperatura impulsa fuertemente la demanda, mientras que la humedad, el viento y la lluvia la reducen.</p></li>
@@ -1008,7 +1010,7 @@ Dep. Variable:                    cnt   R-squared:                       0.643
 Model:                            OLS   Adj. R-squared:                  0.643
 Method:                 Least Squares   F-statistic:                     1461.
 Date:                Fri, 28 Nov 2025   Prob (F-statistic):               0.00
-Time:                        16:48:30   Log-Likelihood:                -74356.
+Time:                        17:23:15   Log-Likelihood:                -74356.
 No. Observations:               12165   AIC:                         1.487e+05
 Df Residuals:                   12149   BIC:                         1.489e+05
 Df Model:                          15                                         
@@ -1064,7 +1066,7 @@ Dep. Variable:                    cnt   R-squared:                       0.643
 Model:                            OLS   Adj. R-squared:                  0.643
 Method:                 Least Squares   F-statistic:                     1565.
 Date:                Fri, 28 Nov 2025   Prob (F-statistic):               0.00
-Time:                        16:48:30   Log-Likelihood:                -74357.
+Time:                        17:23:15   Log-Likelihood:                -74357.
 No. Observations:               12165   AIC:                         1.487e+05
 Df Residuals:                   12150   BIC:                         1.489e+05
 Df Model:                          14                                         
@@ -1101,13 +1103,11 @@ Notes:
 </div>
 </div>
 </section>
-</section>
 <section id="diagnostico-de-supuestos-del-modelo">
 <h2>4.7. Diagnostico de supuestos del modelo<a class="headerlink" href="#diagnostico-de-supuestos-del-modelo" title="Link to this heading">#</a></h2>
 <p>En esta seccion, a partir del modelo anterior, se revisara elñ cumplimiento de la teoria sobre los errores, para entender si el modelo es valido o no</p>
-</section>
 <section id="revision-de-residuos-normalidad-homocedasticidad-e-independencia">
-<h2>4.7.1 Revision de residuos (Normalidad, Homocedasticidad e independencia)<a class="headerlink" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia" title="Link to this heading">#</a></h2>
+<h3>4.7.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)<a class="headerlink" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia" title="Link to this heading">#</a></h3>
 <p>Se parte de la inspeccion visual de residuos</p>
 <ul class="simple">
 <li><p>Disribucion de residuos</p></li>
@@ -1148,6 +1148,7 @@ Notes:
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+ 
 </pre></div>
 </div>
 </div>
@@ -1213,8 +1214,10 @@ Statistic = 2.012892945386459
 </div>
 </div>
 </div>
+</section>
+</section>
 <section id="resultados-validacion-supuestos">
-<h3>4.7.2. Resultados validacion supuestos<a class="headerlink" href="#resultados-validacion-supuestos" title="Link to this heading">#</a></h3>
+<h2>4.7.2. Resultados validacion supuestos<a class="headerlink" href="#resultados-validacion-supuestos" title="Link to this heading">#</a></h2>
 <p><strong>Shapiro-Wilk Test</strong><br />
 Estadistico = 0.964, p-value = 0.0<br />
 El p-value es extremadamente bajo, por lo tanto <strong>rechazamos la hipótesis nula de normalidad</strong>.<br />
@@ -1242,7 +1245,6 @@ Valores cercanos a 2 indican ausencia de autocorrelación.<br />
 </div>
 </div>
 </div>
-</section>
 </section>
 </section>
 
@@ -1312,19 +1314,19 @@ Valores cercanos a 2 indican ausencia de autocorrelación.<br />
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">4.1. Importacion de librerias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">4.2. Lectura de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">4.3. Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cosntruccion-de-matrices-x-y-y">4.4. Cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">4.5. Calculo de Coeficientes Regresion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">4.3 Split data set (Training and test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cosntruccion-de-matrices-x-y-y">4.4 cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">4.5 Calculo de Coeficientes Regresion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-coeficientes-ols-alquiler-de-bicicletas">4.6. Interpretación de coeficientes OLS – Alquiler de bicicletas</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-coeficientes">4.6.1 Tabla de coeficientes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-economica-y-urbana">4.6.7. Síntesis económica y urbana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-coeficientes">3.6.1. Tabla de coeficientes</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-de-supuestos-del-modelo">4.7. Diagnostico de supuestos del modelo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia">4.7.1 Revision de residuos (Normalidad, Homocedasticidad e independencia)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-validacion-supuestos">4.7.2. Resultados validacion supuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-economica-y-urbana">Síntesis económica y urbana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-de-supuestos-del-modelo">4.7. Diagnostico de supuestos del modelo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia">4.7.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-validacion-supuestos">4.7.2. Resultados validacion supuestos</a></li>
 </ul>
   </nav></div>
 
