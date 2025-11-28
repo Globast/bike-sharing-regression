@@ -715,7 +715,10 @@ Y = X\beta + \varepsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coeficientes (ecuación normal): [  23.27253813   86.3031409   224.50128708  -68.24800661  -37.29548918
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coeficientes (ecuación normal):
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> [  23.27253813   86.3031409   224.50128708  -68.24800661  -37.29548918
   160.83287692  -83.49485622  -74.83648406   -9.00851546   45.13702782
    23.0071998    56.83758396  -13.16368955  -64.49499568 -117.21571885
   -32.36380396]
@@ -1011,7 +1014,7 @@ Dep. Variable:                    cnt   R-squared:                       0.643
 Model:                            OLS   Adj. R-squared:                  0.643
 Method:                 Least Squares   F-statistic:                     1461.
 Date:                Fri, 28 Nov 2025   Prob (F-statistic):               0.00
-Time:                        23:06:01   Log-Likelihood:                -74356.
+Time:                        23:09:37   Log-Likelihood:                -74356.
 No. Observations:               12165   AIC:                         1.487e+05
 Df Residuals:                   12149   BIC:                         1.489e+05
 Df Model:                          15                                         
@@ -1067,7 +1070,7 @@ Dep. Variable:                    cnt   R-squared:                       0.643
 Model:                            OLS   Adj. R-squared:                  0.643
 Method:                 Least Squares   F-statistic:                     1565.
 Date:                Fri, 28 Nov 2025   Prob (F-statistic):               0.00
-Time:                        23:06:01   Log-Likelihood:                -74357.
+Time:                        23:09:37   Log-Likelihood:                -74357.
 No. Observations:               12165   AIC:                         1.487e+05
 Df Residuals:                   12150   BIC:                         1.489e+05
 Df Model:                          14                                         
@@ -1168,14 +1171,15 @@ Notes:
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.diagnostic</span><span class="w"> </span><span class="kn">import</span> <span class="n">het_breuschpagan</span><span class="p">,</span> <span class="n">het_white</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.stattools</span><span class="w"> </span><span class="kn">import</span> <span class="n">durbin_watson</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">shapiro</span>
-
-<span class="c1"># 1. Normalidad de residuos (Shapiro-Wilk)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="c1"># Ignorar la advertencia de Shapiro para N &gt; 5000</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span>
     <span class="s2">&quot;ignore&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="o">=</span><span class="s2">&quot;scipy.stats.shapiro: For N &gt; 5000, computed p-value may not be accurate.*&quot;</span><span class="p">,</span>
     <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span>
 <span class="p">)</span>
+
     <span class="n">shapiro_test</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
 <span class="n">shapiro_test</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shapiro-Wilk Test:&quot;</span><span class="p">)</span>
@@ -1201,7 +1205,7 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
     <span class="n">shapiro_test</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
     <span class="o">^</span>
 <span class="ne">IndentationError</span>: unexpected indent

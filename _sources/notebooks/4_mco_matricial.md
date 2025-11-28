@@ -275,14 +275,15 @@ Se observa que los residuos forman patrones y que no siguen una distribucion nor
 from statsmodels.stats.diagnostic import het_breuschpagan, het_white
 from statsmodels.stats.stattools import durbin_watson
 from scipy.stats import shapiro
-
-# 1. Normalidad de residuos (Shapiro-Wilk)
 import warnings
+
+# Ignorar la advertencia de Shapiro para N > 5000
 warnings.filterwarnings(
     "ignore",
     message="scipy.stats.shapiro: For N > 5000, computed p-value may not be accurate.*",
     category=UserWarning
 )
+
     shapiro_test = shapiro(residuals)
 shapiro_test = shapiro(residuals)
 print("Shapiro-Wilk Test:")
