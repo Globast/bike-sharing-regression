@@ -27,6 +27,10 @@ data = pd.read_csv(DATA_PATH)
 data["dteday"] = pd.to_datetime(data["dteday"])
 data.shape
 
+DATA_PATH_CLEAN = Path("../data/hour_clean.csv")
+df = pd.read_csv(DATA_PATH_CLEAN)
+df.shape
+
 # Suavizacion de series temporales
 ## Agrupar por día y calcular total de bicis rentadas
 df_daily = data.groupby("dteday").agg({
