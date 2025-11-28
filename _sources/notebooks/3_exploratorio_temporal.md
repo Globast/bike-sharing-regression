@@ -23,7 +23,7 @@ from pathlib import Path
 import pandas as pd
 
 DATA_PATH = Path("../data/hour.csv")
-df = pd.read_csv(DATA_PATH)
+data = pd.read_csv(DATA_PATH)
 data["dteday"] = pd.to_datetime(data["dteday"])
 data.shape
 
