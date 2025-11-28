@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6. Validación y Selección del Modelo &#8212; Bike Sharing Regression</title>
+    <title>8. Validación y Selección del Modelo &#8212; Bike Sharing Regression</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -339,7 +339,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>6. Validación y Selección del Modelo</h1>
+    <h1>8. Validación y Selección del Modelo</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -349,15 +349,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">6.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">6.2. Lectura de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">6.3 Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-de-ridge-y-lasso">6.4 Aplicacion de Ridge y Lasso</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">6.4.1. Interpretacion de resultados</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-del-modelo-optimo">6.4.2. Seleccion del modelo optimo</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coeficientes-modelo-ridge-y-ols">6.4.2 Coeficientes Modelo Ridge y OLS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">8.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">8.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">8.3 Split data set (Training and test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-de-ridge-y-lasso">8.4 Aplicacion de Ridge y Lasso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">8.5. Interpretacion de resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-del-modelo-optimo">8.6. Seleccion del modelo optimo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coeficientes-modelo-ridge-y-ols">8.7. Coeficientes Modelo Ridge y OLS</a></li>
 </ul>
             </nav>
         </div>
@@ -370,10 +368,10 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="validacion-y-seleccion-del-modelo">
-<h1>6. Validación y Selección del Modelo<a class="headerlink" href="#validacion-y-seleccion-del-modelo" title="Link to this heading">#</a></h1>
+<h1>8. Validación y Selección del Modelo<a class="headerlink" href="#validacion-y-seleccion-del-modelo" title="Link to this heading">#</a></h1>
 <p>OLS, Reach, Lasso</p>
 <section id="importacion-de-librerias">
-<h2>6.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
+<h2>8.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Librerías científicas básicas</span>
@@ -402,7 +400,7 @@ document.write(`
 </div>
 </section>
 <section id="lectura-de-datos">
-<h2>6.2. Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
+<h2>8.2. Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/hour_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
@@ -412,7 +410,7 @@ document.write(`
 </div>
 </section>
 <section id="split-data-set-training-and-test">
-<h2>6.3 Split data set (Training and test)<a class="headerlink" href="#split-data-set-training-and-test" title="Link to this heading">#</a></h2>
+<h2>8.3 Split data set (Training and test)<a class="headerlink" href="#split-data-set-training-and-test" title="Link to this heading">#</a></h2>
 <p>En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -432,7 +430,7 @@ tamaño set de prueba  (5214, 20)
 </div>
 </section>
 <section id="aplicacion-de-ridge-y-lasso">
-<h2>6.4 Aplicacion de Ridge y Lasso<a class="headerlink" href="#aplicacion-de-ridge-y-lasso" title="Link to this heading">#</a></h2>
+<h2>8.4 Aplicacion de Ridge y Lasso<a class="headerlink" href="#aplicacion-de-ridge-y-lasso" title="Link to this heading">#</a></h2>
 <p>Aqui se aplicara ridge y lasso para encontrar si el modelo requiere de sus correcciones.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -609,8 +607,9 @@ tamaño set de prueba  (5214, 20)
 <img alt="../_images/6277079e9dbdf8a1c4d6cbbb50be1b1317a08af278416dc2b11d5df9a9693227.png" src="../_images/6277079e9dbdf8a1c4d6cbbb50be1b1317a08af278416dc2b11d5df9a9693227.png" />
 </div>
 </div>
+</section>
 <section id="interpretacion-de-resultados">
-<h3>6.4.1. Interpretacion de resultados<a class="headerlink" href="#interpretacion-de-resultados" title="Link to this heading">#</a></h3>
+<h2>8.5. Interpretacion de resultados<a class="headerlink" href="#interpretacion-de-resultados" title="Link to this heading">#</a></h2>
 <p>Ridge y Lasso terminan siendo prácticamente iguales, lo que indica que:</p>
 <p>No hay diferencia significativa en desempeño.
 Cambiar entre Ridge y Lasso NO mejora el modelo.
@@ -623,14 +622,13 @@ El comportamiento sugiere que la regularización no cambia mucho la relación en
 <p>Respecto al desempeño del <strong><span class="math notranslate nohighlight">\(R^2\)</span></strong> en test y train, el modelo generaliza bien, evitando sobre ajustes, explicando asi el 64% de la variabilidad, lo cual deja aun sin cubrir temas como interacciones entre variables climaticas, relaciones no lineales o patrones temporales.</p>
 </section>
 <section id="seleccion-del-modelo-optimo">
-<h3>6.4.2. Seleccion del modelo optimo<a class="headerlink" href="#seleccion-del-modelo-optimo" title="Link to this heading">#</a></h3>
+<h2>8.6. Seleccion del modelo optimo<a class="headerlink" href="#seleccion-del-modelo-optimo" title="Link to this heading">#</a></h2>
 <p>Ridge resulta ser más estable cuando todas las variables son relevantes y como en nuestro data set las variables ya están seleccionadas y ninguna sobra, el ruido se ha reducido previamente.</p>
 <p>Para esto, entonces, Ridge mantivo la estructura original distribuyendo encontrando y distribuyendo las penalizaciones (<span class="math notranslate nohighlight">\( \alpha = 4.64\)</span>)</p>
 <p>Lo que indica que Ridge si puedo encontrar un nivel de regularizar el modelo base, <strong>aumentando robustez y reducuiendo varianza</strong>, aun cuando la diferencia es pequeña.</p>
 </section>
-</section>
 <section id="coeficientes-modelo-ridge-y-ols">
-<h2>6.4.2 Coeficientes Modelo Ridge y OLS<a class="headerlink" href="#coeficientes-modelo-ridge-y-ols" title="Link to this heading">#</a></h2>
+<h2>8.7. Coeficientes Modelo Ridge y OLS<a class="headerlink" href="#coeficientes-modelo-ridge-y-ols" title="Link to this heading">#</a></h2>
 <p>Abajo la tabla indicando los coeficientes antes y despues de Ridge</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -836,15 +834,13 @@ El comportamiento sugiere que la regularización no cambia mucho la relación en
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">6.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">6.2. Lectura de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">6.3 Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-de-ridge-y-lasso">6.4 Aplicacion de Ridge y Lasso</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">6.4.1. Interpretacion de resultados</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-del-modelo-optimo">6.4.2. Seleccion del modelo optimo</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coeficientes-modelo-ridge-y-ols">6.4.2 Coeficientes Modelo Ridge y OLS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">8.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">8.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">8.3 Split data set (Training and test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-de-ridge-y-lasso">8.4 Aplicacion de Ridge y Lasso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">8.5. Interpretacion de resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-del-modelo-optimo">8.6. Seleccion del modelo optimo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coeficientes-modelo-ridge-y-ols">8.7. Coeficientes Modelo Ridge y OLS</a></li>
 </ul>
   </nav></div>
 

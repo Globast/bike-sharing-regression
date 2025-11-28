@@ -5,11 +5,10 @@ jupytext:
 kernelspec: {name: python3, display_name: Python 3}
 ---
 
-
-# 6. Validación y Selección del Modelo
+# 8. Validación y Selección del Modelo
 OLS, Reach, Lasso
 
-## 6.1. Importacion de librerias
+## 8.1. Importacion de librerias
 
 ```{code-cell} ipython3
 # Librerías científicas básicas
@@ -34,13 +33,13 @@ from sklearn.feature_selection import RFE
 from sklearn.linear_model import LinearRegression
 ```
 
-## 6.2. Lectura de datos
+## 8.2. Lectura de datos
 
 ```{code-cell} ipython3
 df = pd.read_csv('../data/hour_clean.csv', sep =";")
 ```
 
-## 6.3 Split data set (Training and test)
+## 8.3 Split data set (Training and test)
 En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.
 
 ```{code-cell} ipython3
@@ -50,7 +49,7 @@ print("tamaño set de entrenemaiento ", train.shape)
 print("tamaño set de prueba ", test.shape)
 ```
 
-## 6.4 Aplicacion de Ridge y Lasso
+## 8.4 Aplicacion de Ridge y Lasso
 Aqui se aplicara ridge y lasso para encontrar si el modelo requiere de sus correcciones. 
 
 ```{code-cell} ipython3
@@ -170,7 +169,7 @@ plt.show()
 
 ```
 
-### 6.4.1. Interpretacion de resultados
+## 8.5. Interpretacion de resultados
 
 Ridge y Lasso terminan siendo prácticamente iguales, lo que indica que:
 
@@ -184,7 +183,7 @@ El comportamiento sugiere que la regularización no cambia mucho la relación en
 
 Respecto al desempeño del **$R^2$** en test y train, el modelo generaliza bien, evitando sobre ajustes, explicando asi el 64% de la variabilidad, lo cual deja aun sin cubrir temas como interacciones entre variables climaticas, relaciones no lineales o patrones temporales.
 
-### 6.4.2. Seleccion del modelo optimo
+## 8.6. Seleccion del modelo optimo
 
 Ridge resulta ser más estable cuando todas las variables son relevantes y como en nuestro data set las variables ya están seleccionadas y ninguna sobra, el ruido se ha reducido previamente.
 
@@ -192,7 +191,7 @@ Para esto, entonces, Ridge mantivo la estructura original distribuyendo encontra
 
 Lo que indica que Ridge si puedo encontrar un nivel de regularizar el modelo base, **aumentando robustez y reducuiendo varianza**, aun cuando la diferencia es pequeña.
 
-## 6.4.2 Coeficientes Modelo Ridge y OLS
+## 8.7. Coeficientes Modelo Ridge y OLS
 
 Abajo la tabla indicando los coeficientes antes y despues de Ridge
 
