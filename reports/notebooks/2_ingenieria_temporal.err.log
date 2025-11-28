@@ -1,0 +1,88 @@
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/asyncio/base_events.py", line 684, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Hora pico
+def hora_pico(h):
+    return 1 if (7 <= h <= 9) or (17 <= h <= 19) else 0
+
+data["peak_hour"] = data["hr"].apply(hora_pico)
+
+# conversion d evariables ciclicas
+data["hr_sin"]  = np.sin(2*np.pi*data["hr"]/24)
+data["hr_cos"]  = np.cos(2*np.pi*data["hr"]/24)
+
+data["month_sin"] = np.sin(2*np.pi*data["mnth"]/12)
+data["month_cos"] = np.cos(2*np.pi*data["mnth"]/12)
+
+data["weekday_sin"] = np.sin(2*np.pi*data["weekday"]/7)
+data["weekday_cos"] = np.cos(2*np.pi*data["weekday"]/7)
+
+# variables dummies
+cat_feats = ["season","weathersit","holiday"]
+
+dummies = pd.get_dummies(data[cat_feats], drop_first=True, prefix=cat_feats)
+
+# inclusion de variables dummies al dataset
+df = pd.concat([data.drop(columns=cat_feats), dummies], axis=1)
+
+# Eliminar columnas redudnantes
+df = df.astype({col: int for col in data.select_dtypes("bool").columns})
+df.drop(columns=['instant', 'hr','dteday', 'mnth', 'weekday','casual', 'registered','atemp'], inplace=True)
+
+# Pprint de datos
+print("Columnas finales:")
+print(df.columns.tolist()[:20])
+from pathlib import Path
+df.to_csv(Path('../data/hour_clean.csv'), sep=";",index = False) ## Guardamos las variables listas para empezar a correr los modelos
+df
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mValueError[39m                                Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 20[39m
+[32m     17[39m [38;5;66;03m# variables dummies[39;00m
+[32m     18[39m cat_feats = [[33m"[39m[33mseason[39m[33m"[39m,[33m"[39m[33mweathersit[39m[33m"[39m,[33m"[39m[33mholiday[39m[33m"[39m]
+[32m---> [39m[32m20[39m dummies = [43mpd[49m[43m.[49m[43mget_dummies[49m[43m([49m[43mdata[49m[43m[[49m[43mcat_feats[49m[43m][49m[43m,[49m[43m [49m[43mdrop_first[49m[43m=[49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m[43m [49m[43mprefix[49m[43m=[49m[43mcat_feats[49m[43m)[49m
+[32m     22[39m [38;5;66;03m# inclusion de variables dummies al dataset[39;00m
+[32m     23[39m df = pd.concat([data.drop(columns=cat_feats), dummies], axis=[32m1[39m)
+
+[36mFile [39m[32m~/.local/lib/python3.12/site-packages/pandas/core/reshape/encoding.py:183[39m, in [36mget_dummies[39m[34m(data, prefix, prefix_sep, dummy_na, columns, sparse, drop_first, dtype)[39m
+[32m    176[39m             len_msg = (
+[32m    177[39m                 [33mf[39m[33m"[39m[33mLength of [39m[33m'[39m[38;5;132;01m{[39;00mname[38;5;132;01m}[39;00m[33m'[39m[33m ([39m[38;5;132;01m{[39;00m[38;5;28mlen[39m(item)[38;5;132;01m}[39;00m[33m) did not match the [39m[33m"[39m
+[32m    178[39m                 [33m"[39m[33mlength of the columns being encoded [39m[33m"[39m
+[32m    179[39m                 [33mf[39m[33m"[39m[33m([39m[38;5;132;01m{[39;00mdata_to_encode.shape[[32m1[39m][38;5;132;01m}[39;00m[33m).[39m[33m"[39m
+[32m    180[39m             )
+[32m    181[39m             [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(len_msg)
+[32m--> [39m[32m183[39m [43mcheck_len[49m[43m([49m[43mprefix[49m[43m,[49m[43m [49m[33;43m"[39;49m[33;43mprefix[39;49m[33;43m"[39;49m[43m)[49m
+[32m    184[39m check_len(prefix_sep, [33m"[39m[33mprefix_sep[39m[33m"[39m)
+[32m    186[39m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(prefix, [38;5;28mstr[39m):
+
+[36mFile [39m[32m~/.local/lib/python3.12/site-packages/pandas/core/reshape/encoding.py:181[39m, in [36mget_dummies.<locals>.check_len[39m[34m(item, name)[39m
+[32m    175[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mlen[39m(item) == data_to_encode.shape[[32m1[39m]:
+[32m    176[39m     len_msg = (
+[32m    177[39m         [33mf[39m[33m"[39m[33mLength of [39m[33m'[39m[38;5;132;01m{[39;00mname[38;5;132;01m}[39;00m[33m'[39m[33m ([39m[38;5;132;01m{[39;00m[38;5;28mlen[39m(item)[38;5;132;01m}[39;00m[33m) did not match the [39m[33m"[39m
+[32m    178[39m         [33m"[39m[33mlength of the columns being encoded [39m[33m"[39m
+[32m    179[39m         [33mf[39m[33m"[39m[33m([39m[38;5;132;01m{[39;00mdata_to_encode.shape[[32m1[39m][38;5;132;01m}[39;00m[33m).[39m[33m"[39m
+[32m    180[39m     )
+[32m--> [39m[32m181[39m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(len_msg)
+
+[31mValueError[39m: Length of 'prefix' (3) did not match the length of the columns being encoded (0).
+
