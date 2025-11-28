@@ -1,0 +1,32 @@
+format: jb-book
+root: notebooks/prefacio
+
+chapters:
+  - file: notebooks/guia_reproduccion
+    title: "0.1 Guía de reproducción"
+  - file: notebooks/demostraciones
+    title: "0.2 Demostraciones solicitadas"
+  - file: notebooks/intro_contexto
+    title: "1. Introducción y contexto de movilidad urbana"
+  - file: notebooks/ingenieria_temporal
+    title: "2. Ingeniería de variables y preprocesamiento temporales"
+  - file: notebooks/exploratorio_temporal
+    title: "3. Análisis exploratorio de series temporales"
+  - file: notebooks/mco_matricial
+    title: "4. Implementación matricial de MCO"
+  - file: notebooks/inferencia_temporal
+    title: "5. Inferencia estadística en datos temporales"
+  - file: notebooks/diagnostico_supuestos
+    title: "6. Diagnóstico de supuestos del modelo"
+  - file: notebooks/metodos_robustos
+    title: "7. Métodos robustos para datos temporales"
+  - file: notebooks/validacion_modelo
+    title: "8. Validación y selección del modelo"
+  - file: notebooks/monte_carlo
+    title: "9. Simulación Monte Carlo"
+  - file: notebooks/interpretacion_operativa
+    title: "10. Interpretación operativa y recomendaciones"
+  - file: notebooks/conclusiones_extensiones
+    title: "11. Conclusiones y extensiones futuras"
+  - file: notebooks/referencias
+    title: "12. Referencias"

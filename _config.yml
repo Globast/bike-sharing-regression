@@ -1,0 +1,22 @@
+# Jupyter Book configuration
+# See https://jupyterbook.org/en/stable/customize/config.html
+title: "Bike Sharing Regression"
+author: "Equipo de Analítica de Movilidad"
+language: es
+logo: figures/bike.png
+
+execute:
+  execute_notebooks: "auto"
+
+only_build_toc_files: true
+
+bibtex_bibfiles:
+  - references.bib
+
+sphinx:
+  config:
+    numfig: true
+    mathjax3_config:
+      tex:
+        tags: "ams"
+        useLabelIds: true
