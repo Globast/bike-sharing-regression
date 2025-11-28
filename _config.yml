@@ -1,7 +1,7 @@
 # Jupyter Book configuration
 # See https://jupyterbook.org/en/stable/customize/config.html
 title: "Bike Sharing Regression"
-author: "Equipo de Analítica de Movilidad"
+author: "Gloria Bastidas - Daniel Carbono - Luis Perez"
 language: es
 logo: figures/bike.png
 
