@@ -106,9 +106,14 @@ data["month_cos"] = np.cos(2*np.pi*data["mnth"]/12)
 data["weekday_sin"] = np.sin(2*np.pi*data["weekday"]/7)
 data["weekday_cos"] = np.cos(2*np.pi*data["weekday"]/7)
 
-# variables dummies
-cat_feats = ["season","weathersit","holiday"]
+# Conversion de variables categoricas
+cat_feats = ["season", "weathersit", "workingday", "holiday"]
 
+# Nos aseguramos de que sean categóricas
+for c in cat_feats:
+    data[c] = data[c].astype("category")
+
+# Crear dummies
 dummies = pd.get_dummies(data[cat_feats], drop_first=True, prefix=cat_feats)
 
 # inclusion de variables dummies al dataset
@@ -118,55 +123,12 @@ df = pd.concat([data.drop(columns=cat_feats), dummies], axis=1)
 df = df.astype({col: int for col in data.select_dtypes("bool").columns})
 df.drop(columns=['instant', 'hr','dteday', 'mnth', 'weekday','casual', 'registered','atemp'], inplace=True)
 
+
 # Pprint de datos
 print("Columnas finales:")
 print(df.columns.tolist()[:20])
-from pathlib import Path
-df.to_csv(Path('../data/hour_clean.csv'), sep=";",index = False) ## Guardamos las variables listas para empezar a correr los modelos
+df.to_csv('hour_clean.csv', sep=";",index = False) ## Guardamos las variables listas para empezar a correr los modelos
 df
 ```
 
 
-## 2.6. Analisis exploratorio de Series Temporales
-Se realiza una exploracion sobre las series de tiempo generadas a partir del dataset, para entender tendencias y patrones a nivel diario
-
-```{code-cell} ipython3
-# Suavizacion de series temporales
-## Agrupar por día y calcular total de bicis rentadas
-df_daily = data.groupby("dteday")["cnt"].sum().reset_index()
-
-## Gráfico de la serie temporal diaria
-plt.figure(figsize=(12, 6))
-plt.plot(df_daily["dteday"], df_daily["cnt"])
-plt.title("Serie temporal diaria de bicicletas rentadas")
-plt.xlabel("Fecha")
-plt.ylabel("Cantidad de bicicletas rentadas")
-plt.grid(True)
-plt.show()
-
-# Suavización usando media móvil de ventana 7 días
-df_daily["cnt_ma7"] = df_daily["cnt"].rolling(window=7, center=True).mean()
-
-plt.figure(figsize=(12, 6))
-plt.plot(df_daily["dteday"], df_daily["cnt"], label="Original", alpha=0.5)
-plt.plot(df_daily["dteday"], df_daily["cnt_ma7"], label="Media móvil 7 días", linewidth=2)
-plt.title("Serie temporal suavizada (Media móvil 7 días)")
-plt.xlabel("Fecha")
-plt.ylabel("Cantidad de bicicletas rentadas")
-plt.legend()
-plt.grid(True)
-plt.show()
-
-# Descomposición de la serie temporal (tendencia y componente estacional aproximada)
-from statsmodels.tsa.seasonal import seasonal_decompose
-
-df_daily.set_index("dteday", inplace=True)
-result = seasonal_decompose(df_daily["cnt"], model="additive", period=30)
-
-fig = result.plot()
-fig.set_size_inches(12, 8)
-plt.show()
-
-# Restablecer índice
-df_daily = df_daily.reset_index()
-```

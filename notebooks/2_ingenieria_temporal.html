@@ -351,7 +351,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-faltantes">2.3. Exploracion de datos faltantes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-outliers">2.4. Conteo de outliers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-transformacion-y-adecuacion-de-variables">2.5 Creacion, Transformacion y adecuacion de variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-series-temporales">2.6. Analisis exploratorio de Series Temporales</a></li>
 </ul>
             </nav>
         </div>
@@ -847,9 +846,14 @@ dtype: int64
 <span class="n">data</span><span class="p">[</span><span class="s2">&quot;weekday_sin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;weekday&quot;</span><span class="p">]</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span>
 <span class="n">data</span><span class="p">[</span><span class="s2">&quot;weekday_cos&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;weekday&quot;</span><span class="p">]</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span>
 
-<span class="c1"># variables dummies</span>
-<span class="n">cat_feats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;season&quot;</span><span class="p">,</span><span class="s2">&quot;weathersit&quot;</span><span class="p">,</span><span class="s2">&quot;holiday&quot;</span><span class="p">]</span>
+<span class="c1"># Conversion de variables categoricas</span>
+<span class="n">cat_feats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;season&quot;</span><span class="p">,</span> <span class="s2">&quot;weathersit&quot;</span><span class="p">,</span> <span class="s2">&quot;workingday&quot;</span><span class="p">,</span> <span class="s2">&quot;holiday&quot;</span><span class="p">]</span>
 
+<span class="c1"># Nos aseguramos de que sean categóricas</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cat_feats</span><span class="p">:</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+
+<span class="c1"># Crear dummies</span>
 <span class="n">dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">cat_feats</span><span class="p">],</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">cat_feats</span><span class="p">)</span>
 
 <span class="c1"># inclusion de variables dummies al dataset</span>
@@ -859,97 +863,318 @@ dtype: int64
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="n">col</span><span class="p">:</span> <span class="nb">int</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;bool&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">})</span>
 <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;instant&#39;</span><span class="p">,</span> <span class="s1">&#39;hr&#39;</span><span class="p">,</span><span class="s1">&#39;dteday&#39;</span><span class="p">,</span> <span class="s1">&#39;mnth&#39;</span><span class="p">,</span> <span class="s1">&#39;weekday&#39;</span><span class="p">,</span><span class="s1">&#39;casual&#39;</span><span class="p">,</span> <span class="s1">&#39;registered&#39;</span><span class="p">,</span><span class="s1">&#39;atemp&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
+
 <span class="c1"># Pprint de datos</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Columnas finales:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[:</span><span class="mi">20</span><span class="p">])</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../data/hour_clean.csv&#39;</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span><span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1">## Guardamos las variables listas para empezar a correr los modelos</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;hour_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span><span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1">## Guardamos las variables listas para empezar a correr los modelos</span>
 <span class="n">df</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">20</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="c1"># variables dummies</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="n">cat_feats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;season&quot;</span><span class="p">,</span><span class="s2">&quot;weathersit&quot;</span><span class="p">,</span><span class="s2">&quot;holiday&quot;</span><span class="p">]</span>
-<span class="ne">---&gt; </span><span class="mi">20</span> <span class="n">dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">cat_feats</span><span class="p">],</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">cat_feats</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="c1"># inclusion de variables dummies al dataset</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">cat_feats</span><span class="p">),</span> <span class="n">dummies</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/core/reshape/encoding.py:183,</span> in <span class="ni">get_dummies</span><span class="nt">(data, prefix, prefix_sep, dummy_na, columns, sparse, drop_first, dtype)</span>
-<span class="g g-Whitespace">    </span><span class="mi">176</span>             <span class="n">len_msg</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">177</span>                 <span class="sa">f</span><span class="s2">&quot;Length of &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="si">}</span><span class="s2">) did not match the &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">178</span>                 <span class="s2">&quot;length of the columns being encoded &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">179</span>                 <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">data_to_encode</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">).&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">180</span>             <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">181</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">len_msg</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">183</span> <span class="n">check_len</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s2">&quot;prefix&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">184</span> <span class="n">check_len</span><span class="p">(</span><span class="n">prefix_sep</span><span class="p">,</span> <span class="s2">&quot;prefix_sep&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">186</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-
-<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/core/reshape/encoding.py:181,</span> in <span class="ni">get_dummies.&lt;locals&gt;.check_len</span><span class="nt">(item, name)</span>
-<span class="g g-Whitespace">    </span><span class="mi">175</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">==</span> <span class="n">data_to_encode</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">176</span>     <span class="n">len_msg</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">177</span>         <span class="sa">f</span><span class="s2">&quot;Length of &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="si">}</span><span class="s2">) did not match the &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">178</span>         <span class="s2">&quot;length of the columns being encoded &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">179</span>         <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">data_to_encode</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">).&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">180</span>     <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">181</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">len_msg</span><span class="p">)</span>
-
-<span class="ne">ValueError</span>: Length of &#39;prefix&#39; (3) did not match the length of the columns being encoded (0).
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Columnas finales:
+[&#39;yr&#39;, &#39;temp&#39;, &#39;hum&#39;, &#39;windspeed&#39;, &#39;cnt&#39;, &#39;peak_hour&#39;, &#39;hr_sin&#39;, &#39;hr_cos&#39;, &#39;month_sin&#39;, &#39;month_cos&#39;, &#39;weekday_sin&#39;, &#39;weekday_cos&#39;, &#39;season_2&#39;, &#39;season_3&#39;, &#39;season_4&#39;, &#39;weathersit_2&#39;, &#39;weathersit_3&#39;, &#39;weathersit_4&#39;, &#39;workingday_1&#39;, &#39;holiday_1&#39;]
 </pre></div>
 </div>
-</div>
-</div>
-</section>
-<section id="analisis-exploratorio-de-series-temporales">
-<h2>2.6. Analisis exploratorio de Series Temporales<a class="headerlink" href="#analisis-exploratorio-de-series-temporales" title="Link to this heading">#</a></h2>
-<p>Se realiza una exploracion sobre las series de tiempo generadas a partir del dataset, para entender tendencias y patrones a nivel diario</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Suavizacion de series temporales</span>
-<span class="c1">## Agrupar por día y calcular total de bicis rentadas</span>
-<span class="n">df_daily</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;dteday&quot;</span><span class="p">)[</span><span class="s2">&quot;cnt&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="c1">## Gráfico de la serie temporal diaria</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;dteday&quot;</span><span class="p">],</span> <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;cnt&quot;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Serie temporal diaria de bicicletas rentadas&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cantidad de bicicletas rentadas&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="c1"># Suavización usando media móvil de ventana 7 días</span>
-<span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;cnt_ma7&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;cnt&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;dteday&quot;</span><span class="p">],</span> <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;cnt&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Original&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;dteday&quot;</span><span class="p">],</span> <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;cnt_ma7&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Media móvil 7 días&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Serie temporal suavizada (Media móvil 7 días)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cantidad de bicicletas rentadas&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># Descomposición de la serie temporal (tendencia y componente estacional aproximada)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.tsa.seasonal</span><span class="w"> </span><span class="kn">import</span> <span class="n">seasonal_decompose</span>
-
-<span class="n">df_daily</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;dteday&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;cnt&quot;</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;additive&quot;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># Restablecer índice</span>
-<span class="n">df_daily</span> <span class="o">=</span> <span class="n">df_daily</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>yr</th>
+      <th>temp</th>
+      <th>hum</th>
+      <th>windspeed</th>
+      <th>cnt</th>
+      <th>peak_hour</th>
+      <th>hr_sin</th>
+      <th>hr_cos</th>
+      <th>month_sin</th>
+      <th>month_cos</th>
+      <th>weekday_sin</th>
+      <th>weekday_cos</th>
+      <th>season_2</th>
+      <th>season_3</th>
+      <th>season_4</th>
+      <th>weathersit_2</th>
+      <th>weathersit_3</th>
+      <th>weathersit_4</th>
+      <th>workingday_1</th>
+      <th>holiday_1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0.24</td>
+      <td>0.81</td>
+      <td>0.0000</td>
+      <td>16</td>
+      <td>0</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>5.000000e-01</td>
+      <td>0.866025</td>
+      <td>-0.781831</td>
+      <td>0.62349</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0.22</td>
+      <td>0.80</td>
+      <td>0.0000</td>
+      <td>40</td>
+      <td>0</td>
+      <td>0.258819</td>
+      <td>0.965926</td>
+      <td>5.000000e-01</td>
+      <td>0.866025</td>
+      <td>-0.781831</td>
+      <td>0.62349</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0.22</td>
+      <td>0.80</td>
+      <td>0.0000</td>
+      <td>32</td>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>0.866025</td>
+      <td>5.000000e-01</td>
+      <td>0.866025</td>
+      <td>-0.781831</td>
+      <td>0.62349</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0.24</td>
+      <td>0.75</td>
+      <td>0.0000</td>
+      <td>13</td>
+      <td>0</td>
+      <td>0.707107</td>
+      <td>0.707107</td>
+      <td>5.000000e-01</td>
+      <td>0.866025</td>
+      <td>-0.781831</td>
+      <td>0.62349</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0.24</td>
+      <td>0.75</td>
+      <td>0.0000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0.866025</td>
+      <td>0.500000</td>
+      <td>5.000000e-01</td>
+      <td>0.866025</td>
+      <td>-0.781831</td>
+      <td>0.62349</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>17374</th>
+      <td>1</td>
+      <td>0.26</td>
+      <td>0.60</td>
+      <td>0.1642</td>
+      <td>119</td>
+      <td>1</td>
+      <td>-0.965926</td>
+      <td>0.258819</td>
+      <td>-2.449294e-16</td>
+      <td>1.000000</td>
+      <td>0.781831</td>
+      <td>0.62349</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>17375</th>
+      <td>1</td>
+      <td>0.26</td>
+      <td>0.60</td>
+      <td>0.1642</td>
+      <td>89</td>
+      <td>0</td>
+      <td>-0.866025</td>
+      <td>0.500000</td>
+      <td>-2.449294e-16</td>
+      <td>1.000000</td>
+      <td>0.781831</td>
+      <td>0.62349</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>17376</th>
+      <td>1</td>
+      <td>0.26</td>
+      <td>0.60</td>
+      <td>0.1642</td>
+      <td>90</td>
+      <td>0</td>
+      <td>-0.707107</td>
+      <td>0.707107</td>
+      <td>-2.449294e-16</td>
+      <td>1.000000</td>
+      <td>0.781831</td>
+      <td>0.62349</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>17377</th>
+      <td>1</td>
+      <td>0.26</td>
+      <td>0.56</td>
+      <td>0.1343</td>
+      <td>61</td>
+      <td>0</td>
+      <td>-0.500000</td>
+      <td>0.866025</td>
+      <td>-2.449294e-16</td>
+      <td>1.000000</td>
+      <td>0.781831</td>
+      <td>0.62349</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>17378</th>
+      <td>1</td>
+      <td>0.26</td>
+      <td>0.65</td>
+      <td>0.1343</td>
+      <td>49</td>
+      <td>0</td>
+      <td>-0.258819</td>
+      <td>0.965926</td>
+      <td>-2.449294e-16</td>
+      <td>1.000000</td>
+      <td>0.781831</td>
+      <td>0.62349</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+<p>17379 rows × 20 columns</p>
+</div></div></div>
 </div>
 </section>
 </section>
@@ -1023,7 +1248,6 @@ dtype: int64
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-faltantes">2.3. Exploracion de datos faltantes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-outliers">2.4. Conteo de outliers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-transformacion-y-adecuacion-de-variables">2.5 Creacion, Transformacion y adecuacion de variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-series-temporales">2.6. Analisis exploratorio de Series Temporales</a></li>
 </ul>
   </nav></div>
 
