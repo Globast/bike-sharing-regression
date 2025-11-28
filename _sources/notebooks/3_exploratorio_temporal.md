@@ -19,6 +19,13 @@ Se realiza una exploracion sobre el promedio de bicis rentadas respecto a difere
 4. Bicis rentadas promedio por hora por mes
 
 ```{code-cell} ipython3
+from pathlib import Path
+import pandas as pd
+
+DATA_PATH = Path("../data/hour_clean.csv")
+df = pd.read_csv(DATA_PATH)
+df.shape
+
 # Suavizacion de series temporales
 ## Agrupar por día y calcular total de bicis rentadas
 df_daily = data.groupby("dteday").agg({

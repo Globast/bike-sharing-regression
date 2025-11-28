@@ -175,7 +175,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="0_prefacio.html">
-                    Prefacio
+                    Presentación
                 </a>
             </li>
         </ul>
@@ -374,7 +374,14 @@ document.write(`
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Suavizacion de series temporales</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/hour_clean.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="c1"># Suavizacion de series temporales</span>
 <span class="c1">## Agrupar por día y calcular total de bicis rentadas</span>
 <span class="n">df_daily</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;dteday&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
     <span class="s2">&quot;casual&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span>
@@ -414,15 +421,16 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Suavizacion de series temporales</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">## Agrupar por día y calcular total de bicis rentadas</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">df_daily</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;dteday&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="s2">&quot;casual&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="s2">&quot;registered&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="p">})</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># suavizaion de 7 dias</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;casual_suavizada&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;casual&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">10</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Suavizacion de series temporales</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1">## Agrupar por día y calcular total de bicis rentadas</span>
+<span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">df_daily</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;dteday&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="s2">&quot;casual&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="s2">&quot;registered&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="p">})</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1"># suavizaion de 7 dias</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;casual_suavizada&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_daily</span><span class="p">[</span><span class="s2">&quot;casual&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
 <span class="ne">NameError</span>: name &#39;data&#39; is not defined
 </pre></div>

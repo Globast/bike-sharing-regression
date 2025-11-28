@@ -1,7 +1,12 @@
-# Prefacio
+# Presentación
 
-Este libro de Jupyter documenta un flujo completo de modelado de regresión para datos de demanda de bicicletas compartidas a nivel horario. El objetivo es ofrecer un recurso reproducible para cursos de Modelos Lineales y analistas de movilidad urbana.
+## Proyecto Integrador: Regresión Lineal Múltiple Avanzada – Sistema de Bicicletas Compartidas
 
-El contenido está organizado de forma secuencial: desde el contexto del problema y la exploración de datos, hasta la estimación matricial de mínimos cuadrados ordinarios (MCO), el diagnóstico de supuestos, los métodos robustos para datos temporales, la validación mediante particiones temporales y una simulación Monte Carlo para evaluar la estabilidad del modelo.
 
-A lo largo del libro se utilizan referencias bibliográficas en formato BibTeX, citadas como [@cleveland1990] o [@hyndman2018], así como ecuaciones numeradas, por ejemplo la ecuación {eq}`eq:ols_matrix`. Las figuras y tablas se numeran automáticamente gracias a la configuración de Sphinx y MyST-NB.
+Se presenta el desarrollo de un proyecto integrador cuyo eje central es la aplicación de la regresión lineal múltiple avanzada al análisis de la demanda en un sistema de bicicletas compartidas. El trabajo se enmarca en la asignatura “Modelos Lineales” de la Maestría en Estadística Aplicada de la Universidad del Norte y tiene como propósito articular los contenidos teóricos del curso con un caso de estudio realista, relevante para la movilidad urbana sostenible y para la toma de decisiones basada en datos.
+
+
+Profesor: Lihki Rubio
+
+Estudiantes: Gloria Bastidas – Daniel Carbono – Luis Pérez
+
