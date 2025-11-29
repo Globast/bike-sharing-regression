@@ -32,8 +32,8 @@ from sklearn.model_selection import train_test_split
 
 ```{code-cell} ipython3
 ## Lectura de datos, por hora y por dia
-data = pd.read_csv('day.csv', sep =",")
-
+DATA_PATH = Path("../data/day.csv")
+data = pd.read_csv(DATA_PATH)
 ## Transformacion de fecha
 data['dteday'] = pd.to_datetime(data['dteday'])
 ```
