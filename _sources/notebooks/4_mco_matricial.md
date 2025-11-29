@@ -12,30 +12,14 @@ En esta etapa se utilizaran los datos previamente preparados para el planteamien
 ## 4.1. Importacion de librerias
 
 ```{code-cell} ipython3
-# Librerías científicas básicas
-import numpy as np
+from pathlib import Path
 import pandas as pd
-import scipy.stats as stats
-
-# Visualización
 import matplotlib.pyplot as plt
 import seaborn as sns
+from datetime import datetime
+import numpy as np
 
-# Modelos estadísticos
-import statsmodels.api as sm
-from statsmodels.stats.outliers_influence import variance_inflation_factor
-from statsmodels.api import OLS, add_constant
- 
-# Machine Learning
-from sklearn.model_selection import train_test_split
-from sklearn.feature_selection import RFE
-from sklearn.linear_model import LinearRegression
-```
-
-## 4.2. Lectura de datos
-
-```{code-cell} ipython3
-df = pd.read_csv("../data/day_clean.csv")
+data = pd.read_csv("../data/day.csv")
 
 ```
 
