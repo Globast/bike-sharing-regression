@@ -6,7 +6,7 @@ kernelspec: {name: python3, display_name: Python 3}
 ---
 # 5. Inferencia estadística en datos temporales
 En este capítulo discutimos la inferencia sobre los coeficientes del modelo de regresión en presencia de dependencia temporal.
-```{code-cell} ipython3
+
 ```{code-cell} ipython3
 # Librerías científicas básicas
 import numpy as np
