@@ -8,29 +8,20 @@ kernelspec: {name: python3, display_name: Python 3}
 En este capítulo discutimos la inferencia sobre los coeficientes del modelo de regresión en presencia de dependencia temporal.
 
 ```{code-cell} ipython3
-# Librerías científicas básicas
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
-
-# Visualización
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-# Modelos estadísticos
 import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 from statsmodels.api import OLS, add_constant
- 
-# Machine Learning
-from sklearn.model_selection import train_test_split
+ from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LinearRegression
-
 df = pd.read_csv("../data/day_clean.csv", sep =";")
 N = len(df)
 cut = int(N * 0.7)
-
 train = df.iloc[:cut].copy()
 test  = df.iloc[cut:].copy()
 ```

@@ -18,25 +18,28 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-X = X.astype(float) ## Matriz X
-X_np = train_ols[['yr', 'temp', 'hum', 'windspeed', 'season_2', 'season_3', 'season_4',
-       'weathersit_2', 'weathersit_3', 'holiday_1']].to_numpy().astype(float)
-X_np = np.column_stack([np.ones(X_np.shape[0]), X_np])  # columna de unos
-# 4. Aplicar ecuación normal
-XtX = X_np.T @ X_np
-XtY = X_np.T @ y
-beta_manual = np.linalg.pinv(XtX) @ XtY
-print("Coeficientes (ecuación normal):", beta_manual.flatten())
+import numpy as np
+import pandas as pd
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+import seaborn as sns
+import statsmodels.api as sm
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+from statsmodels.api import OLS, add_constant
+ from sklearn.model_selection import train_test_split
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LinearRegression
+df = pd.read_csv("../data/day_clean.csv", sep =";")
+N = len(df)
+cut = int(N * 0.7)
+train = df.iloc[:cut].copy()
+test  = df.iloc[cut:].copy()
 ------------------
 
 
-[31m---------------------------------------------------------------------------[39m
-[31mNameError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 1[39m
-[32m----> [39m[32m1[39m X = [43mX[49m.astype([38;5;28mfloat[39m) [38;5;66;03m## Matriz X[39;00m
-[32m      2[39m X_np = train_ols[[[33m'[39m[33myr[39m[33m'[39m, [33m'[39m[33mtemp[39m[33m'[39m, [33m'[39m[33mhum[39m[33m'[39m, [33m'[39m[33mwindspeed[39m[33m'[39m, [33m'[39m[33mseason_2[39m[33m'[39m, [33m'[39m[33mseason_3[39m[33m'[39m, [33m'[39m[33mseason_4[39m[33m'[39m,
-[32m      3[39m        [33m'[39m[33mweathersit_2[39m[33m'[39m, [33m'[39m[33mweathersit_3[39m[33m'[39m, [33m'[39m[33mholiday_1[39m[33m'[39m]].to_numpy().astype([38;5;28mfloat[39m)
-[32m      4[39m X_np = np.column_stack([np.ones(X_np.shape[[32m0[39m]), X_np])  [38;5;66;03m# columna de unos[39;00m
+  [36mCell[39m[36m [39m[32mIn[1][39m[32m, line 9[39m
+[31m    [39m[31mfrom sklearn.model_selection import train_test_split[39m
+    ^
+[31mIndentationError[39m[31m:[39m unexpected indent
 
-[31mNameError[39m: name 'X' is not defined
 
