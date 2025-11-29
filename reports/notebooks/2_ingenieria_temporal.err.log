@@ -21,8 +21,10 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 ## Lectura de datos, por hora y por dia
 DATA_PATH = Path("../data/day.csv")
 data = pd.read_csv(DATA_PATH)
+
 ## Transformacion de fecha
 data['dteday'] = pd.to_datetime(data['dteday'])
+data.shape
 ------------------
 
 
@@ -32,7 +34,7 @@ data['dteday'] = pd.to_datetime(data['dteday'])
 [32m      1[39m [38;5;66;03m## Lectura de datos, por hora y por dia[39;00m
 [32m----> [39m[32m2[39m DATA_PATH = [43mPath[49m([33m"[39m[33m../data/day.csv[39m[33m"[39m)
 [32m      3[39m data = pd.read_csv(DATA_PATH)
-[32m      4[39m [38;5;66;03m## Transformacion de fecha[39;00m
+[32m      5[39m [38;5;66;03m## Transformacion de fecha[39;00m
 
 [31mNameError[39m: name 'Path' is not defined
 

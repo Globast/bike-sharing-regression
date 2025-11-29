@@ -34,8 +34,10 @@ from sklearn.model_selection import train_test_split
 ## Lectura de datos, por hora y por dia
 DATA_PATH = Path("../data/day.csv")
 data = pd.read_csv(DATA_PATH)
+
 ## Transformacion de fecha
 data['dteday'] = pd.to_datetime(data['dteday'])
+data.shape
 ```
 
 ## 2.3. Descripcion de variables del dataset
