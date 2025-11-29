@@ -26,8 +26,8 @@ train = df.iloc[:cut].copy()
 test  = df.iloc[cut:].copy()
 ```
 
-## 5.3. Interpretación de coeficientes OLS – Alquiler de bicicletas
-### 5.3.1. Tabla de coeficientes
+## 5.2. Interpretación de coeficientes OLS – Alquiler de bicicletas
+### Tabla de coeficientes
 
 | Variable         | Coeficiente                        | Interpretación económica/urbana                                                                                                                 |
 | ---------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
