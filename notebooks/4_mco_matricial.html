@@ -353,6 +353,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">4.1. Importacion de librerias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">4.3 Split data set (Training and test)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cosntruccion-de-matrices-x-y-y">4.4 cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">4.5. Calculo de Coeficientes Regresion</a></li>
 </ul>
             </nav>
         </div>
@@ -650,12 +651,175 @@ Y = X\beta + \varepsilon
 </div></div></div>
 </div>
 <p>Eliminamos Weekend, y nos quedamos solo con holiday y working day, ya que con estas se captura de manera menos redundante si es dia de semana (trabajo) o fin de semana.</p>
+</section>
+<section id="calculo-de-coeficientes-regresion">
+<h2>4.5. Calculo de Coeficientes Regresion<a class="headerlink" href="#calculo-de-coeficientes-regresion" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/train.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="c1">## Matriz X</span>
+<span class="n">X_np</span> <span class="o">=</span> <span class="n">train_ols</span><span class="p">[[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">X_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X_np</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">X_np</span><span class="p">])</span>  <span class="c1"># columna de unos</span>
+<span class="c1"># 4. Aplicar ecuación normal</span>
+<span class="n">XtX</span> <span class="o">=</span> <span class="n">X_np</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X_np</span>
+<span class="n">XtY</span> <span class="o">=</span> <span class="n">X_np</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
+<span class="n">beta_manual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">XtX</span><span class="p">)</span> <span class="o">@</span> <span class="n">XtY</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coeficientes (ecuación normal):&quot;</span><span class="p">,</span> <span class="n">beta_manual</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coeficientes (ecuación normal): [ 1675.78206826  1971.33480969  5113.45158008 -1240.47215625
+ -2770.38931886  1045.70425207   658.24563451  1424.81862903
+  -374.82738609 -1668.38960877  -527.95635792]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ahora utilizaremos OLS de Statmodels, para la generacion de los coeficientes de la regresion</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6. Ajustar OLS con statsmodels</span>
+<span class="n">X_sm</span> <span class="o">=</span> <span class="n">add_constant</span><span class="p">(</span><span class="n">train_ols</span><span class="p">[[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))</span>
+<span class="n">ols_model</span> <span class="o">=</span> <span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_sm</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">beta_ols</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">params</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===============&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coeficientes (OLS statsmodels):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">beta_ols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===============
+Coeficientes (OLS statsmodels):
+ const           1675.782068
+yr              1971.334810
+temp            5113.451580
+hum            -1240.472156
+windspeed      -2770.389319
+season_2        1045.704252
+season_3         658.245635
+season_4        1424.818629
+weathersit_2    -374.827386
+weathersit_3   -1668.389609
+holiday_1       -527.956358
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6. Comparar en tabla</span>
+<span class="n">coef_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Variable&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Intercepto&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">],</span>
+    <span class="s2">&quot;Beta (Ecuación Normal)&quot;</span><span class="p">:</span> <span class="n">beta_manual</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+    <span class="s2">&quot;Beta (OLS Statsmodels)&quot;</span><span class="p">:</span> <span class="n">beta_ols</span><span class="o">.</span><span class="n">values</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Tabla comparativa de coeficientes:&quot;</span><span class="p">)</span>
+<span class="n">coef_table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabla comparativa de coeficientes:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>Beta (Ecuación Normal)</th>
+      <th>Beta (OLS Statsmodels)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Intercepto</td>
+      <td>1675.782068</td>
+      <td>1675.782068</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>yr</td>
+      <td>1971.334810</td>
+      <td>1971.334810</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>temp</td>
+      <td>5113.451580</td>
+      <td>5113.451580</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>hum</td>
+      <td>-1240.472156</td>
+      <td>-1240.472156</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>windspeed</td>
+      <td>-2770.389319</td>
+      <td>-2770.389319</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>season_2</td>
+      <td>1045.704252</td>
+      <td>1045.704252</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>season_3</td>
+      <td>658.245635</td>
+      <td>658.245635</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>season_4</td>
+      <td>1424.818629</td>
+      <td>1424.818629</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>weathersit_2</td>
+      <td>-374.827386</td>
+      <td>-374.827386</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>weathersit_3</td>
+      <td>-1668.389609</td>
+      <td>-1668.389609</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>holiday_1</td>
+      <td>-527.956358</td>
+      <td>-527.956358</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 </section>
@@ -727,6 +891,7 @@ Y = X\beta + \varepsilon
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">4.1. Importacion de librerias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">4.3 Split data set (Training and test)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cosntruccion-de-matrices-x-y-y">4.4 cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">4.5. Calculo de Coeficientes Regresion</a></li>
 </ul>
   </nav></div>
 

@@ -348,7 +348,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">5.2 Calculo de Coeficientes Regresion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-coeficientes-ols-alquiler-de-bicicletas">5.3. Interpretación de coeficientes OLS – Alquiler de bicicletas</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-coeficientes">5.3.1. Tabla de coeficientes</a></li>
 </ul>
@@ -398,54 +397,6 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="calculo-de-coeficientes-regresion">
-<h2>5.2 Calculo de Coeficientes Regresion<a class="headerlink" href="#calculo-de-coeficientes-regresion" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="c1">## Matriz X</span>
-<span class="n">X_np</span> <span class="o">=</span> <span class="n">train_ols</span><span class="p">[[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">X_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X_np</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">X_np</span><span class="p">])</span>  <span class="c1"># columna de unos</span>
-<span class="c1"># 4. Aplicar ecuación normal</span>
-<span class="n">XtX</span> <span class="o">=</span> <span class="n">X_np</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X_np</span>
-<span class="n">XtY</span> <span class="o">=</span> <span class="n">X_np</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
-<span class="n">beta_manual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">XtX</span><span class="p">)</span> <span class="o">@</span> <span class="n">XtY</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coeficientes (ecuación normal):&quot;</span><span class="p">,</span> <span class="n">beta_manual</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Ahora utilizaremos OLS de Statmodels, para la generacion de los coeficientes de la regresion</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6. Ajustar OLS con statsmodels</span>
-<span class="n">X_sm</span> <span class="o">=</span> <span class="n">add_constant</span><span class="p">(</span><span class="n">train_ols</span><span class="p">[[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))</span>
-<span class="n">ols_model</span> <span class="o">=</span> <span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_sm</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="n">beta_ols</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">params</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===============&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coeficientes (OLS statsmodels):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">beta_ols</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6. Comparar en tabla</span>
-<span class="n">coef_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s2">&quot;Variable&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Intercepto&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">],</span>
-    <span class="s2">&quot;Beta (Ecuación Normal)&quot;</span><span class="p">:</span> <span class="n">beta_manual</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
-    <span class="s2">&quot;Beta (OLS Statsmodels)&quot;</span><span class="p">:</span> <span class="n">beta_ols</span><span class="o">.</span><span class="n">values</span>
-<span class="p">})</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Tabla comparativa de coeficientes:&quot;</span><span class="p">)</span>
-<span class="n">coef_table</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="interpretacion-de-coeficientes-ols-alquiler-de-bicicletas">
 <h2>5.3. Interpretación de coeficientes OLS – Alquiler de bicicletas<a class="headerlink" href="#interpretacion-de-coeficientes-ols-alquiler-de-bicicletas" title="Link to this heading">#</a></h2>
 <section id="tabla-de-coeficientes">
@@ -593,7 +544,6 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">5.2 Calculo de Coeficientes Regresion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-coeficientes-ols-alquiler-de-bicicletas">5.3. Interpretación de coeficientes OLS – Alquiler de bicicletas</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-coeficientes">5.3.1. Tabla de coeficientes</a></li>
 </ul>

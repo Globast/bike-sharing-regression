@@ -131,6 +131,42 @@ vif_1
 ```
 
 Eliminamos Weekend, y nos quedamos solo con holiday y working day, ya que con estas se captura de manera menos redundante si es dia de semana (trabajo) o fin de semana.
+
+## 4.5. Calculo de Coeficientes Regresion
+
 ```{code-cell} ipython3
-train.to_csv("../data/train.csv", index=False)
+X = X.astype(float) ## Matriz X
+X_np = train_ols[['yr', 'temp', 'hum', 'windspeed', 'season_2', 'season_3', 'season_4',
+       'weathersit_2', 'weathersit_3', 'holiday_1']].to_numpy().astype(float)
+X_np = np.column_stack([np.ones(X_np.shape[0]), X_np])  # columna de unos
+# 4. Aplicar ecuación normal
+XtX = X_np.T @ X_np
+XtY = X_np.T @ y
+beta_manual = np.linalg.pinv(XtX) @ XtY
+print("Coeficientes (ecuación normal):", beta_manual.flatten())
+```
+
+Ahora utilizaremos OLS de Statmodels, para la generacion de los coeficientes de la regresion
+
+```{code-cell} ipython3
+# 6. Ajustar OLS con statsmodels
+X_sm = add_constant(train_ols[['yr', 'temp', 'hum', 'windspeed', 'season_2', 'season_3', 'season_4',
+       'weathersit_2', 'weathersit_3', 'holiday_1']].astype(float))
+ols_model = OLS(y, X_sm).fit()
+beta_ols = ols_model.params
+print("===============")
+print("Coeficientes (OLS statsmodels):\n", beta_ols)
+```
+
+```{code-cell} ipython3
+# 6. Comparar en tabla
+coef_table = pd.DataFrame({
+    "Variable": ["Intercepto"] + ['yr', 'temp', 'hum', 'windspeed', 'season_2', 'season_3', 'season_4',
+       'weathersit_2', 'weathersit_3', 'holiday_1'],
+    "Beta (Ecuación Normal)": beta_manual.flatten(),
+    "Beta (OLS Statsmodels)": beta_ols.values
+})
+
+print("\nTabla comparativa de coeficientes:")
+coef_table
 ```
