@@ -32,19 +32,11 @@ from sklearn.linear_model import LinearRegression
 
 ```{code-cell} ipython3
 df = pd.read_csv("../data/day_clean.csv")
-df.shape
+
 ```
 ## 5.2 Calculo de Coeficientes Regresion
 
 ```{code-cell} ipython3
-
-y = train["cnt"]
-X = train.drop(columns=["cnt"])
-X = X.apply(pd.to_numeric, errors='coerce')
-train_ols = pd.concat([X, y], axis=1).dropna()
-y = train_ols["cnt"]
-X = train_ols.drop(columns=["cnt"])
-
 
 X = X.astype(float) ## Matriz X
 X_np = train_ols[['yr', 'temp', 'hum', 'windspeed', 'season_2', 'season_3', 'season_4',

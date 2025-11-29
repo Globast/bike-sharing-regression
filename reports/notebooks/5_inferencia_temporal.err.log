@@ -18,14 +18,6 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-y = train["cnt"]
-X = train.drop(columns=["cnt"])
-X = X.apply(pd.to_numeric, errors='coerce')
-train_ols = pd.concat([X, y], axis=1).dropna()
-y = train_ols["cnt"]
-X = train_ols.drop(columns=["cnt"])
-
-
 X = X.astype(float) ## Matriz X
 X_np = train_ols[['yr', 'temp', 'hum', 'windspeed', 'season_2', 'season_3', 'season_4',
        'weathersit_2', 'weathersit_3', 'holiday_1']].to_numpy().astype(float)
@@ -41,9 +33,10 @@ print("Coeficientes (ecuación normal):", beta_manual.flatten())
 [31m---------------------------------------------------------------------------[39m
 [31mNameError[39m                                 Traceback (most recent call last)
 [36mCell[39m[36m [39m[32mIn[3][39m[32m, line 1[39m
-[32m----> [39m[32m1[39m y = [43mtrain[49m[[33m"[39m[33mcnt[39m[33m"[39m]
-[32m      2[39m X = train.drop(columns=[[33m"[39m[33mcnt[39m[33m"[39m])
-[32m      3[39m X = X.apply(pd.to_numeric, errors=[33m'[39m[33mcoerce[39m[33m'[39m)
+[32m----> [39m[32m1[39m X = [43mX[49m.astype([38;5;28mfloat[39m) [38;5;66;03m## Matriz X[39;00m
+[32m      2[39m X_np = train_ols[[[33m'[39m[33myr[39m[33m'[39m, [33m'[39m[33mtemp[39m[33m'[39m, [33m'[39m[33mhum[39m[33m'[39m, [33m'[39m[33mwindspeed[39m[33m'[39m, [33m'[39m[33mseason_2[39m[33m'[39m, [33m'[39m[33mseason_3[39m[33m'[39m, [33m'[39m[33mseason_4[39m[33m'[39m,
+[32m      3[39m        [33m'[39m[33mweathersit_2[39m[33m'[39m, [33m'[39m[33mweathersit_3[39m[33m'[39m, [33m'[39m[33mholiday_1[39m[33m'[39m]].to_numpy().astype([38;5;28mfloat[39m)
+[32m      4[39m X_np = np.column_stack([np.ones(X_np.shape[[32m0[39m]), X_np])  [38;5;66;03m# columna de unos[39;00m
 
-[31mNameError[39m: name 'train' is not defined
+[31mNameError[39m: name 'X' is not defined
 

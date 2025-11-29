@@ -36,7 +36,7 @@ from sklearn.linear_model import LinearRegression
 
 ```{code-cell} ipython3
 df = pd.read_csv("../data/day_clean.csv")
-df.shape
+
 ```
 
 ## 4.3 Split data set (Training and test)
@@ -135,3 +135,6 @@ vif_1
 ```
 
 Eliminamos Weekend, y nos quedamos solo con holiday y working day, ya que con estas se captura de manera menos redundante si es dia de semana (trabajo) o fin de semana.
+```{code-cell} ipython3
+train.to_csv("../data/train.csv", index=False)
+```
