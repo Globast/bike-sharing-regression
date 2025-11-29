@@ -36,7 +36,7 @@ from sklearn.linear_model import LinearRegression
 
 ```{code-cell} ipython3
 df = pd.read_csv("../data/day_clean.csv")
-df.shape
+
 ```
 
 ## 4.3 Split data set (Training and test)
