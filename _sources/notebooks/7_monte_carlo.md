@@ -9,7 +9,7 @@ kernelspec: {name: python3, display_name: Python 3}
 # 7. Simulación Monte Carlo
 En esta seccion se evaluara la estabilidad de los estimadores mediante simulaciones.
 
-## 6.1. Importacion de librerias
+## 7.1. Importacion de librerias
 
 ```{code-cell} ipython3
 # Librerías científicas básicas
@@ -34,10 +34,10 @@ from sklearn.feature_selection import RFE
 from sklearn.linear_model import LinearRegression
 ```
 
-## 6.2. Lectura de datos
+## 7.2. Lectura de datos
 
 ```{code-cell} ipython3
-df = pd.read_csv('day_clean.csv', sep =";")
+df = pd.read_csv("../data/day_clean.csv", sep =";")
 
 # df ordenado
 N = len(df)
