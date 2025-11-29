@@ -6,14 +6,14 @@ kernelspec: {name: python3, display_name: Python 3}
 ---
 
 
-# 7. Métodos Robustos para Datos Temporales
+# 5. Métodos Robustos para Datos Temporales
 Dado los desarrollos anteriores, se obtuvo que en el modelo de ajuste lineal los errores no satisfacen los supuestos de normalidad y homocedasticidad (varianza costante)  
 Para lo anterior, en esta seccion estaremos explorando el uso de tecnicas como:  
 1. Errores estandar HAC (Newey West) 
 2. Estimadores robustos M (Huber, Tukey)
 3. Boostrap temporal (Block boostrap)
 
-## 7.1. Importacion de librerias
+## 5.1. Importacion de librerias
 
 ```{code-cell} ipython3
 # Librerías científicas básicas
@@ -36,7 +36,7 @@ from sklearn.feature_selection import RFE
 from sklearn.linear_model import LinearRegression
 ```
 
-## 7.2. Lectura de datos
+## 5.2. Lectura de datos
 
 ```{code-cell} ipython3
 df = pd.read_csv("../data/day_clean.csv", sep =";")
