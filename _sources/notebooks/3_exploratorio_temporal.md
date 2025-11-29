@@ -20,6 +20,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
+import numpy as np
 
 DATA_PATH = Path("../data/hour.csv")
 data = pd.read_csv(DATA_PATH)
