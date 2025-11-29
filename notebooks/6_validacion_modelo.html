@@ -775,7 +775,9 @@ R² Validación = 0.4169
 <h3>6.4.3. Recopilacion resultados Ridge, Lasso y Elastic Net y contraste con OLS<a class="headerlink" href="#recopilacion-resultados-ridge-lasso-y-elastic-net-y-contraste-con-ols" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Cargar el modelo OLS</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.diagnostic</span><span class="w"> </span><span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+<span class="c1"># 1. Cargar el modelo OLS</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../models/ols_model.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">ols_model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
@@ -817,19 +819,72 @@ R² Validación = 0.4169
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># 1. Cargar el modelo OLS</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../models/ols_model.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="n">ols_model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># 2. Preparar X con constante</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">X_train_const</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">has_constant</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;pickle&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ridge --&gt; Mejor alpha = 0.0001 | R² validación = 0.4174
+Lasso --&gt; Mejor alpha = 0.0001 | R² validación = 0.4174
+ElasticNet --&gt; Mejor alpha = 0.0001, Mejor l1_ratio = 0.90 | R² Validación = 0.4169
 </pre></div>
 </div>
-</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>R2 Train</th>
+      <th>R2 Test</th>
+      <th>RMSE Test</th>
+      <th>MAE Test</th>
+      <th>MAPE Test (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Ridge</th>
+      <td>0.817653</td>
+      <td>0.565305</td>
+      <td>1088.768746</td>
+      <td>836.094876</td>
+      <td>92.778267</td>
+    </tr>
+    <tr>
+      <th>Lasso</th>
+      <td>0.817653</td>
+      <td>0.565306</td>
+      <td>1088.768122</td>
+      <td>836.093710</td>
+      <td>92.777948</td>
+    </tr>
+    <tr>
+      <th>Elastic Net</th>
+      <td>0.817653</td>
+      <td>0.565263</td>
+      <td>1088.822337</td>
+      <td>836.187815</td>
+      <td>92.799216</td>
+    </tr>
+    <tr>
+      <th>OLS</th>
+      <td>0.817653</td>
+      <td>0.565306</td>
+      <td>1088.767688</td>
+      <td>836.093033</td>
+      <td>92.777850</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -865,6 +920,9 @@ R² Validación = 0.4169
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/945549b7614db9f6beddde5ec0c1951540f2be2c4b72eb4536bbcf57a729f9f7.png" src="../_images/945549b7614db9f6beddde5ec0c1951540f2be2c4b72eb4536bbcf57a729f9f7.png" />
 </div>
 </div>
 </section>

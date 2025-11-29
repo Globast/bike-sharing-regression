@@ -289,6 +289,8 @@ pd.DataFrame(resultados_elastic, index=["Elastic Net"])
 ### 6.4.3. Recopilacion resultados Ridge, Lasso y Elastic Net y contraste con OLS
 
 ```{code-cell} ipython3
+import pickle
+from statsmodels.stats.diagnostic import acorr_ljungbox
 # 1. Cargar el modelo OLS
 with open("../models/ols_model.pkl", "rb") as f:
     ols_model = pickle.load(f)
