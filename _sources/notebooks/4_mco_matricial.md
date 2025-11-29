@@ -18,8 +18,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
 import numpy as np
-
 data = pd.read_csv("../data/day.csv")
+df = pd.read_csv("../data/day_clean.csv")
 
 ```
 

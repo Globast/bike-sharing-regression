@@ -18,25 +18,25 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# suponer que df ya está ordenado temporalmente
-N = len(df)
-cut = int(N * 0.7)
+# 2 definamos, utilizando RFE (Recursive Feature Elimination) con el cual elegiremos las mejoresiudals variables para el modelo MCO
+model = LinearRegression()
+rfe = RFE(estimator=model, n_features_to_select=10)
+rfe =rfe.fit(X,y)
 
-train = df.iloc[:cut].copy()
-test  = df.iloc[cut:].copy()
+print("Variables seleccionadas:")
+print("===================")
+list(zip(X.columns, rfe.support_))
 
-print("tamaño set de entrenamiento:", train.shape)
-print("tamaño set de prueba:", test.shape)
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
 [31mNameError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 2[39m
-[32m      1[39m [38;5;66;03m# suponer que df ya está ordenado temporalmente[39;00m
-[32m----> [39m[32m2[39m N = [38;5;28mlen[39m([43mdf[49m)
-[32m      3[39m cut = [38;5;28mint[39m(N * [32m0.7[39m)
-[32m      5[39m train = df.iloc[:cut].copy()
+[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 2[39m
+[32m      1[39m [38;5;66;03m# 2 definamos, utilizando RFE (Recursive Feature Elimination) con el cual elegiremos las mejoresiudals variables para el modelo MCO[39;00m
+[32m----> [39m[32m2[39m model = [43mLinearRegression[49m()
+[32m      3[39m rfe = RFE(estimator=model, n_features_to_select=[32m10[39m)
+[32m      4[39m rfe =rfe.fit(X,y)
 
-[31mNameError[39m: name 'df' is not defined
+[31mNameError[39m: name 'LinearRegression' is not defined
 
