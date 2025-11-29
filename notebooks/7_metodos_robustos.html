@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>7. Métodos robustos para datos temporales &#8212; Bike Sharing Regression</title>
+    <title>7. Métodos Robustos para Datos Temporales &#8212; Bike Sharing Regression</title>
   
   
   
@@ -340,7 +340,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>7. Métodos robustos para datos temporales</h1>
+    <h1>7. Métodos Robustos para Datos Temporales</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -354,22 +354,28 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">7.2. Lectura de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">7.3 Split data set (Training and test)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">7.4 Errores estándar HAC (Newey–West).</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">7.4.1. Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">7.4.2. Modelo OLS</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">7.4.3. Estimador HAC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">Modelo OLS</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">Estimador HAC</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">Parámetros</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-m-general">7.5.2. Estimador M general</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-de-huber">7.5.3. Estimador de Huber</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-tukey-bisquare-biweight">7.5.4. Estimador Tukey Bisquare (Biweight)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">7.5.5. Metodo Huber y Tukey</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">7.5.6. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-de-la-longitud-de-bloque-ell">7.5.7. Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">7.5.8. Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-que-un-coeficiente-es-robusto">¿Qué significa que un coeficiente es “robusto”?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-robustez-utilizados">7.5.9. ¿Criterios de Robustez utilizados?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-m-robust-huber-y-tukey">7.5 Estimadores M Robust (Huber y Tukey)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-sobre-un-modelo-ols">Aplicación sobre un modelo OLS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-m-general">Estimador M general</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-de-huber">Estimador de Huber</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-tukey-bisquare-biweight">Estimador Tukey Bisquare (Biweight)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">7.5.1 Metodo Huber y Tukey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">7.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-de-la-longitud-de-bloque-ell">Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">7.6 Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-que-un-coeficiente-es-robusto">7.6.1 ¿Qué significa que un coeficiente es “robusto”?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-robustez-utilizados">7.6.2 ¿Criterios de Robustez utilizados?</a></li>
 </ul>
 </li>
 </ul>
@@ -384,7 +390,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="metodos-robustos-para-datos-temporales">
-<h1>7. Métodos robustos para datos temporales<a class="headerlink" href="#metodos-robustos-para-datos-temporales" title="Link to this heading">#</a></h1>
+<h1>7. Métodos Robustos para Datos Temporales<a class="headerlink" href="#metodos-robustos-para-datos-temporales" title="Link to this heading">#</a></h1>
 <p>Dado los desarrollos anteriores, se obtuvo que en el modelo de ajuste lineal los errores no satisfacen los supuestos de normalidad y homocedasticidad (varianza costante)<br />
 Para lo anterior, en esta seccion estaremos explorando el uso de tecnicas como:</p>
 <ol class="arabic simple">
@@ -423,7 +429,71 @@ Para lo anterior, en esta seccion estaremos explorando el uso de tecnicas como:<
 <h2>7.2. Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/hour_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;day_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;day_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;day_clean.csv&#39;
 </pre></div>
 </div>
 </div>
@@ -434,16 +504,15 @@ Para lo anterior, en esta seccion estaremos explorando el uso de tecnicas como:<
 <p>En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span> <span class="c1">## aqui separamos uno en 70% del data set y otro 30%, la separacion es aleatoria</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de entrenemaiento &quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de prueba &quot;</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tamaño set de entrenemaiento  (12165, 20)
-tamaño set de prueba  (5214, 20)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df ordenado</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">cut</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">N</span> <span class="o">*</span> <span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">cut</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">test</span>  <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">cut</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de entrenamiento:&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de prueba:&quot;</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -452,61 +521,97 @@ tamaño set de prueba  (5214, 20)
 <section id="errores-estandar-hac-neweywest">
 <h2>7.4 Errores estándar HAC (Newey–West).<a class="headerlink" href="#errores-estandar-hac-neweywest" title="Link to this heading">#</a></h2>
 <section id="metodo-hac-neweywest">
-<h3>7.4.1. Método HAC (Newey–West)<a class="headerlink" href="#metodo-hac-neweywest" title="Link to this heading">#</a></h3>
+<h3>Método HAC (Newey–West)<a class="headerlink" href="#metodo-hac-neweywest" title="Link to this heading">#</a></h3>
 <p>El estimador de <strong>Errores estándar HAC (Heteroskedasticity and Autocorrelation Consistent)</strong> ajusta la matriz de varianzas y covarianzas de los coeficientes OLS para ser robusta frente a heterocedasticidad y autocorrelación.</p>
 <section id="modelo-ols">
-<h4>7.4.2. Modelo OLS<a class="headerlink" href="#modelo-ols" title="Link to this heading">#</a></h4>
+<h4>Modelo OLS<a class="headerlink" href="#modelo-ols" title="Link to this heading">#</a></h4>
 <div class="math notranslate nohighlight">
 \[
 y_t = X_t \beta + u_t
 \]</div>
 </section>
 <section id="estimador-hac">
-<h4>7.4.3. Estimador HAC<a class="headerlink" href="#estimador-hac" title="Link to this heading">#</a></h4>
+<h4>Estimador HAC<a class="headerlink" href="#estimador-hac" title="Link to this heading">#</a></h4>
 <div class="math notranslate nohighlight">
 \[
 \widehat{V}_{HAC} = (X'X)^{-1} \, \widehat{S} \, (X'X)^{-1}
 \]</div>
 <p>donde:
-$$</p>
-<p>\widehat{S} = \sum_{t=1}^{T} \hat{u}_t^2 X_t X_t’</p>
+$$
+\widehat{S} = \sum_{t=1}^{T} \hat{u}_t^2 X_t X_t’</p>
 <ul class="simple">
 <li><p>\sum_{l=1}^{q} w_l \sum_{t=l+1}^{T} \hat{u}<em>t \hat{u}</em>{t-l}
-\big( X_t X_{t-l}’ + X_{t-l} X_t’ \big)</p></li>
+\big( X_t X_{t-l}’ + X_{t-l} X_t’ \big)
+$$</p></li>
 </ul>
+</section>
+<section id="parametros">
+<h4>Parámetros<a class="headerlink" href="#parametros" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{u}_t\)</span>: residuos estimados del modelo OLS</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_t\)</span>: vector de regresores en el tiempo <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(q\)</span>: número de rezagos (<code class="docutils literal notranslate"><span class="pre">maxlags</span></code>) especificado</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_l = 1 - \frac{l}{q+1}\)</span>: pesos de Bartlett que decrecen linealmente con el rezago</p></li>
+</ul>
+</section>
+<section id="interpretacion">
+<h4>Interpretación<a class="headerlink" href="#interpretacion" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>El primer término corrige la <strong>heterocedasticidad</strong>.</p></li>
+<li><p>El segundo término corrige la <strong>autocorrelación</strong> hasta el rezago <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
+<li><p>Los coeficientes <span class="math notranslate nohighlight">\(\beta\)</span> no cambian, pero los errores estándar y las pruebas de significancia se ajustan.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.diagnostic</span><span class="w"> </span><span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+
+<span class="c1"># 1) Cargar el modelo OLS guardado</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../models/ols_model.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">ols_model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># 2) Heurística de maxlags según tamaño de muestra (Newey–West)</span>
+<span class="n">resid</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">resid</span>
+<span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">resid</span><span class="p">)</span>
+<span class="n">heuristic_maxlags</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="mf">9.0</span><span class="p">)))</span>
+<span class="n">heuristic_maxlags</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">heuristic_maxlags</span><span class="p">)</span>
+
+<span class="c1"># 3) Opcional: ajustar por frecuencia (ejemplo: mensual, cap en 12)</span>
+<span class="c1"># freq_cap = 12</span>
+<span class="c1"># maxlags = min(heuristic_maxlags, freq_cap)</span>
+
+<span class="n">maxlags</span> <span class="o">=</span> <span class="n">heuristic_maxlags</span>
+
+<span class="c1"># 4) Diagnóstico rápido con Ljung–Box en el lag elegido</span>
+<span class="n">lb</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="n">maxlags</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ljung–Box p-value at lag=</span><span class="si">{</span><span class="n">maxlags</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">lb</span><span class="p">[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 5) Aplicar HAC (Newey–West)</span>
+<span class="n">modelo_hac</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span><span class="o">=</span><span class="s2">&quot;HAC&quot;</span><span class="p">,</span> <span class="n">maxlags</span><span class="o">=</span><span class="n">maxlags</span><span class="p">)</span>
+
+<span class="c1"># 6) Resumen con errores estándar corregidos</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">modelo_hac</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="estimadores-m-robust-huber-y-tukey">
+<h2>7.5 Estimadores M Robust (Huber y Tukey)<a class="headerlink" href="#estimadores-m-robust-huber-y-tukey" title="Link to this heading">#</a></h2>
+<section id="aplicacion-sobre-un-modelo-ols">
+<h3>Aplicación sobre un modelo OLS<a class="headerlink" href="#aplicacion-sobre-un-modelo-ols" title="Link to this heading">#</a></h3>
+<p>Cuando hacemos regresión OLS, los coeficientes se estiman minimizando:</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}#### 7.4.4. Parámetros
-- $\hat{u}_t$: residuos estimados del modelo OLS  
-- $X_t$: vector de regresores en el tiempo $t$  
-- $q$: número de rezagos (`maxlags`) especificado  
-- $w_l = 1 - \frac{l}{q+1}$: pesos de Bartlett que decrecen linealmente con el rezago\\#### 7.4.5. Interpretación
-- El primer término corrige la **heterocedasticidad**.  
-- El segundo término corrige la **autocorrelación** hasta el rezago $q$.  
-- Los coeficientes $\beta$ no cambian, pero los errores estándar y las pruebas de significancia se ajustan.\\```{code-cell} ipython3
-import pickle
-from statsmodels.stats.diagnostic import acorr_ljungbox\\# 1) Cargar el modelo OLS guardado
-with open(&quot;ols_model.pkl&quot;, &quot;rb&quot;) as f:
-    ols_model = pickle.load(f)\\# 2) Heurística de maxlags según tamaño de muestra (Newey–West)
-resid = ols_model.resid
-T = len(resid)
-heuristic_maxlags = int(np.floor(4 * (T / 100.0) ** (2.0 / 9.0)))
-heuristic_maxlags = max(1, heuristic_maxlags)\\# 3) Opcional: ajustar por frecuencia (ejemplo: mensual, cap en 12)
-# freq_cap = 12
-# maxlags = min(heuristic_maxlags, freq_cap)\\maxlags = heuristic_maxlags\\# 4) Diagnóstico rápido con Ljung–Box en el lag elegido
-lb = acorr_ljungbox(resid, lags=[maxlags], return_df=True)
-print(f&quot;Ljung–Box p-value at lag={maxlags}: {lb['lb_pvalue'].iloc[-1]:.4f}&quot;)\\# 5) Aplicar HAC (Newey–West)
-modelo_hac = ols_model.get_robustcov_results(cov_type=&quot;HAC&quot;, maxlags=maxlags)\\# 6) Resumen con errores estándar corregidos
-print(modelo_hac.summary())
-```\\## 7.5. Estimadores M Robust (Huber y Tukey)  
-### 7.5.1. Aplicación sobre un modelo OLS\\Cuando hacemos regresión OLS, los coeficientes se estiman minimizando:\end{aligned}\end{align} \]</div>
-<p>\min_\beta \sum_{i=1}^n (y_i - x_i^\top \beta)^2
-$$</p>
+\[
+\min_\beta \sum_{i=1}^n (y_i - x_i^\top \beta)^2
+\]</div>
 <p>Esto hace que OLS sea <strong>muy sensible a valores atípicos</strong>, porque los residuos grandes se elevan al cuadrado.</p>
 <p>Los <strong>estimadores M</strong> reducen la influencia de estos valores usando una función de pérdida <span class="math notranslate nohighlight">\( \rho(\cdot) \)</span> que penaliza menos a los outliers.</p>
 </section>
-</section>
 <section id="estimador-m-general">
-<h3>7.5.2. Estimador M general<a class="headerlink" href="#estimador-m-general" title="Link to this heading">#</a></h3>
+<h3>Estimador M general<a class="headerlink" href="#estimador-m-general" title="Link to this heading">#</a></h3>
 <p>Los estimadores M encuentran los coeficientes resolviendo:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -524,7 +629,7 @@ $$</p>
 \]</div>
 </section>
 <section id="estimador-de-huber">
-<h3>7.5.3. Estimador de Huber<a class="headerlink" href="#estimador-de-huber" title="Link to this heading">#</a></h3>
+<h3>Estimador de Huber<a class="headerlink" href="#estimador-de-huber" title="Link to this heading">#</a></h3>
 <p>La función de pérdida es:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -546,7 +651,7 @@ c \,\text{sign}(r) &amp; |r| &gt; c
 <p>Reduce la influencia de outliers moderados sin descartarlos.</p>
 </section>
 <section id="estimador-tukey-bisquare-biweight">
-<h3>7.5.4. Estimador Tukey Bisquare (Biweight)<a class="headerlink" href="#estimador-tukey-bisquare-biweight" title="Link to this heading">#</a></h3>
+<h3>Estimador Tukey Bisquare (Biweight)<a class="headerlink" href="#estimador-tukey-bisquare-biweight" title="Link to this heading">#</a></h3>
 <p>Función de pérdida:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -568,7 +673,7 @@ r \left(1 - \left(\frac{r}{c}\right)^2\right)^2 &amp; |r| \le c \\
 <p>Los outliers muy extremos reciben peso <span class="math notranslate nohighlight">\(0\)</span> (se excluyen del ajuste).</p>
 </section>
 <section id="metodo-huber-y-tukey">
-<h3>7.5.5. Metodo Huber y Tukey<a class="headerlink" href="#metodo-huber-y-tukey" title="Link to this heading">#</a></h3>
+<h3>7.5.1 Metodo Huber y Tukey<a class="headerlink" href="#metodo-huber-y-tukey" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recuperar X y y con nombres reales desde el modelo</span>
@@ -578,19 +683,6 @@ r \left(1 - \left(\frac{r}{c}\right)^2\right)^2 &amp; |r| \le c \\
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">ols_model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">endog_names</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Recuperar X y y con nombres reales desde el modelo</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">X</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">endog</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span>
-
-<span class="ne">NameError</span>: name &#39;ols_model&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -616,7 +708,7 @@ r \left(1 - \left(\frac{r}{c}\right)^2\right)^2 &amp; |r| \le c \\
 </div>
 </section>
 <section id="bootstrap-temporal-moving-block-bootstrap-2000-replicas">
-<h3>7.5.6. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas<a class="headerlink" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas" title="Link to this heading">#</a></h3>
+<h3>7.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas<a class="headerlink" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas" title="Link to this heading">#</a></h3>
 <p>Cuando los datos son temporales (autocorrelación, dependencias en el tiempo) no se puede re-muestrear observaciones individuales de forma independiente sin romper la estructura temporal. El <strong>block bootstrap</strong> re-muestrea <strong>bloques contiguos</strong> de observaciones para preservar la dependencia local.</p>
 <p>En el <strong>Moving Block Bootstrap (MBB)</strong>:</p>
 <ul class="simple">
@@ -628,7 +720,7 @@ r \left(1 - \left(\frac{r}{c}\right)^2\right)^2 &amp; |r| \le c \\
 </ul>
 </section>
 <section id="eleccion-de-la-longitud-de-bloque-ell">
-<h3>7.5.7. Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span><a class="headerlink" href="#eleccion-de-la-longitud-de-bloque-ell" title="Link to this heading">#</a></h3>
+<h3>Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span><a class="headerlink" href="#eleccion-de-la-longitud-de-bloque-ell" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Regla de pulgar común: <span class="math notranslate nohighlight">\(\ell \approx T^{1/3}\)</span></p></li>
 </ul>
@@ -721,7 +813,7 @@ r \left(1 - \left(\frac{r}{c}\right)^2\right)^2 &amp; |r| \le c \\
 </section>
 </section>
 <section id="tabla-comparativa-robustez-de-los-coeficientes-por-metodo">
-<h2>7.5.8. Tabla comparativa, robustez de los coeficientes por metodo<a class="headerlink" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo" title="Link to this heading">#</a></h2>
+<h2>7.6 Tabla comparativa, robustez de los coeficientes por metodo<a class="headerlink" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extraccion de coeficientes</span>
@@ -754,7 +846,7 @@ r \left(1 - \left(\frac{r}{c}\right)^2\right)^2 &amp; |r| \le c \\
 </div>
 </div>
 <section id="que-significa-que-un-coeficiente-es-robusto">
-<h3>¿Qué significa que un coeficiente es “robusto”?<a class="headerlink" href="#que-significa-que-un-coeficiente-es-robusto" title="Link to this heading">#</a></h3>
+<h3>7.6.1 ¿Qué significa que un coeficiente es “robusto”?<a class="headerlink" href="#que-significa-que-un-coeficiente-es-robusto" title="Link to this heading">#</a></h3>
 <p>Un estimador de un coeficiente es robusto cuando al violar alguno de los supuestos del modelo lineal <strong>NO  cambian mucho</strong> su valor ni su significancia, es decir, se mantiene estable.</p>
 <p>Los supuestos típicos que se violan en datos reales son:</p>
 <ul class="simple">
@@ -789,7 +881,7 @@ r \left(1 - \left(\frac{r}{c}\right)^2\right)^2 &amp; |r| \le c \\
 </div>
 </section>
 <section id="criterios-de-robustez-utilizados">
-<h3>7.5.9. ¿Criterios de Robustez utilizados?<a class="headerlink" href="#criterios-de-robustez-utilizados" title="Link to this heading">#</a></h3>
+<h3>7.6.2 ¿Criterios de Robustez utilizados?<a class="headerlink" href="#criterios-de-robustez-utilizados" title="Link to this heading">#</a></h3>
 <p>En la evaluacion de robustez, se aplica entonces validaciones entre coeficientes de los diferentes metodos para evaluar:</p>
 <ol class="arabic simple">
 <li><p><strong>Estabilidad del coeficiente entre metodos:</strong><br />
@@ -798,9 +890,6 @@ La magbitud del coeficiente debe ser “parecida” (toleremos una variacion del
 El signo del coeficiente debe ser el mismo en todas los metodos. Si se mueve entre positivo y negativo, la relación no es robusta, ya que la relacion no puede indicar “a veces aumenta, aveces disminuye”.</p></li>
 <li><p><strong>Estabilidad de la significancia estadística:</strong><br />
 Si en para OLS, HACy Huber/Tukey para el coeficiente su <span class="math notranslate nohighlight">\(p-value &lt; 0.05\)</span>, y el intervalo de bootstrap no contiene al 0, el coeficnicoeficiente es <strong>robusto</strong>.</p></li>
-<li><p><strong>Ancho del intervalo bootstrap vs tamaño del coeficiente OLS:</strong>
-Caundo el intervalo de confianza, en este caso 95%, el ancho o tamaño del inetervalo es igual a la magnitud del coeficiente es reflejo de una alta variabilidad, por lo que no es tan “robusto” entonces.<br />
-Es por esto que 1.5 veces (IC95%) la desviacion de bootstrap determinamos sea menor que la magnitud del coeficiente OLS</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -838,24 +927,16 @@ Es por esto que 1.5 veces (IC95%) la desviacion de bootstrap determinamos sea me
     <span class="n">ci_high</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Boot CI 97.5%&#39;</span><span class="p">]</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">ci_low</span> <span class="o">&lt;=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Huber&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ci_high</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">ci_low</span> <span class="o">&lt;=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Tukey&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ci_high</span><span class="p">)</span>
 
-<span class="c1">##Intervalo bootstrap es estable </span>
-<span class="k">def</span><span class="w"> </span><span class="nf">is_bootstrap_stable</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Intervalo no excesivamente ancho.</span>
-<span class="sd">    Definimos inestabilidad si: Std &gt; 1.5 * |coef|</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Bootstrap Std&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;OLS&#39;</span><span class="p">])</span>
 
 <span class="c1">#evaluar criterios</span>
 
 <span class="n">df_rob</span><span class="p">[</span><span class="s1">&#39;Signo estable&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comparativa</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">is_sign_stable</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">df_rob</span><span class="p">[</span><span class="s1">&#39;Métodos consistentes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comparativa</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">is_consistent_methods</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">df_rob</span><span class="p">[</span><span class="s1">&#39;Dentro CI bootstrap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comparativa</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">is_inside_bootstrap_CI</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">df_rob</span><span class="p">[</span><span class="s1">&#39;Bootstrap estable&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comparativa</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">is_bootstrap_stable</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Criterio final</span>
 <span class="n">df_rob</span><span class="p">[</span><span class="s1">&#39;ROBUSTO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
-    <span class="n">df_rob</span><span class="p">[[</span><span class="s1">&#39;Signo estable&#39;</span><span class="p">,</span><span class="s1">&#39;Métodos consistentes&#39;</span><span class="p">,</span><span class="s1">&#39;Dentro CI bootstrap&#39;</span><span class="p">,</span><span class="s1">&#39;Bootstrap estable&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">df_rob</span><span class="p">[[</span><span class="s1">&#39;Signo estable&#39;</span><span class="p">,</span><span class="s1">&#39;Métodos consistentes&#39;</span><span class="p">,</span><span class="s1">&#39;Dentro CI bootstrap&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
     <span class="s2">&quot;Sí&quot;</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span>
 <span class="p">)</span>
 
@@ -949,22 +1030,28 @@ Es por esto que 1.5 veces (IC95%) la desviacion de bootstrap determinamos sea me
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">7.2. Lectura de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">7.3 Split data set (Training and test)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">7.4 Errores estándar HAC (Newey–West).</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">7.4.1. Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">7.4.2. Modelo OLS</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">7.4.3. Estimador HAC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">Modelo OLS</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">Estimador HAC</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">Parámetros</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-m-general">7.5.2. Estimador M general</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-de-huber">7.5.3. Estimador de Huber</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-tukey-bisquare-biweight">7.5.4. Estimador Tukey Bisquare (Biweight)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">7.5.5. Metodo Huber y Tukey</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">7.5.6. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-de-la-longitud-de-bloque-ell">7.5.7. Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">7.5.8. Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-que-un-coeficiente-es-robusto">¿Qué significa que un coeficiente es “robusto”?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-robustez-utilizados">7.5.9. ¿Criterios de Robustez utilizados?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-m-robust-huber-y-tukey">7.5 Estimadores M Robust (Huber y Tukey)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-sobre-un-modelo-ols">Aplicación sobre un modelo OLS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-m-general">Estimador M general</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-de-huber">Estimador de Huber</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-tukey-bisquare-biweight">Estimador Tukey Bisquare (Biweight)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">7.5.1 Metodo Huber y Tukey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">7.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-de-la-longitud-de-bloque-ell">Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">7.6 Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-que-un-coeficiente-es-robusto">7.6.1 ¿Qué significa que un coeficiente es “robusto”?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-robustez-utilizados">7.6.2 ¿Criterios de Robustez utilizados?</a></li>
 </ul>
 </li>
 </ul>
