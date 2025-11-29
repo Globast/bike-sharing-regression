@@ -58,6 +58,8 @@ y_train = train['cnt']
 np.random.seed(42)
 
 # MONTE CARLO ADAPTADO A OLS (statsmodels)
+import pickle
+from statsmodels.stats.diagnostic import acorr_ljungbox
 
 # 1. Cargar el modelo OLS desde pickle
 with open("../models/ols_model.pkl", "rb") as f:
