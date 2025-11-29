@@ -12,12 +12,13 @@ En esta etapa se utilizaran los datos previamente preparados para el planteamien
 ## 4.1. Importacion de librerias
 
 ```{code-cell} ipython3
-from pathlib import Path
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from datetime import datetime
-import numpy as np
+import statsmodels.api as sm
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+from sklearn.model_selection import train_test_split
 data = pd.read_csv("../data/day.csv")
 df = pd.read_csv("../data/day_clean.csv")
 
