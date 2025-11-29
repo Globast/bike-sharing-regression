@@ -37,6 +37,16 @@ df.shape
 ## 5.2 Calculo de Coeficientes Regresion
 
 ```{code-cell} ipython3
+
+y = train["cnt"]
+X = train.drop(columns=["cnt"])
+X = X.apply(pd.to_numeric, errors='coerce')
+train_ols = pd.concat([X, y], axis=1).dropna()
+y = train_ols["cnt"]
+X = train_ols.drop(columns=["cnt"])
+
+
+X = X.astype(float) ## Matriz X
 X_np = train_ols[['yr', 'temp', 'hum', 'windspeed', 'season_2', 'season_3', 'season_4',
        'weathersit_2', 'weathersit_3', 'holiday_1']].to_numpy().astype(float)
 X_np = np.column_stack([np.ones(X_np.shape[0]), X_np])  # columna de unos
