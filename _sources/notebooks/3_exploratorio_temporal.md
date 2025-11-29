@@ -22,14 +22,8 @@ import seaborn as sns
 from datetime import datetime
 import numpy as np
 
-DATA_PATH = Path("../data/hour.csv")
-data = pd.read_csv(DATA_PATH)
-data["dteday"] = pd.to_datetime(data["dteday"])
-data.shape
+data = pd.read_csv("../data/day.csv")
 
-DATA_PATH_CLEAN = Path("../data/hour_clean.csv")
-df = pd.read_csv(DATA_PATH_CLEAN)
-df.shape
 
 
 fig, axs = plt.subplots(2, 2, figsize=(14, 10))

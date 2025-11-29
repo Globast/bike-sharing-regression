@@ -381,14 +381,8 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/hour.csv&quot;</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s2">&quot;dteday&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;dteday&quot;</span><span class="p">])</span>
-<span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/day.csv&quot;</span><span class="p">)</span>
 
-<span class="n">DATA_PATH_CLEAN</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/hour_clean.csv&quot;</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DATA_PATH_CLEAN</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
 
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
@@ -456,7 +450,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8eb6d7004081ec115560672c26307b646c2195ebed515ced419f631edffa3c38.png" src="../_images/8eb6d7004081ec115560672c26307b646c2195ebed515ced419f631edffa3c38.png" />
+<img alt="../_images/2a619fd9c52e0a4ec549592c9cf2d94a8bd392bb2ed317c82210609257a11725.png" src="../_images/2a619fd9c52e0a4ec549592c9cf2d94a8bd392bb2ed317c82210609257a11725.png" />
 </div>
 </div>
 <ol class="arabic simple">
@@ -499,7 +493,7 @@ Los usuarios muestran nuevamnete en funcion del clima y de las estaciones dle a√
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/589148210aec583d9db27a58e91ac7cc38604e1136996531c8bd7e8256c516e5.png" src="../_images/589148210aec583d9db27a58e91ac7cc38604e1136996531c8bd7e8256c516e5.png" />
+<img alt="../_images/10a4af48fcc6d59814a07ceaa9af61e055349f0599b6a97563b210f3dc978a5a.png" src="../_images/10a4af48fcc6d59814a07ceaa9af61e055349f0599b6a97563b210f3dc978a5a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -515,7 +509,7 @@ Los usuarios muestran nuevamnete en funcion del clima y de las estaciones dle a√
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2f21ec3b7bb626545789fa0ce8c0913315aaf8fa17a1fee37a23b5ae3034a890.png" src="../_images/2f21ec3b7bb626545789fa0ce8c0913315aaf8fa17a1fee37a23b5ae3034a890.png" />
+<img alt="../_images/a5f573df4413e1f1d28ea1a3fe5289088a41e3a817bfd50767892d00cd938eed.png" src="../_images/a5f573df4413e1f1d28ea1a3fe5289088a41e3a817bfd50767892d00cd938eed.png" />
 </div>
 </div>
 <p>Notemos que la influencia de la temperatura es positiva sobre la cantidad de bicis rentadas, no es la razon principal de su demanada pero si explica en parte la tendencia a que cuando hace buen clima, las personas prefieran este medio de transporte.
