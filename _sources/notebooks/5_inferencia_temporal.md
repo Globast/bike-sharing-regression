@@ -7,7 +7,7 @@ kernelspec: {name: python3, display_name: Python 3}
 # 5. Inferencia estadística en datos temporales
 En este capítulo discutimos la inferencia sobre los coeficientes del modelo de regresión en presencia de dependencia temporal.
 ```{code-cell} ipython3
-
+```{code-cell} ipython3
 # Librerías científicas básicas
 import numpy as np
 import pandas as pd
@@ -26,20 +26,17 @@ from statsmodels.api import OLS, add_constant
 from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LinearRegression
-```
 
-## 5.1. Lectura de datos
+df = pd.read_csv("../data/day_clean.csv", sep =";")
+N = len(df)
+cut = int(N * 0.7)
 
-```{code-cell} ipython3
-df = pd.read_csv("../data/day_clean.csv")
-
+train = df.iloc[:cut].copy()
+test  = df.iloc[cut:].copy()
 ```
 ## 5.2 Calculo de Coeficientes Regresion
 
 ```{code-cell} ipython3
-train = pd.read_csv("../data/train.csv")
-y = train["cnt"]
-X = train.drop(columns=["cnt"])
 X = X.astype(float) ## Matriz X
 X_np = train_ols[['yr', 'temp', 'hum', 'windspeed', 'season_2', 'season_3', 'season_4',
        'weathersit_2', 'weathersit_3', 'holiday_1']].to_numpy().astype(float)
