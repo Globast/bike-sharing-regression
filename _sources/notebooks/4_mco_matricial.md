@@ -35,7 +35,8 @@ from sklearn.linear_model import LinearRegression
 ## 4.2. Lectura de datos
 
 ```{code-cell} ipython3
-df = pd.read_csv('day_clean.csv', sep =";")
+df = pd.read_csv("../data/day_clean.csv")
+df.shape
 ```
 
 ## 4.3 Split data set (Training and test)
