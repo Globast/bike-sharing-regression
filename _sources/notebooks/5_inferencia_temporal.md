@@ -5,9 +5,9 @@ jupytext:
 kernelspec: {name: python3, display_name: Python 3}
 ---
 # 5. Inferencia estadística en datos temporales
-
-```{code-cell} ipython3
 En este capítulo discutimos la inferencia sobre los coeficientes del modelo de regresión en presencia de dependencia temporal.
+```{code-cell} ipython3
+
 # Librerías científicas básicas
 import numpy as np
 import pandas as pd
@@ -31,7 +31,8 @@ from sklearn.linear_model import LinearRegression
 ## 5.1. Lectura de datos
 
 ```{code-cell} ipython3
-df = pd.read_csv('day_clean.csv', sep =";")
+df = pd.read_csv("../data/day_clean.csv")
+df.shape
 ```
 ## 5.2 Calculo de Coeficientes Regresion
 
