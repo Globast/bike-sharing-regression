@@ -38,7 +38,8 @@ df = pd.read_csv("../data/day_clean.csv")
 
 ```{code-cell} ipython3
 train = pd.read_csv("../data/train.csv")
-
+y = train["cnt"]
+X = train.drop(columns=["cnt"])
 X = X.astype(float) ## Matriz X
 X_np = train_ols[['yr', 'temp', 'hum', 'windspeed', 'season_2', 'season_3', 'season_4',
        'weathersit_2', 'weathersit_3', 'holiday_1']].to_numpy().astype(float)
