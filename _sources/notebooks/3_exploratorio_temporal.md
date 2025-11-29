@@ -50,8 +50,9 @@ axs[0,0].set_ylabel("Cnt")
 bp_weekday = axs[0,1].boxplot(
     [data[data["weekday"]==w]["cnt"] for w in sorted(data["weekday"].unique())],
     patch_artist=True,
-    labels=sorted(data["weekday"].unique())
+    tick_labels=sorted(data["weekday"].unique()) 
 )
+
 
 for patch, color in zip(bp_weekday['boxes'], weekday_colors):
     patch.set_facecolor(color)
@@ -64,8 +65,9 @@ axs[0,1].set_ylabel("cnt")
 bp_month = axs[1,0].boxplot(
     [data[data["mnth"]==m]["cnt"] for m in sorted(data["mnth"].unique())],
     patch_artist=True,
-    labels=sorted(data["mnth"].unique())
+    tick_labels=sorted(data["mnth"].unique())  
 )
+
 
 for patch, color in zip(bp_month['boxes'], month_colors):
     patch.set_facecolor(color)
@@ -78,8 +80,9 @@ axs[1,0].set_ylabel("cnt")
 bp_season = axs[1,1].boxplot(
     [data[data["season"]==s]["cnt"] for s in sorted(data["season"].unique())],
     patch_artist=True,
-    labels=sorted(data["season"].unique())
+    tick_labels=sorted(data["season"].unique())  
 )
+
 
 for patch, color in zip(bp_season['boxes'], season_colors):
     patch.set_facecolor(color)

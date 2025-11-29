@@ -409,8 +409,9 @@ document.write(`
 <span class="n">bp_weekday</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
     <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;weekday&quot;</span><span class="p">]</span><span class="o">==</span><span class="n">w</span><span class="p">][</span><span class="s2">&quot;cnt&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;weekday&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())],</span>
     <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">labels</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;weekday&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+    <span class="n">tick_labels</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;weekday&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> 
 <span class="p">)</span>
+
 
 <span class="k">for</span> <span class="n">patch</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp_weekday</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">],</span> <span class="n">weekday_colors</span><span class="p">):</span>
     <span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
@@ -423,8 +424,9 @@ document.write(`
 <span class="n">bp_month</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
     <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mnth&quot;</span><span class="p">]</span><span class="o">==</span><span class="n">m</span><span class="p">][</span><span class="s2">&quot;cnt&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mnth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())],</span>
     <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">labels</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mnth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+    <span class="n">tick_labels</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mnth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>  
 <span class="p">)</span>
+
 
 <span class="k">for</span> <span class="n">patch</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp_month</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">],</span> <span class="n">month_colors</span><span class="p">):</span>
     <span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
@@ -437,8 +439,9 @@ document.write(`
 <span class="n">bp_season</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
     <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;season&quot;</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">][</span><span class="s2">&quot;cnt&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;season&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())],</span>
     <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">labels</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;season&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+    <span class="n">tick_labels</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;season&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>  
 <span class="p">)</span>
+
 
 <span class="k">for</span> <span class="n">patch</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp_season</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">],</span> <span class="n">season_colors</span><span class="p">):</span>
     <span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
@@ -453,14 +456,6 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_17314/942069851.py:33: MatplotlibDeprecationWarning: The &#39;labels&#39; parameter of boxplot() has been renamed &#39;tick_labels&#39; since Matplotlib 3.9; support for the old name will be dropped in 3.11.
-  bp_weekday = axs[0,1].boxplot(
-/tmp/ipykernel_17314/942069851.py:47: MatplotlibDeprecationWarning: The &#39;labels&#39; parameter of boxplot() has been renamed &#39;tick_labels&#39; since Matplotlib 3.9; support for the old name will be dropped in 3.11.
-  bp_month = axs[1,0].boxplot(
-/tmp/ipykernel_17314/942069851.py:61: MatplotlibDeprecationWarning: The &#39;labels&#39; parameter of boxplot() has been renamed &#39;tick_labels&#39; since Matplotlib 3.9; support for the old name will be dropped in 3.11.
-  bp_season = axs[1,1].boxplot(
-</pre></div>
-</div>
 <img alt="../_images/8eb6d7004081ec115560672c26307b646c2195ebed515ced419f631edffa3c38.png" src="../_images/8eb6d7004081ec115560672c26307b646c2195ebed515ced419f631edffa3c38.png" />
 </div>
 </div>
