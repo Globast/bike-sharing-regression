@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="7. Métodos Robustos para Datos Temporales" href="7_metodos_robustos.html" />
-    <link rel="prev" title="5. Inferencia estadística en datos temporales" href="5_inferencia_temporal.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="5_inferencia_temporal.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,8 +190,9 @@
 <li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">2. Ingenieria de Variables y Procesamiento Temporal</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="3_exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Implementación matricial de MCO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_inferencia_temporal.html">5. Inferencia estadística en datos temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Implementación Matricial de MCO</a></li>
+
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Diagnóstico de supuestos del modelo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="7_metodos_robustos.html">7. Métodos robustos para datos temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="8_validacion_modelo.html">8. Validación y selección del modelo</a></li>
@@ -349,7 +350,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia">6.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-validacion-supuestos">6.2 Resultados validacion supuestos</a></li>
 </ul>
             </nav>
         </div>
@@ -404,130 +404,6 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Generacion de resiudals</span>
-
-<span class="n">fitted_values</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">fittedvalues</span>
-<span class="n">residuals</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">resid</span>
-
-<span class="c1">## Particion de grafica</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
- 
-<span class="c1"># 1. Histograma de resiudal</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Histograma de resiudal&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;resiudals&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
- 
-<span class="c1"># 2. Q-Q plot</span>
-<span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s2">&quot;norm&quot;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Q-Q plot de resiudal&quot;</span><span class="p">)</span>
- 
-<span class="c1"># 3. resiudals vs valores ajustados</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">fitted_values</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;purple&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;resiudal vs Valores ajustados&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Valoresiudals ajustados&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;resiudals&quot;</span><span class="p">)</span>
-
-<span class="c1"># 4. Densidad de resiudal</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Densidad de resiudals&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;resiudals&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
- 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">## Generacion de resiudals</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">fitted_values</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">fittedvalues</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">residuals</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">resid</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1">## Particion de grafica</span>
-
-<span class="ne">NameError</span>: name &#39;ols_model&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-<p>Se observa que los residuos forman patrones y que no siguen una distribucion normal, lo cual validaremos con las pruebas estadisticas:</p>
-<ol class="arabic simple">
-<li><p>Normalidad de residuos (Shapiro-Wilk)</p></li>
-<li><p>Homocedasticidad (Breusch-Pagan)</p></li>
-<li><p>Homocedasticidad (White test)</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.diagnostic</span><span class="w"> </span><span class="kn">import</span> <span class="n">het_breuschpagan</span><span class="p">,</span> <span class="n">het_white</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.stattools</span><span class="w"> </span><span class="kn">import</span> <span class="n">durbin_watson</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">shapiro</span>
-
-<span class="c1"># 1. Normalidad de residuos (Shapiro-Wilk)</span>
-<span class="n">shapiro_test</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shapiro-Wilk Test:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statistic =&quot;</span><span class="p">,</span> <span class="n">shapiro_test</span><span class="o">.</span><span class="n">statistic</span><span class="p">,</span> <span class="s2">&quot;p-value =&quot;</span><span class="p">,</span> <span class="n">shapiro_test</span><span class="o">.</span><span class="n">pvalue</span><span class="p">)</span>
- 
-<span class="c1"># 2. Homocedasticidad (Breusch-Pagan)</span>
-<span class="n">bp_test</span> <span class="o">=</span> <span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Breusch-Pagan Test:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LM stat =&quot;</span><span class="p">,</span> <span class="n">bp_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;p-value =&quot;</span><span class="p">,</span> <span class="n">bp_test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F stat =&quot;</span><span class="p">,</span> <span class="n">bp_test</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;p-value =&quot;</span><span class="p">,</span> <span class="n">bp_test</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
- 
-<span class="c1"># 3. Homocedasticidad (White test)</span>
-<span class="n">white_test</span> <span class="o">=</span> <span class="n">het_white</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">White Test:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LM stat =&quot;</span><span class="p">,</span> <span class="n">white_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;p-value =&quot;</span><span class="p">,</span> <span class="n">white_test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F stat =&quot;</span><span class="p">,</span> <span class="n">white_test</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;p-value =&quot;</span><span class="p">,</span> <span class="n">white_test</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
- 
-<span class="c1"># 4. Independencia de residuos (Durbin-Watson)</span>
-<span class="n">dw_stat</span> <span class="o">=</span> <span class="n">durbin_watson</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Durbin-Watson Test:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statistic =&quot;</span><span class="p">,</span> <span class="n">dw_stat</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="resultados-validacion-supuestos">
-<h2>6.2 Resultados validacion supuestos<a class="headerlink" href="#resultados-validacion-supuestos" title="Link to this heading">#</a></h2>
-<p><strong>Shapiro-Wilk Test</strong>
-Estadístico = 0.9745, p-value = 9.16e-08
-El p-value es extremadamente bajo, por lo tanto rechazamos la hipótesis nula de normalidad.
-Conclusión: los residuos no siguen una distribución normal. Esto afecta la validez de los intervalos de confianza y los tests de significancia clásicos.</p>
-<p><strong>Breusch-Pagan Test</strong>
-Estadístico LM = 42.44, p-value = 6.26e-06
-El p-value es muy bajo, indicando heterocedasticidad.
-Conclusión: los residuos no son homocedásticos (la varianza no es constante), lo que puede sesgar los errores estándar del modelo.</p>
-<p>F-stat BP Test
-F = 4.53, p-value = 3.73e-06
-El resultado confirma nuevamente la presencia de heterocedasticidad.</p>
-<p><strong>White Test</strong>
-Estadístico LM = 114.47, p-value = 8.92e-07
-Confirma la presencia de heterocedasticidad en los residuos.
-F = 2.60, p-value = 8.27e-08
-Indica patrones no lineales en la varianza de los residuos.
-Conclusión: se confirma heterocedasticidad.</p>
-<p><strong>Durbin-Watson Test</strong>
-Estadístico = 1.253
-Valores cercanos a 2 indican ausencia de autocorrelación; valores más bajos indican autocorrelación positiva.
-Conclusión: el estadístico 1.25 sugiere autocorrelación positiva en los residuos.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
-
-<span class="c1"># Guardaremos el modelo en formato .pkl para su posterior utilizacion</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../models/ols_model.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ols_model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 
@@ -567,7 +443,7 @@ Conclusión: el estadístico 1.25 sugiere autocorrelación positiva en los resid
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">5. Inferencia estadística en datos temporales</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
       </div>
     </a>
     <a class="right-next"
@@ -596,7 +472,6 @@ Conclusión: el estadístico 1.25 sugiere autocorrelación positiva en los resid
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia">6.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-validacion-supuestos">6.2 Resultados validacion supuestos</a></li>
 </ul>
   </nav></div>
 
