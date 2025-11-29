@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>7. Métodos Robustos para Datos Temporales &#8212; Bike Sharing Regression</title>
+    <title>5. Métodos Robustos para Datos Temporales &#8212; Bike Sharing Regression</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -338,7 +338,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>7. Métodos Robustos para Datos Temporales</h1>
+    <h1>5. Métodos Robustos para Datos Temporales</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -348,10 +348,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">7.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">7.2. Lectura de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">7.3 Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">7.4 Errores estándar HAC (Newey–West).</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">5.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">5.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">5.3 Split data set (Training and test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">5.4 Errores estándar HAC (Newey–West).</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">Modelo OLS</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">Estimador HAC</a></li>
@@ -361,19 +361,19 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-m-robust-huber-y-tukey">7.5 Estimadores M Robust (Huber y Tukey)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-m-robust-huber-y-tukey">5.5 Estimadores M Robust (Huber y Tukey)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-sobre-un-modelo-ols">Aplicación sobre un modelo OLS</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-m-general">Estimador M general</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-de-huber">Estimador de Huber</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-tukey-bisquare-biweight">Estimador Tukey Bisquare (Biweight)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">7.5.1 Metodo Huber y Tukey</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">7.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">5.5.1 Metodo Huber y Tukey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">5.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-de-la-longitud-de-bloque-ell">Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">7.6 Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-que-un-coeficiente-es-robusto">7.6.1 ¿Qué significa que un coeficiente es “robusto”?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-robustez-utilizados">7.6.2 ¿Criterios de Robustez utilizados?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">5.6 Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-que-un-coeficiente-es-robusto">5.6.1 ¿Qué significa que un coeficiente es “robusto”?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-robustez-utilizados">5.6.2 ¿Criterios de Robustez utilizados?</a></li>
 </ul>
 </li>
 </ul>
@@ -388,7 +388,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="metodos-robustos-para-datos-temporales">
-<h1>7. Métodos Robustos para Datos Temporales<a class="headerlink" href="#metodos-robustos-para-datos-temporales" title="Link to this heading">#</a></h1>
+<h1>5. Métodos Robustos para Datos Temporales<a class="headerlink" href="#metodos-robustos-para-datos-temporales" title="Link to this heading">#</a></h1>
 <p>Dado los desarrollos anteriores, se obtuvo que en el modelo de ajuste lineal los errores no satisfacen los supuestos de normalidad y homocedasticidad (varianza costante)<br />
 Para lo anterior, en esta seccion estaremos explorando el uso de tecnicas como:</p>
 <ol class="arabic simple">
@@ -397,7 +397,7 @@ Para lo anterior, en esta seccion estaremos explorando el uso de tecnicas como:<
 <li><p>Boostrap temporal (Block boostrap)</p></li>
 </ol>
 <section id="importacion-de-librerias">
-<h2>7.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
+<h2>5.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Librerías científicas básicas</span>
@@ -424,7 +424,7 @@ Para lo anterior, en esta seccion estaremos explorando el uso de tecnicas como:<
 </div>
 </section>
 <section id="lectura-de-datos">
-<h2>7.2. Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
+<h2>5.2. Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/day_clean.csv&quot;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
@@ -434,7 +434,7 @@ Para lo anterior, en esta seccion estaremos explorando el uso de tecnicas como:<
 </div>
 </section>
 <section id="split-data-set-training-and-test">
-<h2>7.3 Split data set (Training and test)<a class="headerlink" href="#split-data-set-training-and-test" title="Link to this heading">#</a></h2>
+<h2>5.3 Split data set (Training and test)<a class="headerlink" href="#split-data-set-training-and-test" title="Link to this heading">#</a></h2>
 <p>En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -459,7 +459,7 @@ tamaño set de prueba: (220, 17)
 </div>
 </section>
 <section id="errores-estandar-hac-neweywest">
-<h2>7.4 Errores estándar HAC (Newey–West).<a class="headerlink" href="#errores-estandar-hac-neweywest" title="Link to this heading">#</a></h2>
+<h2>5.4 Errores estándar HAC (Newey–West).<a class="headerlink" href="#errores-estandar-hac-neweywest" title="Link to this heading">#</a></h2>
 <section id="metodo-hac-neweywest">
 <h3>Método HAC (Newey–West)<a class="headerlink" href="#metodo-hac-neweywest" title="Link to this heading">#</a></h3>
 <p>El estimador de <strong>Errores estándar HAC (Heteroskedasticity and Autocorrelation Consistent)</strong> ajusta la matriz de varianzas y covarianzas de los coeficientes OLS para ser robusta frente a heterocedasticidad y autocorrelación.</p>
@@ -542,7 +542,7 @@ Dep. Variable:                    cnt   R-squared:                       0.818
 Model:                            OLS   Adj. R-squared:                  0.814
 Method:                 Least Squares   F-statistic:                     207.0
 Date:                Sat, 29 Nov 2025   Prob (F-statistic):          1.25e-170
-Time:                        04:56:31   Log-Likelihood:                -4055.4
+Time:                        04:58:09   Log-Likelihood:                -4055.4
 No. Observations:                 511   AIC:                             8133.
 Df Residuals:                     500   BIC:                             8179.
 Df Model:                          10                                         
@@ -578,7 +578,7 @@ Notes:
 </section>
 </section>
 <section id="estimadores-m-robust-huber-y-tukey">
-<h2>7.5 Estimadores M Robust (Huber y Tukey)<a class="headerlink" href="#estimadores-m-robust-huber-y-tukey" title="Link to this heading">#</a></h2>
+<h2>5.5 Estimadores M Robust (Huber y Tukey)<a class="headerlink" href="#estimadores-m-robust-huber-y-tukey" title="Link to this heading">#</a></h2>
 <section id="aplicacion-sobre-un-modelo-ols">
 <h3>Aplicación sobre un modelo OLS<a class="headerlink" href="#aplicacion-sobre-un-modelo-ols" title="Link to this heading">#</a></h3>
 <p>Cuando hacemos regresión OLS, los coeficientes se estiman minimizando:</p>
@@ -652,7 +652,7 @@ r \left(1 - \left(\frac{r}{c}\right)^2\right)^2 &amp; |r| \le c \\
 <p>Los outliers muy extremos reciben peso <span class="math notranslate nohighlight">\(0\)</span> (se excluyen del ajuste).</p>
 </section>
 <section id="metodo-huber-y-tukey">
-<h3>7.5.1 Metodo Huber y Tukey<a class="headerlink" href="#metodo-huber-y-tukey" title="Link to this heading">#</a></h3>
+<h3>5.5.1 Metodo Huber y Tukey<a class="headerlink" href="#metodo-huber-y-tukey" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recuperar X y y con nombres reales desde el modelo</span>
@@ -695,7 +695,7 @@ Norm:                          HuberT
 Scale Est.:                       mad                                         
 Cov Type:                          H1                                         
 Date:                Sat, 29 Nov 2025                                         
-Time:                        04:56:31                                         
+Time:                        04:58:09                                         
 No. Iterations:                     9                                         
 ================================================================================
                    coef    std err          z      P&gt;|z|      [0.025      0.975]
@@ -724,7 +724,7 @@ Norm:                   TukeyBiweight
 Scale Est.:                       mad                                         
 Cov Type:                          H1                                         
 Date:                Sat, 29 Nov 2025                                         
-Time:                        04:56:31                                         
+Time:                        04:58:09                                         
 No. Iterations:                    12                                         
 ================================================================================
                    coef    std err          z      P&gt;|z|      [0.025      0.975]
@@ -749,7 +749,7 @@ If the model instance has been used for another fit with different fit parameter
 </div>
 </section>
 <section id="bootstrap-temporal-moving-block-bootstrap-2000-replicas">
-<h3>7.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas<a class="headerlink" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas" title="Link to this heading">#</a></h3>
+<h3>5.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas<a class="headerlink" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas" title="Link to this heading">#</a></h3>
 <p>Cuando los datos son temporales (autocorrelación, dependencias en el tiempo) no se puede re-muestrear observaciones individuales de forma independiente sin romper la estructura temporal. El <strong>block bootstrap</strong> re-muestrea <strong>bloques contiguos</strong> de observaciones para preservar la dependencia local.</p>
 <p>En el <strong>Moving Block Bootstrap (MBB)</strong>:</p>
 <ul class="simple">
@@ -878,7 +878,7 @@ holiday_1     -531.687974  235.608843 -1010.262558   -87.796621
 </section>
 </section>
 <section id="tabla-comparativa-robustez-de-los-coeficientes-por-metodo">
-<h2>7.6 Tabla comparativa, robustez de los coeficientes por metodo<a class="headerlink" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo" title="Link to this heading">#</a></h2>
+<h2>5.6 Tabla comparativa, robustez de los coeficientes por metodo<a class="headerlink" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extraccion de coeficientes</span>
@@ -1068,7 +1068,7 @@ holiday_1     -531.687974  235.608843 -1010.262558   -87.796621
 </div></div></div>
 </div>
 <section id="que-significa-que-un-coeficiente-es-robusto">
-<h3>7.6.1 ¿Qué significa que un coeficiente es “robusto”?<a class="headerlink" href="#que-significa-que-un-coeficiente-es-robusto" title="Link to this heading">#</a></h3>
+<h3>5.6.1 ¿Qué significa que un coeficiente es “robusto”?<a class="headerlink" href="#que-significa-que-un-coeficiente-es-robusto" title="Link to this heading">#</a></h3>
 <p>Un estimador de un coeficiente es robusto cuando al violar alguno de los supuestos del modelo lineal <strong>NO  cambian mucho</strong> su valor ni su significancia, es decir, se mantiene estable.</p>
 <p>Los supuestos típicos que se violan en datos reales son:</p>
 <ul class="simple">
@@ -1103,7 +1103,7 @@ holiday_1     -531.687974  235.608843 -1010.262558   -87.796621
 </div>
 </section>
 <section id="criterios-de-robustez-utilizados">
-<h3>7.6.2 ¿Criterios de Robustez utilizados?<a class="headerlink" href="#criterios-de-robustez-utilizados" title="Link to this heading">#</a></h3>
+<h3>5.6.2 ¿Criterios de Robustez utilizados?<a class="headerlink" href="#criterios-de-robustez-utilizados" title="Link to this heading">#</a></h3>
 <p>En la evaluacion de robustez, se aplica entonces validaciones entre coeficientes de los diferentes metodos para evaluar:</p>
 <ol class="arabic simple">
 <li><p><strong>Estabilidad del coeficiente entre metodos:</strong><br />
@@ -1471,10 +1471,10 @@ holiday_1
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">7.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">7.2. Lectura de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">7.3 Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">7.4 Errores estándar HAC (Newey–West).</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">5.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">5.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">5.3 Split data set (Training and test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">5.4 Errores estándar HAC (Newey–West).</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">Modelo OLS</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">Estimador HAC</a></li>
@@ -1484,19 +1484,19 @@ holiday_1
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-m-robust-huber-y-tukey">7.5 Estimadores M Robust (Huber y Tukey)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-m-robust-huber-y-tukey">5.5 Estimadores M Robust (Huber y Tukey)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-sobre-un-modelo-ols">Aplicación sobre un modelo OLS</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-m-general">Estimador M general</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-de-huber">Estimador de Huber</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-tukey-bisquare-biweight">Estimador Tukey Bisquare (Biweight)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">7.5.1 Metodo Huber y Tukey</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">7.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">5.5.1 Metodo Huber y Tukey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">5.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-de-la-longitud-de-bloque-ell">Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">7.6 Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-que-un-coeficiente-es-robusto">7.6.1 ¿Qué significa que un coeficiente es “robusto”?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-robustez-utilizados">7.6.2 ¿Criterios de Robustez utilizados?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">5.6 Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-que-un-coeficiente-es-robusto">5.6.1 ¿Qué significa que un coeficiente es “robusto”?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-robustez-utilizados">5.6.2 ¿Criterios de Robustez utilizados?</a></li>
 </ul>
 </li>
 </ul>

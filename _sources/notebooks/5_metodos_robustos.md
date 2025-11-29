@@ -42,7 +42,7 @@ from sklearn.linear_model import LinearRegression
 df = pd.read_csv("../data/day_clean.csv", sep =";")
 ```
 
-## 7.3 Split data set (Training and test)
+## 5.3 Split data set (Training and test)
 En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.
 
 ```{code-cell} ipython3
@@ -57,7 +57,7 @@ print("tamaño set de entrenamiento:", train.shape)
 print("tamaño set de prueba:", test.shape)
 ```
 
-## 7.4 Errores estándar HAC (Newey–West).  
+## 5.4 Errores estándar HAC (Newey–West).  
 
 ### Método HAC (Newey–West)  
 
@@ -122,7 +122,7 @@ modelo_hac = ols_model.get_robustcov_results(cov_type="HAC", maxlags=maxlags)
 print(modelo_hac.summary())
 ```
 
-## 7.5 Estimadores M Robust (Huber y Tukey)  
+## 5.5 Estimadores M Robust (Huber y Tukey)  
 #### Aplicación sobre un modelo OLS
 
 Cuando hacemos regresión OLS, los coeficientes se estiman minimizando:
@@ -202,7 +202,7 @@ $$
 
 Los outliers muy extremos reciben peso $0$ (se excluyen del ajuste).
 
-### 7.5.1 Metodo Huber y Tukey
+### 5.5.1 Metodo Huber y Tukey
 
 ```{code-cell} ipython3
 # Recuperar X y y con nombres reales desde el modelo
@@ -232,7 +232,7 @@ print(tukey_results.summary())
 
 ```
 
-### 7.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas
+### 5.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas
 
 Cuando los datos son temporales (autocorrelación, dependencias en el tiempo) no se puede re-muestrear observaciones individuales de forma independiente sin romper la estructura temporal. El **block bootstrap** re-muestrea **bloques contiguos** de observaciones para preservar la dependencia local.
 
@@ -330,7 +330,7 @@ print(results_df)
 
 ```
 
-## 7.6 Tabla comparativa, robustez de los coeficientes por metodo
+## 5.6 Tabla comparativa, robustez de los coeficientes por metodo
 
 ```{code-cell} ipython3
 # Extraccion de coeficientes
@@ -360,7 +360,7 @@ print("\nTabla comparativa de robustez de coeficientes:\n")
 comparativa
 ```
 
-### 7.6.1 ¿Qué significa que un coeficiente es “robusto”?  
+### 5.6.1 ¿Qué significa que un coeficiente es “robusto”?  
 
 Un estimador de un coeficiente es robusto cuando al violar alguno de los supuestos del modelo lineal **NO  cambian mucho** su valor ni su significancia, es decir, se mantiene estable.  
 
@@ -381,7 +381,7 @@ Es por ello que al revisar los diferentes metodos, estos abordan cada uno un asp
 | **Tukey biweight**              | Outliers severos                             |
 | **Bootstrap (block bootstrap)** | Distribucion no normal, dependencia temporal |
 
-### 7.6.2 ¿Criterios de Robustez utilizados?  
+### 5.6.2 ¿Criterios de Robustez utilizados?  
 En la evaluacion de robustez, se aplica entonces validaciones entre coeficientes de los diferentes metodos para evaluar:
 
 1. **Estabilidad del coeficiente entre metodos:**   
