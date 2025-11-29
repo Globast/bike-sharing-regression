@@ -33,10 +33,14 @@ from statsmodels.api import OLS, add_constant
 from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LinearRegression
-```
 
-```{code-cell} ipython3
 df = pd.read_csv("../data/day_clean.csv", sep =";")
+
+N = len(df)
+cut = int(N * 0.7)
+
+train = df.iloc[:cut].copy()
+test  = df.iloc[cut:].copy()
 ```
 
 ```{code-cell} ipython3
