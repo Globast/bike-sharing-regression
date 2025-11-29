@@ -69,6 +69,7 @@ y_t = X_t \beta + u_t
 $$
 
 #### Estimador HAC
+#### Estimador HAC
 $$
 \widehat{V}_{HAC} = (X'X)^{-1} \, \widehat{S} \, (X'X)^{-1}
 $$
@@ -76,9 +77,12 @@ $$
 donde:
 $$
 \widehat{S} = \sum_{t=1}^{T} \hat{u}_t^2 X_t X_t' 
-+ \sum_{l=1}^{q} w_l \sum_{t=l+1}^{T} \hat{u}_t \hat{u}_{t-l} 
++ \sum_{l=1}^{q} w_l \sum_{t=l+1}^{T} \hat{u}t \hat{u}{t-l} 
 \big( X_t X_{t-l}' + X_{t-l} X_t' \big)
 $$
+
+
+
 
 #### Parámetros
 - $\hat{u}_t$: residuos estimados del modelo OLS  
