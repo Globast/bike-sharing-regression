@@ -70,9 +70,11 @@ $$
 
 donde:
 $$
+
 \widehat{S} = \sum_{t=1}^{T} \hat{u}_t^2 X_t X_t' 
 + \sum_{l=1}^{q} w_l \sum_{t=l+1}^{T} \hat{u}_t \hat{u}_{t-l} 
 \big( X_t X_{t-l}' + X_{t-l} X_t' \big)
+
 $$
 
 #### 7.4.4. Parámetros

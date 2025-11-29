@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Ingenieria de Variables y Procesamiento Temporal &#8212; Bike Sharing Regression</title>
+    <title>2. Ingenieria de Variables y Procesamiento Temporal &#8212; Bike Sharing Regression</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -187,7 +187,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contenido</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_intro_contexto.html">1. Introducción y contexto de movilidad urbana</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Ingenieria de Variables y Procesamiento Temporal</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Ingenieria de Variables y Procesamiento Temporal</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="3_exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Implementación matricial de MCO</a></li>
@@ -196,6 +196,7 @@
 <li class="toctree-l1"><a class="reference internal" href="7_metodos_robustos.html">7. Métodos robustos para datos temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="8_validacion_modelo.html">8. Validación y selección del modelo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="9_monte_carlo.html">9. Simulación Monte Carlo</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="10_interpretacion_operativa.html">10. Interpretación operativa y recomendaciones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="11_conclusiones_extensiones.html">11. Conclusiones y extensiones futuras</a></li>
 <li class="toctree-l1"><a class="reference internal" href="12_referencias.html">12. Referencias</a></li>
@@ -337,7 +338,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1. Ingenieria de Variables y Procesamiento Temporal</h1>
+    <h1>2. Ingenieria de Variables y Procesamiento Temporal</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -347,15 +348,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Ingenieria de Variables y Procesamiento Temporal</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">1.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">1.2. Lectura de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-variables-del-dataset">1.3. Descripcion de variables del dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-faltantes">1.4. Exploracion de datos faltantes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-outliers">1.5. Conteo de outliers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Ingenieria de Variables y Procesamiento Temporal</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">2.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">2.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-variables-del-dataset">2.3. Descripcion de variables del dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-faltantes">2.4. Exploracion de datos faltantes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-outliers">2.5. Conteo de outliers</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-transformacion-y-adecuacion-de-variables">1.6. Creacion, Transformacion y adecuacion de variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-transformacion-y-adecuacion-de-variables">2.6. Creacion, Transformacion y adecuacion de variables</a></li>
 </ul>
 
             </nav>
@@ -369,10 +370,10 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ingenieria-de-variables-y-procesamiento-temporal">
-<h1>1. Ingenieria de Variables y Procesamiento Temporal<a class="headerlink" href="#ingenieria-de-variables-y-procesamiento-temporal" title="Link to this heading">#</a></h1>
+<h1>2. Ingenieria de Variables y Procesamiento Temporal<a class="headerlink" href="#ingenieria-de-variables-y-procesamiento-temporal" title="Link to this heading">#</a></h1>
 <p>En esta etapa se prepararan los datos para el modelado, asegurando consistencia y calidad</p>
 <section id="importacion-de-librerias">
-<h2>1.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
+<h2>2.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Librerías científicas básicas</span>
@@ -395,282 +396,88 @@ document.write(`
 </div>
 </section>
 <section id="lectura-de-datos">
-<h2>1.2. Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
+<h2>2.2. Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/hour.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Lectura de datos, por hora y por dia</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;day.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+<span class="c1">## Transformacion de fecha</span>
 <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dteday&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dteday&#39;</span><span class="p">])</span>
-<span class="n">data</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">## Lectura de datos, por hora y por dia</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;day.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1">## Transformacion de fecha</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dteday&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dteday&#39;</span><span class="p">])</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>instant</th>
-      <th>dteday</th>
-      <th>season</th>
-      <th>yr</th>
-      <th>mnth</th>
-      <th>hr</th>
-      <th>holiday</th>
-      <th>weekday</th>
-      <th>workingday</th>
-      <th>weathersit</th>
-      <th>temp</th>
-      <th>atemp</th>
-      <th>hum</th>
-      <th>windspeed</th>
-      <th>casual</th>
-      <th>registered</th>
-      <th>cnt</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2011-01-01</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>6</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0.24</td>
-      <td>0.2879</td>
-      <td>0.81</td>
-      <td>0.0000</td>
-      <td>3</td>
-      <td>13</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>2011-01-01</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>6</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0.22</td>
-      <td>0.2727</td>
-      <td>0.80</td>
-      <td>0.0000</td>
-      <td>8</td>
-      <td>32</td>
-      <td>40</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>2011-01-01</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>2</td>
-      <td>0</td>
-      <td>6</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0.22</td>
-      <td>0.2727</td>
-      <td>0.80</td>
-      <td>0.0000</td>
-      <td>5</td>
-      <td>27</td>
-      <td>32</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>2011-01-01</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>3</td>
-      <td>0</td>
-      <td>6</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0.24</td>
-      <td>0.2879</td>
-      <td>0.75</td>
-      <td>0.0000</td>
-      <td>3</td>
-      <td>10</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>2011-01-01</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>4</td>
-      <td>0</td>
-      <td>6</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0.24</td>
-      <td>0.2879</td>
-      <td>0.75</td>
-      <td>0.0000</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>17374</th>
-      <td>17375</td>
-      <td>2012-12-31</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12</td>
-      <td>19</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>0.26</td>
-      <td>0.2576</td>
-      <td>0.60</td>
-      <td>0.1642</td>
-      <td>11</td>
-      <td>108</td>
-      <td>119</td>
-    </tr>
-    <tr>
-      <th>17375</th>
-      <td>17376</td>
-      <td>2012-12-31</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12</td>
-      <td>20</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>0.26</td>
-      <td>0.2576</td>
-      <td>0.60</td>
-      <td>0.1642</td>
-      <td>8</td>
-      <td>81</td>
-      <td>89</td>
-    </tr>
-    <tr>
-      <th>17376</th>
-      <td>17377</td>
-      <td>2012-12-31</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12</td>
-      <td>21</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0.26</td>
-      <td>0.2576</td>
-      <td>0.60</td>
-      <td>0.1642</td>
-      <td>7</td>
-      <td>83</td>
-      <td>90</td>
-    </tr>
-    <tr>
-      <th>17377</th>
-      <td>17378</td>
-      <td>2012-12-31</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12</td>
-      <td>22</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0.26</td>
-      <td>0.2727</td>
-      <td>0.56</td>
-      <td>0.1343</td>
-      <td>13</td>
-      <td>48</td>
-      <td>61</td>
-    </tr>
-    <tr>
-      <th>17378</th>
-      <td>17379</td>
-      <td>2012-12-31</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12</td>
-      <td>23</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0.26</td>
-      <td>0.2727</td>
-      <td>0.65</td>
-      <td>0.1343</td>
-      <td>12</td>
-      <td>37</td>
-      <td>49</td>
-    </tr>
-  </tbody>
-</table>
-<p>17379 rows × 17 columns</p>
-</div></div></div>
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;day.csv&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="descripcion-de-variables-del-dataset">
-<h2>1.3. Descripcion de variables del dataset<a class="headerlink" href="#descripcion-de-variables-del-dataset" title="Link to this heading">#</a></h2>
+<h2>2.3. Descripcion de variables del dataset<a class="headerlink" href="#descripcion-de-variables-del-dataset" title="Link to this heading">#</a></h2>
 <p>Se muestra por variable, su tipo, su rango, y la interpretaciona utilizar en el analisis</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -771,7 +578,7 @@ document.write(`
 </div>
 </section>
 <section id="exploracion-de-datos-faltantes">
-<h2>1.4. Exploracion de datos faltantes<a class="headerlink" href="#exploracion-de-datos-faltantes" title="Link to this heading">#</a></h2>
+<h2>2.4. Exploracion de datos faltantes<a class="headerlink" href="#exploracion-de-datos-faltantes" title="Link to this heading">#</a></h2>
 <p>Se revisa cada variable para observar sus faltantes, en caso de existir, se imputaran utilizando la mediana</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -782,32 +589,10 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>instant       0
-dteday        0
-season        0
-yr            0
-mnth          0
-hr            0
-holiday       0
-weekday       0
-workingday    0
-weathersit    0
-temp          0
-atemp         0
-hum           0
-windspeed     0
-casual        0
-registered    0
-cnt           0
-dtype: int64
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="conteo-de-outliers">
-<h2>1.5. Conteo de outliers<a class="headerlink" href="#conteo-de-outliers" title="Link to this heading">#</a></h2>
+<h2>2.5. Conteo de outliers<a class="headerlink" href="#conteo-de-outliers" title="Link to this heading">#</a></h2>
 <p>Se realiza solo conteo de outliers, no se corrigen debido a que son condiciones ambientals las cuales influyen dentro del modelo y estan fuera del control humano, es decir, son validas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -830,19 +615,11 @@ dtype: int64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;temp&#39;: np.int64(0),
- &#39;hum&#39;: np.int64(22),
- &#39;windspeed&#39;: np.int64(342),
- &#39;cnt&#39;: np.int64(505)}
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="creacion-transformacion-y-adecuacion-de-variables">
-<h1>1.6. Creacion, Transformacion y adecuacion de variables<a class="headerlink" href="#creacion-transformacion-y-adecuacion-de-variables" title="Link to this heading">#</a></h1>
+<h1>2.6. Creacion, Transformacion y adecuacion de variables<a class="headerlink" href="#creacion-transformacion-y-adecuacion-de-variables" title="Link to this heading">#</a></h1>
 <ol class="arabic simple">
 <li><p>Se crean variables categoricas a partir de momentos como Horas pico, fin de semana</p></li>
 <li><p>Transformaciones SEN y COS, esto permite que variables temporales que naturalmente son circulares (hora, día, mes)
@@ -851,16 +628,7 @@ sean representadas en un espacio donde puntos cercanos evitan saltos artificiale
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hora pico</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">hora_pico</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="mi">7</span> <span class="o">&lt;=</span> <span class="n">h</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">17</span> <span class="o">&lt;=</span> <span class="n">h</span> <span class="o">&lt;=</span> <span class="mi">19</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
-
-<span class="n">data</span><span class="p">[</span><span class="s2">&quot;peak_hour&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;hr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">hora_pico</span><span class="p">)</span>
-
-<span class="c1"># conversion d evariables ciclicas</span>
-<span class="n">data</span><span class="p">[</span><span class="s2">&quot;hr_sin&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;hr&quot;</span><span class="p">]</span><span class="o">/</span><span class="mi">24</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s2">&quot;hr_cos&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;hr&quot;</span><span class="p">]</span><span class="o">/</span><span class="mi">24</span><span class="p">)</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;dayofyear&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;dteday&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofyear</span>
 <span class="n">data</span><span class="p">[</span><span class="s2">&quot;month_sin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mnth&quot;</span><span class="p">]</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">data</span><span class="p">[</span><span class="s2">&quot;month_cos&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mnth&quot;</span><span class="p">]</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
 
@@ -882,320 +650,17 @@ sean representadas en un espacio donde puntos cercanos evitan saltos artificiale
 
 <span class="c1"># Eliminar columnas redudnantes</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="n">col</span><span class="p">:</span> <span class="nb">int</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;bool&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">})</span>
-<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;instant&#39;</span><span class="p">,</span> <span class="s1">&#39;hr&#39;</span><span class="p">,</span><span class="s1">&#39;dteday&#39;</span><span class="p">,</span> <span class="s1">&#39;mnth&#39;</span><span class="p">,</span> <span class="s1">&#39;weekday&#39;</span><span class="p">,</span><span class="s1">&#39;casual&#39;</span><span class="p">,</span> <span class="s1">&#39;registered&#39;</span><span class="p">,</span><span class="s1">&#39;atemp&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;instant&#39;</span><span class="p">,</span><span class="s1">&#39;dteday&#39;</span><span class="p">,</span> <span class="s1">&#39;mnth&#39;</span><span class="p">,</span> <span class="s1">&#39;weekday&#39;</span><span class="p">,</span><span class="s1">&#39;casual&#39;</span><span class="p">,</span> <span class="s1">&#39;registered&#39;</span><span class="p">,</span><span class="s1">&#39;atemp&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
 <span class="c1"># Pprint de datos</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Columnas finales:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[:</span><span class="mi">20</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;hour_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span><span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1">## Guardamos las variables listas para empezar a correr los modelos</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;day_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span><span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1">## Guardamos las variables listas para empezar a correr los modelos</span>
 <span class="n">df</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Columnas finales:
-[&#39;yr&#39;, &#39;temp&#39;, &#39;hum&#39;, &#39;windspeed&#39;, &#39;cnt&#39;, &#39;peak_hour&#39;, &#39;hr_sin&#39;, &#39;hr_cos&#39;, &#39;month_sin&#39;, &#39;month_cos&#39;, &#39;weekday_sin&#39;, &#39;weekday_cos&#39;, &#39;season_2&#39;, &#39;season_3&#39;, &#39;season_4&#39;, &#39;weathersit_2&#39;, &#39;weathersit_3&#39;, &#39;weathersit_4&#39;, &#39;workingday_1&#39;, &#39;holiday_1&#39;]
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>yr</th>
-      <th>temp</th>
-      <th>hum</th>
-      <th>windspeed</th>
-      <th>cnt</th>
-      <th>peak_hour</th>
-      <th>hr_sin</th>
-      <th>hr_cos</th>
-      <th>month_sin</th>
-      <th>month_cos</th>
-      <th>weekday_sin</th>
-      <th>weekday_cos</th>
-      <th>season_2</th>
-      <th>season_3</th>
-      <th>season_4</th>
-      <th>weathersit_2</th>
-      <th>weathersit_3</th>
-      <th>weathersit_4</th>
-      <th>workingday_1</th>
-      <th>holiday_1</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>0.24</td>
-      <td>0.81</td>
-      <td>0.0000</td>
-      <td>16</td>
-      <td>0</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>5.000000e-01</td>
-      <td>0.866025</td>
-      <td>-0.781831</td>
-      <td>0.62349</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>0.22</td>
-      <td>0.80</td>
-      <td>0.0000</td>
-      <td>40</td>
-      <td>0</td>
-      <td>0.258819</td>
-      <td>0.965926</td>
-      <td>5.000000e-01</td>
-      <td>0.866025</td>
-      <td>-0.781831</td>
-      <td>0.62349</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0</td>
-      <td>0.22</td>
-      <td>0.80</td>
-      <td>0.0000</td>
-      <td>32</td>
-      <td>0</td>
-      <td>0.500000</td>
-      <td>0.866025</td>
-      <td>5.000000e-01</td>
-      <td>0.866025</td>
-      <td>-0.781831</td>
-      <td>0.62349</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0</td>
-      <td>0.24</td>
-      <td>0.75</td>
-      <td>0.0000</td>
-      <td>13</td>
-      <td>0</td>
-      <td>0.707107</td>
-      <td>0.707107</td>
-      <td>5.000000e-01</td>
-      <td>0.866025</td>
-      <td>-0.781831</td>
-      <td>0.62349</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>0.24</td>
-      <td>0.75</td>
-      <td>0.0000</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0.866025</td>
-      <td>0.500000</td>
-      <td>5.000000e-01</td>
-      <td>0.866025</td>
-      <td>-0.781831</td>
-      <td>0.62349</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>17374</th>
-      <td>1</td>
-      <td>0.26</td>
-      <td>0.60</td>
-      <td>0.1642</td>
-      <td>119</td>
-      <td>1</td>
-      <td>-0.965926</td>
-      <td>0.258819</td>
-      <td>-2.449294e-16</td>
-      <td>1.000000</td>
-      <td>0.781831</td>
-      <td>0.62349</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>17375</th>
-      <td>1</td>
-      <td>0.26</td>
-      <td>0.60</td>
-      <td>0.1642</td>
-      <td>89</td>
-      <td>0</td>
-      <td>-0.866025</td>
-      <td>0.500000</td>
-      <td>-2.449294e-16</td>
-      <td>1.000000</td>
-      <td>0.781831</td>
-      <td>0.62349</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>17376</th>
-      <td>1</td>
-      <td>0.26</td>
-      <td>0.60</td>
-      <td>0.1642</td>
-      <td>90</td>
-      <td>0</td>
-      <td>-0.707107</td>
-      <td>0.707107</td>
-      <td>-2.449294e-16</td>
-      <td>1.000000</td>
-      <td>0.781831</td>
-      <td>0.62349</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>17377</th>
-      <td>1</td>
-      <td>0.26</td>
-      <td>0.56</td>
-      <td>0.1343</td>
-      <td>61</td>
-      <td>0</td>
-      <td>-0.500000</td>
-      <td>0.866025</td>
-      <td>-2.449294e-16</td>
-      <td>1.000000</td>
-      <td>0.781831</td>
-      <td>0.62349</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>17378</th>
-      <td>1</td>
-      <td>0.26</td>
-      <td>0.65</td>
-      <td>0.1343</td>
-      <td>49</td>
-      <td>0</td>
-      <td>-0.258819</td>
-      <td>0.965926</td>
-      <td>-2.449294e-16</td>
-      <td>1.000000</td>
-      <td>0.781831</td>
-      <td>0.62349</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-    </tr>
-  </tbody>
-</table>
-<p>17379 rows × 20 columns</p>
-</div></div></div>
 </div>
 </section>
 
@@ -1263,15 +728,15 @@ sean representadas en un espacio donde puntos cercanos evitan saltos artificiale
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Ingenieria de Variables y Procesamiento Temporal</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">1.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">1.2. Lectura de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-variables-del-dataset">1.3. Descripcion de variables del dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-faltantes">1.4. Exploracion de datos faltantes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-outliers">1.5. Conteo de outliers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Ingenieria de Variables y Procesamiento Temporal</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">2.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">2.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-variables-del-dataset">2.3. Descripcion de variables del dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-faltantes">2.4. Exploracion de datos faltantes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-outliers">2.5. Conteo de outliers</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-transformacion-y-adecuacion-de-variables">1.6. Creacion, Transformacion y adecuacion de variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-transformacion-y-adecuacion-de-variables">2.6. Creacion, Transformacion y adecuacion de variables</a></li>
 </ul>
 
   </nav></div>

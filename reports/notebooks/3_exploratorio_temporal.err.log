@@ -1,0 +1,109 @@
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/asyncio/base_events.py", line 684, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from pathlib import Path
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from datetime import datetime
+
+DATA_PATH = Path("../data/hour.csv")
+data = pd.read_csv(DATA_PATH)
+data["dteday"] = pd.to_datetime(data["dteday"])
+data.shape
+
+DATA_PATH_CLEAN = Path("../data/hour_clean.csv")
+df = pd.read_csv(DATA_PATH_CLEAN)
+df.shape
+
+
+fig, axs = plt.subplots(2, 2, figsize=(14, 10))
+
+# PALETA DE COLORES
+weekday_colors = plt.cm.Set3(np.linspace(0, 1, data["weekday"].nunique()))
+month_colors   = plt.cm.Paired(np.linspace(0, 1, data["mnth"].nunique()))
+season_colors  = plt.cm.Set2(np.linspace(0, 1, data["season"].nunique()))
+
+# 1. Línea suavizada (7 días)
+data.set_index("dteday")["cnt"].rolling(7).mean().plot(
+    ax=axs[0,0], linewidth=2
+)
+axs[0,0].set_title("Cnt suavizado (7 días)")
+axs[0,0].set_ylabel("Cnt")
+
+# 2. Boxplot weekday vs cnt
+bp_weekday = axs[0,1].boxplot(
+    [data[data["weekday"]==w]["cnt"] for w in sorted(data["weekday"].unique())],
+    patch_artist=True,
+    labels=sorted(data["weekday"].unique())
+)
+
+for patch, color in zip(bp_weekday['boxes'], weekday_colors):
+    patch.set_facecolor(color)
+
+axs[0,1].set_title("Distribución cnt por weekday")
+axs[0,1].set_xlabel("weekday")
+axs[0,1].set_ylabel("cnt")
+
+# 3. Boxplot month vs cnt
+bp_month = axs[1,0].boxplot(
+    [data[data["mnth"]==m]["cnt"] for m in sorted(data["mnth"].unique())],
+    patch_artist=True,
+    labels=sorted(data["mnth"].unique())
+)
+
+for patch, color in zip(bp_month['boxes'], month_colors):
+    patch.set_facecolor(color)
+
+axs[1,0].set_title("Distribución cnt por mes")
+axs[1,0].set_xlabel("mes")
+axs[1,0].set_ylabel("cnt")
+
+# 4. Boxplot season vs cnt
+bp_season = axs[1,1].boxplot(
+    [data[data["season"]==s]["cnt"] for s in sorted(data["season"].unique())],
+    patch_artist=True,
+    labels=sorted(data["season"].unique())
+)
+
+for patch, color in zip(bp_season['boxes'], season_colors):
+    patch.set_facecolor(color)
+
+axs[1,1].set_title("Distribución cnt por season")
+axs[1,1].set_xlabel("season")
+axs[1,1].set_ylabel("cnt")
+
+plt.tight_layout()
+plt.show()
+
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mNameError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 20[39m
+[32m     17[39m fig, axs = plt.subplots([32m2[39m, [32m2[39m, figsize=([32m14[39m, [32m10[39m))
+[32m     19[39m [38;5;66;03m# PALETA DE COLORES[39;00m
+[32m---> [39m[32m20[39m weekday_colors = plt.cm.Set3([43mnp[49m.linspace([32m0[39m, [32m1[39m, data[[33m"[39m[33mweekday[39m[33m"[39m].nunique()))
+[32m     21[39m month_colors   = plt.cm.Paired(np.linspace([32m0[39m, [32m1[39m, data[[33m"[39m[33mmnth[39m[33m"[39m].nunique()))
+[32m     22[39m season_colors  = plt.cm.Set2(np.linspace([32m0[39m, [32m1[39m, data[[33m"[39m[33mseason[39m[33m"[39m].nunique()))
+
+[31mNameError[39m: name 'np' is not defined
+
