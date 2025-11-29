@@ -37,6 +37,7 @@ df = pd.read_csv("../data/day_clean.csv")
 ## 5.2 Calculo de Coeficientes Regresion
 
 ```{code-cell} ipython3
+train = pd.read_csv("../data/train.csv")
 
 X = X.astype(float) ## Matriz X
 X_np = train_ols[['yr', 'temp', 'hum', 'windspeed', 'season_2', 'season_3', 'season_4',
