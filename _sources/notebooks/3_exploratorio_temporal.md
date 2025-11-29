@@ -108,7 +108,7 @@ plt.show()
 4. **Total de biciletas por temporada del año**
     Los usuarios muestran nuevamnete en funcion del clima y de las estaciones dle año una preferencia por el uso de la bicileta cuando las condiciones ambientales son agradables.
 
-## 2.2. Influencia de factores ambientales
+## 3.2. Influencia de factores ambientales
 Para entender el efecto de las diferentes variables ambientales se traza un grafico de dispersion de la temperatura, humedad y velocidad del viento vs el promedio de bicis rentadas, esto con el fin de encontrar relaciones o influencias de las variables en la variable objetivo.
 
 ```{code-cell} ipython3
