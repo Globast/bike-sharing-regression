@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>8. Validación y Selección del Modelo &#8212; Bike Sharing Regression</title>
+    <title>6. Validación y Selección del Modelo &#8212; Bike Sharing Regression</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/6_validacion_modelo';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="9. Simulación Monte Carlo" href="7_monte_carlo.html" />
-    <link rel="prev" title="7. Métodos Robustos para Datos Temporales" href="5_metodos_robustos.html" />
+    <link rel="next" title="7. Simulación Monte Carlo" href="7_monte_carlo.html" />
+    <link rel="prev" title="5. Métodos Robustos para Datos Temporales" href="5_metodos_robustos.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -195,8 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Matricial de MCO y diagnostico de supuestos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_metodos_robustos.html">5. Métodos robustos para datos temporales</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Validación y selección del modelo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="7_monte_carlo.html">9. Simulación Monte Carlo</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="7_monte_carlo.html">7. Simulación Monte Carlo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="8_interpretacion_operativa.html">8. Interpretación operativa y recomendaciones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="9_conclusiones_extensiones.html">9. Conclusiones y extensiones futuras</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10_referencias.html">10. Referencias</a></li>
@@ -338,7 +337,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>8. Validación y Selección del Modelo</h1>
+    <h1>6. Validación y Selección del Modelo</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -348,13 +347,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">8.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">8.2. Lectura de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">8.3 Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-de-ridge-y-lasso">8.4 Aplicacion de Ridge y Lasso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">8.5. Interpretacion de resultados</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-del-modelo-optimo">8.6. Seleccion del modelo optimo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coeficientes-modelo-ridge-y-ols">8.7. Coeficientes Modelo Ridge y OLS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">6.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">6.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">6.3 Split data set (Training and test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-de-ridge-lasso-y-elastic-net">6.4 Aplicacion de Ridge, Lasso y Elastic Net</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-y-lasso">6.4.1 Ridge y Lasso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elastic-net">6.4.2. Elastic Net</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recopilacion-resultados-ridge-lasso-y-elastic-net-y-contraste-con-ols">6.4.3. Recopilacion resultados Ridge, Lasso y Elastic Net y contraste con OLS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">6.5. Interpretación de resultados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-del-modelo-optimo">6.6. Seleccion del modelo optimo</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -367,10 +370,10 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="validacion-y-seleccion-del-modelo">
-<h1>8. Validación y Selección del Modelo<a class="headerlink" href="#validacion-y-seleccion-del-modelo" title="Link to this heading">#</a></h1>
+<h1>6. Validación y Selección del Modelo<a class="headerlink" href="#validacion-y-seleccion-del-modelo" title="Link to this heading">#</a></h1>
 <p>OLS, Reach, Lasso</p>
 <section id="importacion-de-librerias">
-<h2>8.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
+<h2>6.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Librerías científicas básicas</span>
@@ -386,7 +389,7 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">OLS</span><span class="p">,</span> <span class="n">add_constant</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">ElasticNet</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span>
  
 <span class="c1"># Machine Learning</span>
@@ -399,10 +402,10 @@ document.write(`
 </div>
 </section>
 <section id="lectura-de-datos">
-<h2>8.2. Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
+<h2>6.2. Lectura de datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/hour_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;day_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -410,7 +413,7 @@ document.write(`
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/hour_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;day_clean.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
 
 <span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
@@ -466,92 +469,142 @@ document.write(`
 <span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
 <span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
 
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../data/hour_clean.csv&#39;
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;day_clean.csv&#39;
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="split-data-set-training-and-test">
-<h2>8.3 Split data set (Training and test)<a class="headerlink" href="#split-data-set-training-and-test" title="Link to this heading">#</a></h2>
+<h2>6.3 Split data set (Training and test)<a class="headerlink" href="#split-data-set-training-and-test" title="Link to this heading">#</a></h2>
 <p>En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span> <span class="c1">## aqui separamos uno en 70% del data set y otro 30%, la separacion es aleatoria</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de entrenemaiento &quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de prueba &quot;</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df ordenado</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">cut</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">N</span> <span class="o">*</span> <span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">cut</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">test</span>  <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">cut</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de entrenamiento:&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de prueba:&quot;</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="aplicacion-de-ridge-y-lasso">
-<h2>8.4 Aplicacion de Ridge y Lasso<a class="headerlink" href="#aplicacion-de-ridge-y-lasso" title="Link to this heading">#</a></h2>
-<p>Aqui se aplicara ridge y lasso para encontrar si el modelo requiere de sus correcciones.</p>
+<section id="aplicacion-de-ridge-lasso-y-elastic-net">
+<h2>6.4 Aplicacion de Ridge, Lasso y Elastic Net<a class="headerlink" href="#aplicacion-de-ridge-lasso-y-elastic-net" title="Link to this heading">#</a></h2>
+<p>Aqui se aplicara Ridge, Lasso y Elastic Net para encontrar si el modelo requiere de sus correcciones.</p>
+<section id="ridge-y-lasso">
+<h3>6.4.1 Ridge y Lasso<a class="headerlink" href="#ridge-y-lasso" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Subdivisión del conjunto de entrenamiento</span>
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;peak_hour&#39;</span><span class="p">,</span> <span class="s1">&#39;hr_sin&#39;</span><span class="p">,</span> <span class="s1">&#39;hr_cos&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;month_sin&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">]]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --------------------------</span>
+<span class="c1"># 0. Partición temporal 70/30</span>
+<span class="c1"># --------------------------</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">cut</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">N</span> <span class="o">*</span> <span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">cut</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">test</span>  <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">cut</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de entrenamiento:&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tamaño set de prueba:&quot;</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># --------------------------</span>
+<span class="c1"># 1. Subdivisión del conjunto de entrenamiento</span>
+<span class="c1"># --------------------------</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">]]</span>
+
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;cnt&#39;</span><span class="p">]</span>
 
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;peak_hour&#39;</span><span class="p">,</span> <span class="s1">&#39;hr_sin&#39;</span><span class="p">,</span> <span class="s1">&#39;hr_cos&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;month_sin&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">]]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">]]</span>
+
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;cnt&#39;</span><span class="p">]</span>
 
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 1b. Partición interna también NO aleatoria (validación)</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="n">N2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">cut2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">N2</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">X_train_2</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">cut2</span><span class="p">]</span>
+<span class="n">y_train_2</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">cut2</span><span class="p">]</span>
+
+<span class="n">X_test_2</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">cut2</span><span class="p">:]</span>
+<span class="n">y_test_2</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">cut2</span><span class="p">:]</span>
+
+<span class="c1"># --------------------------</span>
+<span class="c1"># 2. Búsqueda de alpha + guardar R2</span>
+<span class="c1"># --------------------------</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
-<span class="c1"># split interno para elegir alpha</span>
-<span class="n">X_train_2</span><span class="p">,</span> <span class="n">X_test_2</span><span class="p">,</span> <span class="n">y_train_2</span><span class="p">,</span> <span class="n">y_test_2</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> 
-    <span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> 
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
-<span class="p">)</span>
-<span class="c1"># 2. Búsqueda de alpha</span>
-<span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
-
-<span class="c1"># RIDGE</span>
 <span class="n">mejor_alpha_ridge</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">mejor_r2_ridge</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
 
-<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
-    <span class="n">modelo</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
-    <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_2</span><span class="p">,</span> <span class="n">y_train_2</span><span class="p">)</span>
-    <span class="n">pred_val</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_2</span><span class="p">)</span>
-    <span class="n">r2_val</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test_2</span><span class="p">,</span> <span class="n">pred_val</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">r2_val</span> <span class="o">&gt;</span> <span class="n">mejor_r2_ridge</span><span class="p">:</span>
-        <span class="n">mejor_r2_ridge</span> <span class="o">=</span> <span class="n">r2_val</span>
-        <span class="n">mejor_alpha_ridge</span> <span class="o">=</span> <span class="n">a</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ridge --&gt; Mejor alpha = </span><span class="si">{</span><span class="n">mejor_alpha_ridge</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | R² validación = </span><span class="si">{</span><span class="n">mejor_r2_ridge</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># LASSO</span>
 <span class="n">mejor_alpha_lasso</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">mejor_r2_lasso</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
 
-<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
-    <span class="n">modelo</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
-    <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_2</span><span class="p">,</span> <span class="n">y_train_2</span><span class="p">)</span>
-    <span class="n">pred_val</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_2</span><span class="p">)</span>
-    <span class="n">r2_val</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test_2</span><span class="p">,</span> <span class="n">pred_val</span><span class="p">)</span>
+<span class="c1"># listas para graficar</span>
+<span class="n">r2_ridge_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">r2_lasso_list</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">if</span> <span class="n">r2_val</span> <span class="o">&gt;</span> <span class="n">mejor_r2_lasso</span><span class="p">:</span>
-        <span class="n">mejor_r2_lasso</span> <span class="o">=</span> <span class="n">r2_val</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
+
+    <span class="c1"># Ridge</span>
+    <span class="n">modelo_r</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">modelo_r</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_2</span><span class="p">,</span> <span class="n">y_train_2</span><span class="p">)</span>
+    <span class="n">pred_r</span> <span class="o">=</span> <span class="n">modelo_r</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_2</span><span class="p">)</span>
+    <span class="n">r2_r</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test_2</span><span class="p">,</span> <span class="n">pred_r</span><span class="p">)</span>
+    <span class="n">r2_ridge_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r2_r</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">r2_r</span> <span class="o">&gt;</span> <span class="n">mejor_r2_ridge</span><span class="p">:</span>
+        <span class="n">mejor_r2_ridge</span> <span class="o">=</span> <span class="n">r2_r</span>
+        <span class="n">mejor_alpha_ridge</span> <span class="o">=</span> <span class="n">a</span>
+
+    <span class="c1"># Lasso</span>
+    <span class="n">modelo_l</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">modelo_l</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_2</span><span class="p">,</span> <span class="n">y_train_2</span><span class="p">)</span>
+    <span class="n">pred_l</span> <span class="o">=</span> <span class="n">modelo_l</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_2</span><span class="p">)</span>
+    <span class="n">r2_l</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test_2</span><span class="p">,</span> <span class="n">pred_l</span><span class="p">)</span>
+    <span class="n">r2_lasso_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r2_l</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">r2_l</span> <span class="o">&gt;</span> <span class="n">mejor_r2_lasso</span><span class="p">:</span>
+        <span class="n">mejor_r2_lasso</span> <span class="o">=</span> <span class="n">r2_l</span>
         <span class="n">mejor_alpha_lasso</span> <span class="o">=</span> <span class="n">a</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ridge --&gt; Mejor alpha = </span><span class="si">{</span><span class="n">mejor_alpha_ridge</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | R² validación = </span><span class="si">{</span><span class="n">mejor_r2_ridge</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lasso --&gt; Mejor alpha = </span><span class="si">{</span><span class="n">mejor_alpha_lasso</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | R² validación = </span><span class="si">{</span><span class="n">mejor_r2_lasso</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># 3. Métrica personalizada</span>
+<span class="c1"># --------------------------</span>
+<span class="c1"># 2b. Gráfica alpha vs R2</span>
+<span class="c1"># --------------------------</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">r2_ridge_list</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ridge&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">r2_lasso_list</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Lasso&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Alpha (escala log)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;R² en validación&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Evolución de R² en función de alpha&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># --------------------------</span>
+<span class="c1"># 3. Métricas</span>
+<span class="c1"># --------------------------</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">mape</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_true</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
 
-<span class="c1"># 4. Reentrenar con todo el train y evaluar</span>
-
-<span class="c1"># Ridge final</span>
+<span class="c1"># --------------------------</span>
+<span class="c1"># 4. Reentrenar con TODO el train</span>
+<span class="c1"># --------------------------</span>
 <span class="n">ridge_final</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">mejor_alpha_ridge</span><span class="p">)</span>
 <span class="n">ridge_final</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">ridge_pred_train</span> <span class="o">=</span> <span class="n">ridge_final</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
@@ -565,7 +618,7 @@ document.write(`
     <span class="s2">&quot;MAPE Test (%)&quot;</span><span class="p">:</span> <span class="n">mape</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">ridge_pred_test</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="c1"># Lasso final</span>
+<span class="c1"># LASSO final</span>
 <span class="n">lasso_final</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">mejor_alpha_lasso</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 <span class="n">lasso_final</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">lasso_pred_train</span> <span class="o">=</span> <span class="n">lasso_final</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
@@ -579,10 +632,148 @@ document.write(`
     <span class="s2">&quot;MAPE Test (%)&quot;</span><span class="p">:</span> <span class="n">mape</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">lasso_pred_test</span><span class="p">)</span>
 <span class="p">}</span>
 
-
-<span class="c1"># 5. tabla final</span>
+<span class="c1"># --------------------------</span>
+<span class="c1"># 5. Tabla final</span>
+<span class="c1"># --------------------------</span>
 <span class="n">df_resultados</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">resultados_ridge</span><span class="p">,</span> <span class="n">resultados_lasso</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Ridge&quot;</span><span class="p">,</span> <span class="s2">&quot;Lasso&quot;</span><span class="p">])</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df_resultados</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="elastic-net">
+<h3>6.4.2. Elastic Net<a class="headerlink" href="#elastic-net" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---------------------------------</span>
+<span class="c1"># 1. Partición temporal 70 / 30</span>
+<span class="c1"># ---------------------------------</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">cut</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">N</span> <span class="o">*</span> <span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">cut</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">test</span>  <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">cut</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># ---------------------------------</span>
+<span class="c1"># 2. Definir X/Y</span>
+<span class="c1"># ---------------------------------</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">]]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;cnt&#39;</span><span class="p">]</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[[</span><span class="s1">&#39;yr&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;hum&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">,</span> <span class="s1">&#39;season_2&#39;</span><span class="p">,</span> <span class="s1">&#39;season_3&#39;</span><span class="p">,</span> <span class="s1">&#39;season_4&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;weathersit_2&#39;</span><span class="p">,</span> <span class="s1">&#39;weathersit_3&#39;</span><span class="p">,</span> <span class="s1">&#39;holiday_1&#39;</span><span class="p">]]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;cnt&#39;</span><span class="p">]</span>
+
+<span class="c1"># ---------------------------------</span>
+<span class="c1"># 3. Partición interna también NO aleatoria (80/20)</span>
+<span class="c1"># ---------------------------------</span>
+<span class="n">N2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">cut2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">N2</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">X_train_2</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">cut2</span><span class="p">]</span>
+<span class="n">y_train_2</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">cut2</span><span class="p">]</span>
+
+<span class="n">X_test_2</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">cut2</span><span class="p">:]</span>
+<span class="n">y_test_2</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">cut2</span><span class="p">:]</span>
+
+<span class="c1"># ---------------------------------</span>
+<span class="c1"># 4. Búsqueda de hiperparámetros</span>
+<span class="c1"># ---------------------------------</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">l1_ratios</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+
+<span class="n">mejor_alpha</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">mejor_l1</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">mejor_r2</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">l1</span> <span class="ow">in</span> <span class="n">l1_ratios</span><span class="p">:</span>
+        <span class="n">modelo</span> <span class="o">=</span> <span class="n">ElasticNet</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="n">l1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+        <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_2</span><span class="p">,</span> <span class="n">y_train_2</span><span class="p">)</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_2</span><span class="p">)</span>
+        <span class="n">r2_val</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test_2</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">r2_val</span> <span class="o">&gt;</span> <span class="n">mejor_r2</span><span class="p">:</span>
+            <span class="n">mejor_r2</span> <span class="o">=</span> <span class="n">r2_val</span>
+            <span class="n">mejor_alpha</span> <span class="o">=</span> <span class="n">a</span>
+            <span class="n">mejor_l1</span> <span class="o">=</span> <span class="n">l1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ElasticNet --&gt; Mejor alpha = </span><span class="si">{</span><span class="n">mejor_alpha</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Mejor l1_ratio = </span><span class="si">{</span><span class="n">mejor_l1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R² Validación = </span><span class="si">{</span><span class="n">mejor_r2</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ---------------------------------</span>
+<span class="c1"># 5. Entrenamiento final</span>
+<span class="c1"># ---------------------------------</span>
+<span class="n">elastic_final</span> <span class="o">=</span> <span class="n">ElasticNet</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">mejor_alpha</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="n">mejor_l1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">elastic_final</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">pred_train</span> <span class="o">=</span> <span class="n">elastic_final</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">pred_test</span> <span class="o">=</span> <span class="n">elastic_final</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># ---------------------------------</span>
+<span class="c1"># 6. Métricas finales</span>
+<span class="c1"># ---------------------------------</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mape</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_true</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">resultados_elastic</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;R2 Train&quot;</span><span class="p">:</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">pred_train</span><span class="p">),</span>
+    <span class="s2">&quot;R2 Test&quot;</span><span class="p">:</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">),</span>
+    <span class="s2">&quot;RMSE Test&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">)),</span>
+    <span class="s2">&quot;MAE Test&quot;</span><span class="p">:</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">),</span>
+    <span class="s2">&quot;MAPE Test (%)&quot;</span><span class="p">:</span> <span class="n">mape</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados_elastic</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Elastic Net&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="recopilacion-resultados-ridge-lasso-y-elastic-net-y-contraste-con-ols">
+<h3>6.4.3. Recopilacion resultados Ridge, Lasso y Elastic Net y contraste con OLS<a class="headerlink" href="#recopilacion-resultados-ridge-lasso-y-elastic-net-y-contraste-con-ols" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Cargar el modelo OLS</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../models/ols_model.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">ols_model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># 2. Preparar X con constante</span>
+<span class="n">X_train_const</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">has_constant</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">)</span>
+<span class="n">X_test_const</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">has_constant</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">)</span>
+
+<span class="c1"># 3. Predicciones</span>
+<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_const</span><span class="p">)</span>
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">ols_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_const</span><span class="p">)</span>
+
+<span class="c1"># 4. Métricas</span>
+<span class="n">r2_train</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred_train</span><span class="p">)</span>
+<span class="n">r2_test</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
+<span class="n">rmse_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">))</span>
+<span class="n">mae_test</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
+<span class="n">mape_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_test</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_test</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="c1"># 5. Diccionario de resultados OLS</span>
+<span class="n">resultados_ols</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;R2 Train&quot;</span><span class="p">:</span> <span class="n">r2_train</span><span class="p">,</span>
+    <span class="s2">&quot;R2 Test&quot;</span><span class="p">:</span> <span class="n">r2_test</span><span class="p">,</span>
+    <span class="s2">&quot;RMSE Test&quot;</span><span class="p">:</span> <span class="n">rmse_test</span><span class="p">,</span>
+    <span class="s2">&quot;MAE Test&quot;</span><span class="p">:</span> <span class="n">mae_test</span><span class="p">,</span>
+    <span class="s2">&quot;MAPE Test (%)&quot;</span><span class="p">:</span> <span class="n">mape_test</span>
+<span class="p">}</span>
+
+<span class="c1"># 6. Añadir al DataFrame final</span>
+<span class="n">df_resultados_final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">resultados_ridge</span><span class="p">,</span> <span class="n">resultados_lasso</span><span class="p">,</span> <span class="n">resultados_elastic</span><span class="p">,</span> <span class="n">resultados_ols</span><span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Ridge&quot;</span><span class="p">,</span> <span class="s2">&quot;Lasso&quot;</span><span class="p">,</span> <span class="s2">&quot;Elastic Net&quot;</span><span class="p">,</span> <span class="s2">&quot;OLS&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ridge --&gt; Mejor alpha = </span><span class="si">{</span><span class="n">mejor_alpha_ridge</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | R² validación = </span><span class="si">{</span><span class="n">mejor_r2_ridge</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lasso --&gt; Mejor alpha = </span><span class="si">{</span><span class="n">mejor_alpha_lasso</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | R² validación = </span><span class="si">{</span><span class="n">mejor_r2_lasso</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ElasticNet --&gt; Mejor alpha = </span><span class="si">{</span><span class="n">mejor_alpha</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Mejor l1_ratio = </span><span class="si">{</span><span class="n">mejor_l1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | R² Validación = </span><span class="si">{</span><span class="n">mejor_r2</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_resultados_final</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -591,18 +782,32 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
-<span class="c1"># Valores reales</span>
+<span class="c1"># Scatter de predicciones</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">ridge_pred_test</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ridge&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">lasso_pred_test</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Lasso&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Elastic Net&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;OLS model&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
-<span class="c1"># Línea identidad (predicción perfecta)</span>
-<span class="n">min_val</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">ridge_pred_test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">lasso_pred_test</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
-<span class="n">max_val</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">ridge_pred_test</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">lasso_pred_test</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+<span class="c1"># Línea ideal (predicción perfecta)</span>
+<span class="n">min_val</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> 
+    <span class="n">ridge_pred_test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> 
+    <span class="n">lasso_pred_test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+    <span class="n">pred_test</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">max_val</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> 
+    <span class="n">ridge_pred_test</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> 
+    <span class="n">lasso_pred_test</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+    <span class="n">pred_test</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">],</span> <span class="p">[</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Línea ideal&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valores reales (y_test)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Predicciones&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Comparación: Predicciones vs Valores Reales (Ridge vs Lasso)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Comparación: Predicciones vs Valores Reales (Ridge, Lasso y Elastic Net)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -611,62 +816,26 @@ document.write(`
 </div>
 </section>
 <section id="interpretacion-de-resultados">
-<h2>8.5. Interpretacion de resultados<a class="headerlink" href="#interpretacion-de-resultados" title="Link to this heading">#</a></h2>
-<p>Ridge y Lasso terminan siendo prácticamente iguales, lo que indica que:</p>
-<p>No hay diferencia significativa en desempeño.
-Cambiar entre Ridge y Lasso NO mejora el modelo.
-El comportamiento sugiere que la regularización no cambia mucho la relación entre variables y demanda de bicis.</p>
+<h3>6.5. Interpretación de resultados<a class="headerlink" href="#interpretacion-de-resultados" title="Link to this heading">#</a></h3>
+<p>Los tres modelos —<strong>Ridge, Lasso y Elastic Net</strong>— presentan desempeños prácticamente idénticos. Tanto los valores de ( <span class="math notranslate nohighlight">\(R^2\)</span> ) en validación como las métricas en el conjunto de prueba muestran diferencias mínimas entre ellos. Esto permite concluir lo siguiente:</p>
 <ul class="simple">
-<li><p>esto es consecuente con que las variables seleccionadas no hay multicolinealidad.</p></li>
-<li><p>Se han realizado tansformaciones de valor sonbre las variables.</p></li>
-<li><p>La relacion detectada es moderada pero no fuerte.</p></li>
+<li><p><strong>La multicolinealidad no es un problema relevante</strong> en este conjunto de variables, ya que ni Lasso ni Elastic Net reducen coeficientes a cero ni muestran mejoras sustanciales frente a Ridge.</p></li>
+<li><p><strong>Todas las variables aportan información útil</strong> al modelo; las penalizaciones no seleccionan ni descartan predictores, lo que confirma una buena preparación previa de las variables climáticas y temporales.</p></li>
+<li><p><strong>La estructura del modelo es estable</strong>: las regularizaciones no alteran significativamente los coeficientes.</p></li>
+<li><p><strong>La relación entre clima, temporalidad y demanda es moderada</strong>, suficiente para explicar parte del comportamiento, pero no lo bastante fuerte como para que las técnicas penalizadas marquen diferencias.</p></li>
 </ul>
-<p>Respecto al desempeño del <strong><span class="math notranslate nohighlight">\(R^2\)</span></strong> en test y train, el modelo generaliza bien, evitando sobre ajustes, explicando asi el 64% de la variabilidad, lo cual deja aun sin cubrir temas como interacciones entre variables climaticas, relaciones no lineales o patrones temporales.</p>
+<p>En términos de generalización, el rendimiento es consistente: el ( <span class="math notranslate nohighlight">\(R^2\)</span> ) en entrenamiento y prueba se mantiene alrededor de 0.56, lo que indica una <strong>ligera pérdida de capacidad predictiva</strong> pero sin señales de sobreajuste importante.</p>
+<p>Finalmente, existe espacio para mejorar el modelo explorando:</p>
+<ul class="simple">
+<li><p><strong>Interacciones entre variables</strong> (por ejemplo, temperatura × humedad, hora × estación).</p></li>
+<li><p><strong>Interacciones No lineales</strong></p></li>
+<li><p><strong>Modelos específicos para series de tiempo</strong>, que capturen patrones más complejos como tendencia, estacionalidad y autocorrelación a largo plazo.</p></li>
+</ul>
 </section>
 <section id="seleccion-del-modelo-optimo">
-<h2>8.6. Seleccion del modelo optimo<a class="headerlink" href="#seleccion-del-modelo-optimo" title="Link to this heading">#</a></h2>
-<p>Ridge resulta ser más estable cuando todas las variables son relevantes y como en nuestro data set las variables ya están seleccionadas y ninguna sobra, el ruido se ha reducido previamente.</p>
-<p>Para esto, entonces, Ridge mantivo la estructura original distribuyendo encontrando y distribuyendo las penalizaciones (<span class="math notranslate nohighlight">\( \alpha = 4.64\)</span>)</p>
-<p>Lo que indica que Ridge si puedo encontrar un nivel de regularizar el modelo base, <strong>aumentando robustez y reducuiendo varianza</strong>, aun cuando la diferencia es pequeña.</p>
+<h3>6.6. Seleccion del modelo optimo<a class="headerlink" href="#seleccion-del-modelo-optimo" title="Link to this heading">#</a></h3>
+<p>Luego de la comparacion entre modelos, nos quedamos con OLS, luego de su correccion de errores, y haber notado que sus coeficientes eran robistos, podemos con el explicar buena parte de los datos, y evitamos el gasto computacional de correr nuevamnete los modelos.</p>
 </section>
-<section id="coeficientes-modelo-ridge-y-ols">
-<h2>8.7. Coeficientes Modelo Ridge y OLS<a class="headerlink" href="#coeficientes-modelo-ridge-y-ols" title="Link to this heading">#</a></h2>
-<p>Abajo la tabla indicando los coeficientes antes y despues de Ridge</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Cargar modelo OLS</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;ols_model.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">ols_loaded</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-
-
-<span class="n">ols_coefs</span> <span class="o">=</span> <span class="n">ols_loaded</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&quot;const&quot;</span><span class="p">:</span> <span class="s2">&quot;Intercepto&quot;</span><span class="p">})</span>
-
-
-<span class="c1"># 2. Coeficientes Ridge</span>
-
-<span class="n">ridge_coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">ridge_final</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-<span class="n">ridge_coefs</span><span class="p">[</span><span class="s2">&quot;Intercepto&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ridge_final</span><span class="o">.</span><span class="n">intercept_</span>
-
-<span class="c1"># 3. Tabla comparativa</span>
-<span class="n">tabla_coef</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s2">&quot;Ridge&quot;</span><span class="p">:</span> <span class="n">ridge_coefs</span><span class="p">,</span>
-    <span class="s2">&quot;OLS&quot;</span><span class="p">:</span> <span class="n">ols_coefs</span>
-    
-<span class="p">})</span>
-
-<span class="c1"># Asegurar orden poniendo el Intercepto arriba</span>
-<span class="k">if</span> <span class="s2">&quot;Intercepto&quot;</span> <span class="ow">in</span> <span class="n">tabla_coef</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
-    <span class="n">tabla_coef</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span>
-        <span class="n">tabla_coef</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;Intercepto&quot;</span><span class="p">]],</span>
-        <span class="n">tabla_coef</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;Intercepto&quot;</span><span class="p">)</span>
-    <span class="p">])</span>
-
-<span class="n">tabla_coef</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 
@@ -706,7 +875,7 @@ El comportamiento sugiere que la regularización no cambia mucho la relación en
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">7. Métodos Robustos para Datos Temporales</p>
+        <p class="prev-next-title">5. Métodos Robustos para Datos Temporales</p>
       </div>
     </a>
     <a class="right-next"
@@ -714,7 +883,7 @@ El comportamiento sugiere que la regularización no cambia mucho la relación en
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">9. Simulación Monte Carlo</p>
+        <p class="prev-next-title">7. Simulación Monte Carlo</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -734,13 +903,17 @@ El comportamiento sugiere que la regularización no cambia mucho la relación en
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">8.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">8.2. Lectura de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">8.3 Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-de-ridge-y-lasso">8.4 Aplicacion de Ridge y Lasso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">8.5. Interpretacion de resultados</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-del-modelo-optimo">8.6. Seleccion del modelo optimo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coeficientes-modelo-ridge-y-ols">8.7. Coeficientes Modelo Ridge y OLS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">6.1. Importacion de librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">6.2. Lectura de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">6.3 Split data set (Training and test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-de-ridge-lasso-y-elastic-net">6.4 Aplicacion de Ridge, Lasso y Elastic Net</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-y-lasso">6.4.1 Ridge y Lasso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elastic-net">6.4.2. Elastic Net</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recopilacion-resultados-ridge-lasso-y-elastic-net-y-contraste-con-ols">6.4.3. Recopilacion resultados Ridge, Lasso y Elastic Net y contraste con OLS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">6.5. Interpretación de resultados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-del-modelo-optimo">6.6. Seleccion del modelo optimo</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
