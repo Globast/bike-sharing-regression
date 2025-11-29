@@ -31,7 +31,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LinearRegression
 
-df = pd.read_csv("../data/day_clean.csv")
+df = pd.read_csv("../data/day_clean.csv", sep =";")
 
 ```
 

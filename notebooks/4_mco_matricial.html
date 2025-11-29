@@ -390,7 +390,7 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">RFE</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/day_clean.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/day_clean.csv&quot;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -414,8 +414,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tamaño set de entrenamiento: (511, 1)
-tamaño set de prueba: (220, 1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tamaño set de entrenamiento: (511, 17)
+tamaño set de prueba: (220, 17)
 </pre></div>
 </div>
 </div>
@@ -456,57 +456,6 @@ Y = X\beta + \varepsilon
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py:3812,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3811</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3812</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3813</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-
-<span class="nn">File pandas/_libs/index.pyx:167,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">File pandas/_libs/index.pyx:196,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:7088,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:7096,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="ne">KeyError</span>: &#39;cnt&#39;
-
-<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
-
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># 1. Definir X e y</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;cnt&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">X</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cnt&quot;</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># convertir booleanos y objetos en numéricos</span>
-
-<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/core/frame.py:4113,</span> in <span class="ni">DataFrame.__getitem__</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4111</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">4112</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">4113</span> <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4114</span> <span class="k">if</span> <span class="n">is_integer</span><span class="p">(</span><span class="n">indexer</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">4115</span>     <span class="n">indexer</span> <span class="o">=</span> <span class="p">[</span><span class="n">indexer</span><span class="p">]</span>
-
-<span class="nn">File ~/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py:3819,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3814</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">3815</span>         <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3816</span>         <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">casted_key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3817</span>     <span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">3818</span>         <span class="k">raise</span> <span class="n">InvalidIndexError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">3819</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
-<span class="g g-Whitespace">   </span><span class="mi">3820</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3821</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
-<span class="g g-Whitespace">   </span><span class="mi">3822</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
-<span class="g g-Whitespace">   </span><span class="mi">3823</span>     <span class="c1">#  the TypeError.</span>
-<span class="g g-Whitespace">   </span><span class="mi">3824</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-
-<span class="ne">KeyError</span>: &#39;cnt&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>Antes de ajustar el modelo, aplicaremos el metodo RFE(Recursive Feature Elimination) el cual busca, luego de iteraciones, entregar las variables que mejor explican el modelo maximizando el ajuste</p>
 <div class="cell docutils container">
@@ -522,6 +471,30 @@ Y = X\beta + \varepsilon
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables seleccionadas:
+===================
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;yr&#39;, np.True_),
+ (&#39;temp&#39;, np.True_),
+ (&#39;hum&#39;, np.True_),
+ (&#39;windspeed&#39;, np.True_),
+ (&#39;dayofyear&#39;, np.False_),
+ (&#39;month_sin&#39;, np.False_),
+ (&#39;month_cos&#39;, np.False_),
+ (&#39;weekday_sin&#39;, np.False_),
+ (&#39;weekday_cos&#39;, np.False_),
+ (&#39;season_2&#39;, np.True_),
+ (&#39;season_3&#39;, np.True_),
+ (&#39;season_4&#39;, np.True_),
+ (&#39;weathersit_2&#39;, np.True_),
+ (&#39;weathersit_3&#39;, np.True_),
+ (&#39;workingday_1&#39;, np.False_),
+ (&#39;holiday_1&#39;, np.True_)]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -531,11 +504,42 @@ Y = X\beta + \varepsilon
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ranking de importancia:
+===================
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;yr&#39;, np.int64(1)),
+ (&#39;temp&#39;, np.int64(1)),
+ (&#39;hum&#39;, np.int64(1)),
+ (&#39;windspeed&#39;, np.int64(1)),
+ (&#39;dayofyear&#39;, np.int64(7)),
+ (&#39;month_sin&#39;, np.int64(6)),
+ (&#39;month_cos&#39;, np.int64(2)),
+ (&#39;weekday_sin&#39;, np.int64(3)),
+ (&#39;weekday_cos&#39;, np.int64(5)),
+ (&#39;season_2&#39;, np.int64(1)),
+ (&#39;season_3&#39;, np.int64(1)),
+ (&#39;season_4&#39;, np.int64(1)),
+ (&#39;weathersit_2&#39;, np.int64(1)),
+ (&#39;weathersit_3&#39;, np.int64(1)),
+ (&#39;workingday_1&#39;, np.int64(4)),
+ (&#39;holiday_1&#39;, np.int64(1))]
+</pre></div>
+</div>
+</div>
 </div>
 <p>Seguido del paso anterior nos quedaremos con aquellas variables que se marcaron como importantes para el analisis RFE</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">rfe</span><span class="o">.</span><span class="n">support_</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;yr&#39;, &#39;temp&#39;, &#39;hum&#39;, &#39;windspeed&#39;, &#39;season_2&#39;, &#39;season_3&#39;, &#39;season_4&#39;,
+       &#39;weathersit_2&#39;, &#39;weathersit_3&#39;, &#39;holiday_1&#39;],
+      dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -562,6 +566,88 @@ Y = X\beta + \varepsilon
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variables</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>const</td>
+      <td>48.442257</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>season_3</td>
+      <td>3.829338</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>temp</td>
+      <td>3.072249</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>season_2</td>
+      <td>2.356251</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>hum</td>
+      <td>1.975891</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>season_4</td>
+      <td>1.795374</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>weathersit_2</td>
+      <td>1.588074</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>weathersit_3</td>
+      <td>1.316516</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>yr</td>
+      <td>1.313616</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>windspeed</td>
+      <td>1.199310</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>holiday_1</td>
+      <td>1.006158</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Eliminamos Weekend, y nos quedamos solo con holiday y working day, ya que con estas se captura de manera menos redundante si es dia de semana (trabajo) o fin de semana.</p>
 <div class="cell docutils container">
