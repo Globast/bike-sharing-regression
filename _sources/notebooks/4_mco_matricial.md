@@ -6,34 +6,29 @@ kernelspec: {name: python3, display_name: Python 3}
 ---
 
 
-# 4. Implementación Matricial de MCO
+# 4. Implementación Matricial de MCO y diagnosticos de supuestos
+
+## 4.1. Implementación Matricial de MCO
 En esta etapa se utilizaran los datos previamente preparados para el planteamiento del modelo por MCO, utilizando su forma matricial, comparandolo con los resiudalsultados arrojados por la libreria statsmodels.OLS y junto con ello la validacion de supuetos que acompañan la teoria.
 
-## 4.1. Importacion de librerias
+### 4.1.1. Importacion de librerias
 
 ```{code-cell} ipython3
-# Librerías científicas básicas
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
-
-# Visualización
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-# Modelos estadísticos
 import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 from statsmodels.api import OLS, add_constant
- 
-# Machine Learning
 from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LinearRegression
 df = pd.read_csv("../data/day_clean.csv", sep =";")
 ```
 
-## 4.3 Split data set (Training and test)
+### 4.1.2. Split data set (Training and test)
 En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.
 
 ```{code-cell} ipython3
@@ -48,7 +43,7 @@ print("tamaño set de entrenamiento:", train.shape)
 print("tamaño set de prueba:", test.shape)
 ```
 
-## 4.4 cosntruccion de matrices $X$ y $y$
+### 4.1.3. cosntruccion de matrices $X$ y $y$
 
 Para el modelo lineal clasisco expresiudalsado como:
 $$
@@ -130,7 +125,7 @@ vif_1
 
 Eliminamos Weekend, y nos quedamos solo con holiday y working day, ya que con estas se captura de manera menos redundante si es dia de semana (trabajo) o fin de semana.
 
-## 4.5. Calculo de Coeficientes Regresion
+### 4.1.4. Calculo de Coeficientes Regresion
 
 ```{code-cell} ipython3
 X = X.astype(float) ## Matriz X
@@ -168,10 +163,9 @@ coef_table = pd.DataFrame({
 print("\nTabla comparativa de coeficientes:")
 coef_table
 ```
-# 5. Inferencia estadística en datos temporales
+## 4.2. Inferencia estadística en datos temporales
 En este capítulo discutimos la inferencia sobre los coeficientes del modelo de regresión en presencia de dependencia temporal.
 
-## 5.1. Interpretación de coeficientes OLS – Alquiler de bicicletas
 ### Tabla de coeficientes
 
 | Variable         | Coeficiente                        | Interpretación económica/urbana                                                                                                                 |
@@ -189,7 +183,7 @@ En este capítulo discutimos la inferencia sobre los coeficientes del modelo de 
 | **holiday_1**    | **–527.96**                        | En días festivos la demanda disminuye, posiblemente por reducción en viajes laborales y de estudio.                                             |
 
 
-## Síntesis económica y urbana
+### Síntesis económica y urbana
  
 El modelo confirma que la **demanda de bicicletas está determinada por factores climáticos, temporales y estacionales**.   
 - **Clima**: la temperatura impulsa fuertemente la demanda, mientras que la humedad, el viento y la lluvia la reducen.  
@@ -207,10 +201,10 @@ print(ols_model.summary())
 
 Extraemos weathersit_4 ya que no es estadisticamene significativo
 
-# 6. Diagnóstico de supuestos del modelo
+## 4.3. Diagnóstico de supuestos del modelo
 En esta seccion, a partir del modelo anterior, se revisara elñ cumplimiento de la teoria sobre los errores, para entender si el modelo es valido o no
 
-### 6.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)
+### 4.3.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)
 
 Se parte de la inspeccion visual de residuos
 - Disribucion de residuos
@@ -286,7 +280,7 @@ print("\nDurbin-Watson Test:")
 print("Statistic =", dw_stat)
 ```
 
-## 6.2 Resultados validacion supuestos
+## 4.3.2. Resultados validacion supuestos
 
 **Shapiro-Wilk Test**
 Estadístico = 0.9745, p-value = 9.16e-08

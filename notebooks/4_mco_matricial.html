@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4. Implementación Matricial de MCO &#8212; Bike Sharing Regression</title>
+    <title>4. Implementación Matricial de MCO y diagnosticos de supuestos &#8212; Bike Sharing Regression</title>
   
   
   
@@ -192,9 +192,7 @@
 <li class="toctree-l1"><a class="reference internal" href="2_ingenieria_temporal.html">2. Ingenieria de Variables y Procesamiento Temporal</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="3_exploratorio_temporal.html">3. Análisis exploratorio de series temporales</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Implementación Matricial de MCO</a></li>
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Implementación matricial de MCO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_diagnostico_supuestos.html">6. Diagnóstico de supuestos del modelo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="7_metodos_robustos.html">7. Métodos robustos para datos temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="8_validacion_modelo.html">8. Validación y selección del modelo</a></li>
@@ -341,7 +339,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>4. Implementación Matricial de MCO</h1>
+    <h1>4. Implementación Matricial de MCO y diagnosticos de supuestos</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -351,28 +349,24 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4. Implementación Matricial de MCO</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">4.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">4.3 Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cosntruccion-de-matrices-x-y-y">4.4 cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">4.5. Calculo de Coeficientes Regresion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-matricial-de-mco">4.1. Implementación Matricial de MCO</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">4.1.1. Importacion de librerias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">4.1.2. Split data set (Training and test)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cosntruccion-de-matrices-x-y-y">4.1.3. cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">4.1.4. Calculo de Coeficientes Regresion</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inferencia-estadistica-en-datos-temporales">5. Inferencia estadística en datos temporales</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-coeficientes-ols-alquiler-de-bicicletas">5.1. Interpretación de coeficientes OLS – Alquiler de bicicletas</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inferencia-estadistica-en-datos-temporales">4.2. Inferencia estadística en datos temporales</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-coeficientes">Tabla de coeficientes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-economica-y-urbana">Síntesis económica y urbana</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-economica-y-urbana">Síntesis económica y urbana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-de-supuestos-del-modelo">4.3. Diagnóstico de supuestos del modelo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia">4.3.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-de-supuestos-del-modelo">6. Diagnóstico de supuestos del modelo</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia">6.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-validacion-supuestos">6.2 Resultados validacion supuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-validacion-supuestos">4.3.2. Resultados validacion supuestos</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -383,28 +377,23 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="implementacion-matricial-de-mco">
-<h1>4. Implementación Matricial de MCO<a class="headerlink" href="#implementacion-matricial-de-mco" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="implementacion-matricial-de-mco-y-diagnosticos-de-supuestos">
+<h1>4. Implementación Matricial de MCO y diagnosticos de supuestos<a class="headerlink" href="#implementacion-matricial-de-mco-y-diagnosticos-de-supuestos" title="Link to this heading">#</a></h1>
+<section id="implementacion-matricial-de-mco">
+<h2>4.1. Implementación Matricial de MCO<a class="headerlink" href="#implementacion-matricial-de-mco" title="Link to this heading">#</a></h2>
 <p>En esta etapa se utilizaran los datos previamente preparados para el planteamiento del modelo por MCO, utilizando su forma matricial, comparandolo con los resiudalsultados arrojados por la libreria statsmodels.OLS y junto con ello la validacion de supuetos que acompañan la teoria.</p>
 <section id="importacion-de-librerias">
-<h2>4.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h2>
+<h3>4.1.1. Importacion de librerias<a class="headerlink" href="#importacion-de-librerias" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Librerías científicas básicas</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
-
-<span class="c1"># Visualización</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
-
-<span class="c1"># Modelos estadísticos</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">OLS</span><span class="p">,</span> <span class="n">add_constant</span>
- 
-<span class="c1"># Machine Learning</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">RFE</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
@@ -415,7 +404,7 @@ document.write(`
 </div>
 </section>
 <section id="split-data-set-training-and-test">
-<h2>4.3 Split data set (Training and test)<a class="headerlink" href="#split-data-set-training-and-test" title="Link to this heading">#</a></h2>
+<h3>4.1.2. Split data set (Training and test)<a class="headerlink" href="#split-data-set-training-and-test" title="Link to this heading">#</a></h3>
 <p>En este apartado separaremos los datos en un 70% para entremaniento de los modelos y un 30% para testing de los mismos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -440,7 +429,7 @@ tamaño set de prueba: (220, 17)
 </div>
 </section>
 <section id="cosntruccion-de-matrices-x-y-y">
-<h2>4.4 cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span><a class="headerlink" href="#cosntruccion-de-matrices-x-y-y" title="Link to this heading">#</a></h2>
+<h3>4.1.3. cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span><a class="headerlink" href="#cosntruccion-de-matrices-x-y-y" title="Link to this heading">#</a></h3>
 <p>Para el modelo lineal clasisco expresiudalsado como:
 $<span class="math notranslate nohighlight">\(
 Y = X\beta + \varepsilon
@@ -670,7 +659,7 @@ Y = X\beta + \varepsilon
 <p>Eliminamos Weekend, y nos quedamos solo con holiday y working day, ya que con estas se captura de manera menos redundante si es dia de semana (trabajo) o fin de semana.</p>
 </section>
 <section id="calculo-de-coeficientes-regresion">
-<h2>4.5. Calculo de Coeficientes Regresion<a class="headerlink" href="#calculo-de-coeficientes-regresion" title="Link to this heading">#</a></h2>
+<h3>4.1.4. Calculo de Coeficientes Regresion<a class="headerlink" href="#calculo-de-coeficientes-regresion" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="c1">## Matriz X</span>
@@ -840,11 +829,9 @@ dtype: float64
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="inferencia-estadistica-en-datos-temporales">
-<h1>5. Inferencia estadística en datos temporales<a class="headerlink" href="#inferencia-estadistica-en-datos-temporales" title="Link to this heading">#</a></h1>
+<section id="inferencia-estadistica-en-datos-temporales">
+<h2>4.2. Inferencia estadística en datos temporales<a class="headerlink" href="#inferencia-estadistica-en-datos-temporales" title="Link to this heading">#</a></h2>
 <p>En este capítulo discutimos la inferencia sobre los coeficientes del modelo de regresión en presencia de dependencia temporal.</p>
-<section id="interpretacion-de-coeficientes-ols-alquiler-de-bicicletas">
-<h2>5.1. Interpretación de coeficientes OLS – Alquiler de bicicletas<a class="headerlink" href="#interpretacion-de-coeficientes-ols-alquiler-de-bicicletas" title="Link to this heading">#</a></h2>
 <section id="tabla-de-coeficientes">
 <h3>Tabla de coeficientes<a class="headerlink" href="#tabla-de-coeficientes" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -903,9 +890,8 @@ dtype: float64
 </table>
 </div>
 </section>
-</section>
 <section id="sintesis-economica-y-urbana">
-<h2>Síntesis económica y urbana<a class="headerlink" href="#sintesis-economica-y-urbana" title="Link to this heading">#</a></h2>
+<h3>Síntesis económica y urbana<a class="headerlink" href="#sintesis-economica-y-urbana" title="Link to this heading">#</a></h3>
 <p>El modelo confirma que la <strong>demanda de bicicletas está determinada por factores climáticos, temporales y estacionales</strong>.</p>
 <ul class="simple">
 <li><p><strong>Clima</strong>: la temperatura impulsa fuertemente la demanda, mientras que la humedad, el viento y la lluvia la reducen.</p></li>
@@ -928,7 +914,7 @@ Dep. Variable:                    cnt   R-squared:                       0.818
 Model:                            OLS   Adj. R-squared:                  0.814
 Method:                 Least Squares   F-statistic:                     224.2
 Date:                Sat, 29 Nov 2025   Prob (F-statistic):          1.27e-177
-Time:                        04:41:08   Log-Likelihood:                -4055.4
+Time:                        04:48:15   Log-Likelihood:                -4055.4
 No. Observations:                 511   AIC:                             8133.
 Df Residuals:                     500   BIC:                             8179.
 Df Model:                          10                                         
@@ -963,11 +949,11 @@ Notes:
 <p>Extraemos weathersit_4 ya que no es estadisticamene significativo</p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="diagnostico-de-supuestos-del-modelo">
-<h1>6. Diagnóstico de supuestos del modelo<a class="headerlink" href="#diagnostico-de-supuestos-del-modelo" title="Link to this heading">#</a></h1>
+<section id="diagnostico-de-supuestos-del-modelo">
+<h2>4.3. Diagnóstico de supuestos del modelo<a class="headerlink" href="#diagnostico-de-supuestos-del-modelo" title="Link to this heading">#</a></h2>
 <p>En esta seccion, a partir del modelo anterior, se revisara elñ cumplimiento de la teoria sobre los errores, para entender si el modelo es valido o no</p>
 <section id="revision-de-residuos-normalidad-homocedasticidad-e-independencia">
-<h2>6.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)<a class="headerlink" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia" title="Link to this heading">#</a></h2>
+<h3>4.3.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)<a class="headerlink" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia" title="Link to this heading">#</a></h3>
 <p>Se parte de la inspeccion visual de residuos</p>
 <ul class="simple">
 <li><p>Disribucion de residuos</p></li>
@@ -1071,8 +1057,9 @@ Statistic = 1.2530538236043882
 </div>
 </div>
 </section>
+</section>
 <section id="resultados-validacion-supuestos">
-<h2>6.2 Resultados validacion supuestos<a class="headerlink" href="#resultados-validacion-supuestos" title="Link to this heading">#</a></h2>
+<h2>4.3.2. Resultados validacion supuestos<a class="headerlink" href="#resultados-validacion-supuestos" title="Link to this heading">#</a></h2>
 <p><strong>Shapiro-Wilk Test</strong>
 Estadístico = 0.9745, p-value = 9.16e-08
 El p-value es extremadamente bajo, por lo tanto rechazamos la hipótesis nula de normalidad.
@@ -1172,28 +1159,24 @@ Conclusión: el estadístico 1.25 sugiere autocorrelación positiva en los resid
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4. Implementación Matricial de MCO</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">4.1. Importacion de librerias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">4.3 Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cosntruccion-de-matrices-x-y-y">4.4 cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">4.5. Calculo de Coeficientes Regresion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-matricial-de-mco">4.1. Implementación Matricial de MCO</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">4.1.1. Importacion de librerias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">4.1.2. Split data set (Training and test)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cosntruccion-de-matrices-x-y-y">4.1.3. cosntruccion de matrices <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(y\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-coeficientes-regresion">4.1.4. Calculo de Coeficientes Regresion</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inferencia-estadistica-en-datos-temporales">5. Inferencia estadística en datos temporales</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-coeficientes-ols-alquiler-de-bicicletas">5.1. Interpretación de coeficientes OLS – Alquiler de bicicletas</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inferencia-estadistica-en-datos-temporales">4.2. Inferencia estadística en datos temporales</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-coeficientes">Tabla de coeficientes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-economica-y-urbana">Síntesis económica y urbana</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-economica-y-urbana">Síntesis económica y urbana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-de-supuestos-del-modelo">4.3. Diagnóstico de supuestos del modelo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia">4.3.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-de-supuestos-del-modelo">6. Diagnóstico de supuestos del modelo</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-de-residuos-normalidad-homocedasticidad-e-independencia">6.1. Revision de residuos (Normalidad, Homocedasticidad e independencia)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-validacion-supuestos">6.2 Resultados validacion supuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-validacion-supuestos">4.3.2. Resultados validacion supuestos</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
