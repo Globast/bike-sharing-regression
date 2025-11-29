@@ -400,8 +400,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Lectura de datos, por hora y por dia</span>
-<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/day.csv&quot;</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/day.csv&quot;</span><span class="p">)</span>
 
 <span class="c1">## Transformacion de fecha</span>
 <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dteday&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dteday&#39;</span><span class="p">])</span>
@@ -410,15 +409,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">## Lectura de datos, por hora y por dia</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/day.csv&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1">## Transformacion de fecha</span>
-
-<span class="ne">NameError</span>: name &#39;Path&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(731, 16)
 </pre></div>
 </div>
 </div>
@@ -537,6 +528,27 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>instant       0
+dteday        0
+season        0
+yr            0
+mnth          0
+holiday       0
+weekday       0
+workingday    0
+weathersit    0
+temp          0
+atemp         0
+hum           0
+windspeed     0
+casual        0
+registered    0
+cnt           0
+dtype: int64
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="conteo-de-outliers">
@@ -560,6 +572,14 @@ document.write(`
     <span class="n">outlier_counts</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_outliers</span>
 
 <span class="n">outlier_counts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;temp&#39;: np.int64(0),
+ &#39;hum&#39;: np.int64(2),
+ &#39;windspeed&#39;: np.int64(13),
+ &#39;cnt&#39;: np.int64(0)}
 </pre></div>
 </div>
 </div>
@@ -609,6 +629,273 @@ sean representadas en un espacio donde puntos cercanos evitan saltos artificiale
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Columnas finales:
+[&#39;yr&#39;, &#39;temp&#39;, &#39;hum&#39;, &#39;windspeed&#39;, &#39;cnt&#39;, &#39;dayofyear&#39;, &#39;month_sin&#39;, &#39;month_cos&#39;, &#39;weekday_sin&#39;, &#39;weekday_cos&#39;, &#39;season_2&#39;, &#39;season_3&#39;, &#39;season_4&#39;, &#39;weathersit_2&#39;, &#39;weathersit_3&#39;, &#39;workingday_1&#39;, &#39;holiday_1&#39;]
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>yr</th>
+      <th>temp</th>
+      <th>hum</th>
+      <th>windspeed</th>
+      <th>cnt</th>
+      <th>dayofyear</th>
+      <th>month_sin</th>
+      <th>month_cos</th>
+      <th>weekday_sin</th>
+      <th>weekday_cos</th>
+      <th>season_2</th>
+      <th>season_3</th>
+      <th>season_4</th>
+      <th>weathersit_2</th>
+      <th>weathersit_3</th>
+      <th>workingday_1</th>
+      <th>holiday_1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0.344167</td>
+      <td>0.805833</td>
+      <td>0.160446</td>
+      <td>985</td>
+      <td>1</td>
+      <td>5.000000e-01</td>
+      <td>0.866025</td>
+      <td>-0.781831</td>
+      <td>0.623490</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0.363478</td>
+      <td>0.696087</td>
+      <td>0.248539</td>
+      <td>801</td>
+      <td>2</td>
+      <td>5.000000e-01</td>
+      <td>0.866025</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0.196364</td>
+      <td>0.437273</td>
+      <td>0.248309</td>
+      <td>1349</td>
+      <td>3</td>
+      <td>5.000000e-01</td>
+      <td>0.866025</td>
+      <td>0.781831</td>
+      <td>0.623490</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0.200000</td>
+      <td>0.590435</td>
+      <td>0.160296</td>
+      <td>1562</td>
+      <td>4</td>
+      <td>5.000000e-01</td>
+      <td>0.866025</td>
+      <td>0.974928</td>
+      <td>-0.222521</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0.226957</td>
+      <td>0.436957</td>
+      <td>0.186900</td>
+      <td>1600</td>
+      <td>5</td>
+      <td>5.000000e-01</td>
+      <td>0.866025</td>
+      <td>0.433884</td>
+      <td>-0.900969</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>726</th>
+      <td>1</td>
+      <td>0.254167</td>
+      <td>0.652917</td>
+      <td>0.350133</td>
+      <td>2114</td>
+      <td>362</td>
+      <td>-2.449294e-16</td>
+      <td>1.000000</td>
+      <td>-0.433884</td>
+      <td>-0.900969</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>727</th>
+      <td>1</td>
+      <td>0.253333</td>
+      <td>0.590000</td>
+      <td>0.155471</td>
+      <td>3095</td>
+      <td>363</td>
+      <td>-2.449294e-16</td>
+      <td>1.000000</td>
+      <td>-0.974928</td>
+      <td>-0.222521</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>728</th>
+      <td>1</td>
+      <td>0.253333</td>
+      <td>0.752917</td>
+      <td>0.124383</td>
+      <td>1341</td>
+      <td>364</td>
+      <td>-2.449294e-16</td>
+      <td>1.000000</td>
+      <td>-0.781831</td>
+      <td>0.623490</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>729</th>
+      <td>1</td>
+      <td>0.255833</td>
+      <td>0.483333</td>
+      <td>0.350754</td>
+      <td>1796</td>
+      <td>365</td>
+      <td>-2.449294e-16</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>730</th>
+      <td>1</td>
+      <td>0.215833</td>
+      <td>0.577500</td>
+      <td>0.154846</td>
+      <td>2729</td>
+      <td>366</td>
+      <td>-2.449294e-16</td>
+      <td>1.000000</td>
+      <td>0.781831</td>
+      <td>0.623490</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+<p>731 rows × 17 columns</p>
+</div></div></div>
 </div>
 </section>
 
