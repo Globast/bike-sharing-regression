@@ -133,6 +133,6 @@ df.drop(columns=['instant','dteday', 'mnth', 'weekday','casual', 'registered','a
 # Pprint de datos
 print("Columnas finales:")
 print(df.columns.tolist()[:20])
-df.to_csv('day_clean.csv', sep=";",index = False) ## Guardamos las variables listas para empezar a correr los modelos
+df.to_csv("../data/day_clean.csv") ## Guardamos las variables listas para empezar a correr los modelos
 df
 ```
