@@ -3,7 +3,7 @@
 
 ## 1.1 Contexto del problema
 
-En las últimas décadas, muchas ciudades han recurrido a la bicicleta como pieza clave de sus estrategias de movilidad sostenible, tanto por su bajo impacto ambiental como por sus beneficios en salud y eficiencia del espacio urbano [@eren2020_review_bikesharing]. Los sistemas de bicicletas compartidas y el aumento del uso cotidiano de la bicicleta se han consolidado como alternativas reales al automóvil privado, especialmente para viajes cortos e intermodales.
+En las últimas décadas, muchas ciudades han recurrido a la bicicleta como pieza clave de sus estrategias de movilidad sostenible, tanto por su bajo impacto ambiental como por sus beneficios en salud y eficiencia del espacio urbano {cite}`eren2020_review_bikesharing`. Los sistemas de bicicletas compartidas y el aumento del uso cotidiano de la bicicleta se han consolidado como alternativas reales al automóvil privado, especialmente para viajes cortos e intermodales.
 
 ### 1.1.1 Reducción de CO₂
 
