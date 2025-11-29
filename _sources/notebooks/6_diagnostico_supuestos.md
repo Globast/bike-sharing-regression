@@ -36,7 +36,7 @@ from sklearn.linear_model import LinearRegression
 ```
 
 ```{code-cell} ipython3
-df = pd.read_csv('day_clean.csv', sep =";")
+df = pd.read_csv("../data/day_clean.csv", sep =";")
 ```
 
 ```{code-cell} ipython3
