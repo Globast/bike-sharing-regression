@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -192,8 +192,7 @@
 <li class="toctree-l1"><a class="reference internal" href="4_mco_matricial.html">4. Matricial de MCO y diagnostico de supuestos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_metodos_robustos.html">5. Métodos robustos para datos temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_validacion_modelo.html">6. Validación y selección del modelo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="7_monte_carlo.html">9. Simulación Monte Carlo</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="7_monte_carlo.html">7. Simulación Monte Carlo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="8_interpretacion_operativa.html">8. Interpretación operativa y recomendaciones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="9_conclusiones_extensiones.html">9. Conclusiones y extensiones futuras</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Referencias</a></li>
@@ -349,14 +348,92 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="referencias">
 <h1>12. Referencias<a class="headerlink" href="#referencias" title="Link to this heading">#</a></h1>
-<p>Las referencias se gestionan mediante un archivo BibTeX (<code class="docutils literal notranslate"><span class="pre">references.bib</span></code>). A continuación se muestran algunos ejemplos de citas dentro del texto:</p>
-<ul class="simple">
-<li><p>Análisis clásico de series temporales [&#64;boxjenkins2016].</p></li>
-<li><p>Introducción práctica a las series temporales con R [&#64;hyndman2018].</p></li>
-<li><p>Descripción original del conjunto de datos de <em>Bike Sharing</em> [&#64;fanaee2014].</p></li>
-<li><p>Discusión general sobre regresión y gráficos [&#64;cleveland1990].</p></li>
-</ul>
-<p>En el resto de capítulos, las citas se incluyen con el formato <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">&#64;clave</span> <span class="pre">]</span></code> (sin espacios), por ejemplo <code class="docutils literal notranslate"><span class="pre">[&#64;fanaee2014]</span></code>.</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">eren2020_review_bikesharing</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Eren, Ezgi and Uz, Volkan Emre}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{A Review on Bike-Sharing: The Factors Affecting Bike-Sharing Demand}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Sustainable Cities and Society}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2020}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{54}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">pages</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{101882}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">doi</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{10.1016/j.scs.2019.101882}</span>
+<span class="p">}</span>
+
+<span class="nc">@article</span><span class="p">{</span><span class="nl">brand2021_active_travel</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Brand, Christian and Dons, Evi and Anaya-Boig, Esther and Avila-Palencia, Ione and Clark, Anna and de Nazelle, Audrey and others}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{The Climate Change Mitigation Effects of Daily Active Travel in Cities}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Transportation Research Part D: Transport and Environment}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2021}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{93}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">pages</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{102764}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">doi</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{10.1016/j.trd.2021.102764}</span>
+<span class="p">}</span>
+
+<span class="nc">@techreport</span><span class="p">{</span><span class="nl">mason2015_high_shift_cycling</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="s">{Mason, Jacob and Fulton, Lew and McDonald, Zane}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">       </span><span class="p">=</span><span class="w"> </span><span class="s">{A Global High Shift Cycling Scenario: The Potential for Dramatically Increasing Bicycle and E-bike Use in Cities Around the World, with Estimated Energy, CO2, and Cost Impacts}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">institution</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Institute for Transportation and Development Policy and University of California, Davis}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{2015}</span>
+<span class="p">}</span>
+
+<span class="nc">@online</span><span class="p">{</span><span class="nl">alcaldia2023_ciclorrutas_bogota</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{{Alcald{&#39;i}a Mayor de Bogot{&#39;a}}}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Bogot{&#39;a}, capital mundial de la bici, cuenta con m{&#39;a}s de 630 km de ciclorruta}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{2023}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{https://bogota.gov.co/mi-ciudad/movilidad/bogota-capital-mundial-de-la-bici-con-cientos-kilometros-de-ciclorruta}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">note</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Consultado: 2025-11-29}</span>
+<span class="p">}</span>
+
+<span class="nc">@online</span><span class="p">{</span><span class="nl">tmc2022_cycling_infrastructure_bogota</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{{Transformative Urban Mobility Initiative}}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Cycling Infrastructure in Cities: Bogot{&#39;a}&#39;s Ambitious Bicycle Network Expansion}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{2022}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{https://transformative-mobility.org/cycling-infrastructure-in-cities-bogotas-ambitious-bicycle-network-expansion/}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">note</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Consultado: 2025-11-29}</span>
+<span class="p">}</span>
+
+<span class="nc">@online</span><span class="p">{</span><span class="nl">larepublica2024_tembici_bogota</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Barbieri, Nicole}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{El Sistema de Bicicletas Compartidas en Bogot{&#39;a} Suma 3 Millones de Desplazamientos}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{2024}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{https://www.larepublica.co/especiales/cumpleanos-486-de-bogota/el-sistema-de-bicicletas-compartidas-en-bogota-suma-3-millones-de-desplazamientos-3923502}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">note</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Consultado: 2025-11-29}</span>
+<span class="p">}</span>
+
+<span class="nc">@online</span><span class="p">{</span><span class="nl">eltiempo2022_retos_bicicletas_compartidas</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Castillo, Camilo A.}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Los Retos del Nuevo Sistema de Bicicletas Compartidas de Bogot{&#39;a}}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{2022}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{https://www.eltiempo.com/bogota/los-retos-del-nuevo-sistema-de-bicicletas-compartidas-de-bogota-706667}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">note</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Consultado: 2025-11-29}</span>
+<span class="p">}</span>
+
+<span class="nc">@online</span><span class="p">{</span><span class="nl">elpais2025_modelo_bicis_bogota</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{S{&#39;a}nchez, Camilo}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{El Modelo de Bicis de Alquiler se Hunde en Bogot{&#39;a}, la Capital Ciclista de Am{&#39;e}rica Latina}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{2025}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{https://elpais.com/america-colombia/2025-09-18/el-modelo-de-bicis-de-alquiler-se-hunde-en-bogota-la-capital-ciclista-de-america-latina.html}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">note</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Consultado: 2025-11-29}</span>
+<span class="p">}</span>
+
+<span class="nc">@article</span><span class="p">{</span><span class="nl">wang2021_spatial_regression_bikesharing</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Wang, Xudong and Cheng, Zhanhong and Tr{&#39;e}panier, Martin and Sun, Lijun}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Modeling Bike-Sharing Demand Using a Regression Model with Spatially Varying Coefficients}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Journal of Transport Geography}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2021}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{93}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">pages</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{103059}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">doi</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{10.1016/j.jtrangeo.2021.103059}</span>
+<span class="p">}</span>
+
+<span class="nc">@online</span><span class="p">{</span><span class="nl">elpais2025_dia_sin_carro</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{{Redacci{&#39;o}n EL PA{&#39;I}S}}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{D{&#39;i}a sin Carro y sin Moto en Bogot{&#39;a} 2025: Cu{&#39;a}ndo es, Restricciones y Multas}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{2025}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{https://elpais.com/america-colombia/2025-02-05/dia-sin-carro-y-sin-moto-bogota-2025-cuando-es-restricciones-y-multas.html}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">note</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Consultado: 2025-11-29}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
