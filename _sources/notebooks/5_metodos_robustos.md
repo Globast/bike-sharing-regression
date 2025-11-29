@@ -69,12 +69,14 @@ y_t = X_t \beta + u_t
 $$
 
 #### Estimador HAC
-#### Estimador HAC
+
 $$
 \widehat{V}_{HAC} = (X'X)^{-1} \, \widehat{S} \, (X'X)^{-1}
 $$
 
 donde:
+
+
 $$
 \widehat{S} = \sum_{t=1}^{T} \hat{u}_t^2 X_t X_t' 
 + \sum_{l=1}^{q} w_l \sum_{t=l+1}^{T} \hat{u}t \hat{u}{t-l} 

@@ -354,7 +354,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">Modelo OLS</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">Estimador HAC</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Estimador HAC</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">Parámetros</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a></li>
 </ul>
@@ -472,21 +471,17 @@ y_t = X_t \beta + u_t
 </section>
 <section id="estimador-hac">
 <h4>Estimador HAC<a class="headerlink" href="#estimador-hac" title="Link to this heading">#</a></h4>
-</section>
-<section id="id1">
-<h4>Estimador HAC<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <div class="math notranslate nohighlight">
 \[
 \widehat{V}_{HAC} = (X'X)^{-1} \, \widehat{S} \, (X'X)^{-1}
 \]</div>
-<p>donde:
-$$
-\widehat{S} = \sum_{t=1}^{T} \hat{u}_t^2 X_t X_t’</p>
-<ul class="simple">
-<li><p>\sum_{l=1}^{q} w_l \sum_{t=l+1}^{T} \hat{u}t \hat{u}{t-l}
-\big( X_t X_{t-l}’ + X_{t-l} X_t’ \big)
-$$</p></li>
-</ul>
+<p>donde:</p>
+<div class="math notranslate nohighlight">
+\[
+\widehat{S} = \sum_{t=1}^{T} \hat{u}_t^2 X_t X_t' 
++ \sum_{l=1}^{q} w_l \sum_{t=l+1}^{T} \hat{u}t \hat{u}{t-l} 
+\big( X_t X_{t-l}' + X_{t-l} X_t' \big)
+\]</div>
 </section>
 <section id="parametros">
 <h4>Parámetros<a class="headerlink" href="#parametros" title="Link to this heading">#</a></h4>
@@ -545,7 +540,7 @@ Dep. Variable:                    cnt   R-squared:                       0.818
 Model:                            OLS   Adj. R-squared:                  0.814
 Method:                 Least Squares   F-statistic:                     207.0
 Date:                Sat, 29 Nov 2025   Prob (F-statistic):          1.25e-170
-Time:                        05:18:28   Log-Likelihood:                -4055.4
+Time:                        05:21:15   Log-Likelihood:                -4055.4
 No. Observations:                 511   AIC:                             8133.
 Df Residuals:                     500   BIC:                             8179.
 Df Model:                          10                                         
@@ -698,7 +693,7 @@ Norm:                          HuberT
 Scale Est.:                       mad                                         
 Cov Type:                          H1                                         
 Date:                Sat, 29 Nov 2025                                         
-Time:                        05:18:28                                         
+Time:                        05:21:15                                         
 No. Iterations:                     9                                         
 ================================================================================
                    coef    std err          z      P&gt;|z|      [0.025      0.975]
@@ -727,7 +722,7 @@ Norm:                   TukeyBiweight
 Scale Est.:                       mad                                         
 Cov Type:                          H1                                         
 Date:                Sat, 29 Nov 2025                                         
-Time:                        05:18:28                                         
+Time:                        05:21:15                                         
 No. Iterations:                    12                                         
 ================================================================================
                    coef    std err          z      P&gt;|z|      [0.025      0.975]
@@ -1481,7 +1476,6 @@ holiday_1
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">Modelo OLS</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">Estimador HAC</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Estimador HAC</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">Parámetros</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a></li>
 </ul>
