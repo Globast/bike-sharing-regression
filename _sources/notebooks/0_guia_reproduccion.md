@@ -67,3 +67,8 @@ Puede ejecutar los notebooks de dos maneras principales:
 ```
 
 En ambos casos, asegúrese de que el kernel de Python apunta al mismo entorno virtual en el que instaló las dependencias.
+
+Para publicación utilice: 
+
+    jupyter-book build .
+    ghp-import -n -p -f _build/html   

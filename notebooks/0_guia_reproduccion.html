@@ -424,6 +424,11 @@ title: “10. Referencias”</p></li>
 <li><p>Construyendo el libro estático con Jupyter Book:</p></li>
 </ol>
 <p>En ambos casos, asegúrese de que el kernel de Python apunta al mismo entorno virtual en el que instaló las dependencias.</p>
+<p>Para publicación utilice:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>jupyter-book build .
+ghp-import -n -p -f _build/html   
+</pre></div>
+</div>
 </section>
 </section>
 
