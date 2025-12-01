@@ -58,7 +58,7 @@ Desarrollar y validar un modelo de regresión para la predicción de la demanda 
 
 ¿Cómo pueden utilizarse las predicciones del modelo y la interpretación de sus parámetros para orientar decisiones de política pública en movilidad sostenible, particularmente en la reducción de emisiones asociadas al transporte y en la mejora de la eficiencia energética del sistema de movilidad bogotano?
 
-## 1.5. Justificación técnic
+## 1.5. Justificación
 Técnicamente, el estudio se justifica porque permite desarrollar y evaluar modelos cuantitativos de predicción de demanda en un contexto real de ciudad lainoamericana, con datos horarios y temporales que presentan autocorrelación, estacionalidad y posibles valores atípicos. El uso de diferentes especificaciones de regresión (clásicas, penalizadas y robustas) y de esquemas de validación fuera de muestra aporta evidencia sobre qué enfoques son más adecuados para datos de movilidad con estructura temporal. 
 Socialmente, entender qué condiciones fomentan o inhiben el uso de la bicicleta permite diseñar políticas e infraestructuras que reduzcan barreras de acceso  y promuevan una movilidad más equitativa. Un modelo robusto de demanda ayuda a focalizar intervenciones donde más beneficien a grupos vulnerables, a mejorar la confiabilidad del sistema de bicicletas compartidas y, en consecuencia, a consolidar la bicicleta como opción real de movilidad cotidiana.
 
