@@ -351,6 +351,12 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retos">1.1.2 Retos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-politicas-publicas-de-movilidad-sostenible">1.1.3. Evaluación de políticas públicas de movilidad sostenible</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valor-como-sensor-urbano">1.2. Valor como sensor Urbano</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">1.3. Objetivos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-general">1.3.1. Objetivo general</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-especificos">1.3.2. Objetivos específicos</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -389,6 +395,24 @@ document.write(`
 </ul>
 <p>Modelos de demanda calibrados con datos locales de Bogotá permiten simular estos escenarios y cuantificar beneficios ambientales (reducción de emisiones y ruido), de salud (mayor actividad física) y de tiempo de viaje. Los resultados pueden compararse con la evidencia internacional, que muestra que aumentar el uso de modos activos tiene un efecto significativo en la reducción de emisiones y costes asociados al cambio climático <a class="reference internal" href="10_referencias.html"><span class="std std-doc">&#64;brand2021_active_travel; &#64;mason2015_high_shift_cycling</span></a>.</p>
 <p>Contextualizar el estudio de predicción de demanda de bicicletas en Bogotá implica reconocer que, más allá de su valor académico, los modelos desarrollados pueden alimentar decisiones de planeación estratégica, diseño de infraestructura, operación de sistemas de micromovilidad y evaluación de políticas públicas. Dada la escala actual de la red ciclable y la ambición de la ciudad en materia de acción climática, contar con herramientas cuantitativas robustas para anticipar la demanda de bicicletas es un componente imprescindible de la gestión de la movilidad sostenible bogotana.</p>
+</section>
+<section id="valor-como-sensor-urbano">
+<h2>1.2. Valor como sensor Urbano<a class="headerlink" href="#valor-como-sensor-urbano" title="Link to this heading">#</a></h2>
+<p>En el proyecto de regresión para bike sharing, el análisis exploratorio muestra  que la demanda de bicicletas responde de forma sistemática a patrones de clima, estacionalidad y calendario permitiendo entender en qué contextos las personas están dispuestas a sustituir el automóvil por la bicicleta
+La ingeniería de variables incoincorpora  transformaciones horarias y estacionales, así como dummies de clima y tipo de día, con el fin de capturar con precisión las condiciones bajo las cuales se generan más viajes en bicicleta. Sobre esta base, el modelo lineal estimado por MCO cuantifica el efecto marginal de temperatura, humedad, velocidad del viento, estaciones y festivos sobre el número de préstamos, proporcionando una lectura económica y urbana de los determinantes de la demanda ciclista. En conjunto, este andamiaje de datos y modelos ofrece valor como sensor urbano al dar a las autoridades herramientas concretas para formular políticas de movilidad que reduzcan emisiones (al favorecer el trasvase modal hacia la bicicleta), mejoren la eficiencia energética del sistema de transporte y permitan focalizar inversiones e intervenciones (infraestructura ciclista, integración con transporte público, gestión de la oferta de bicicletas) allí donde el potencial de mitigación climática y ahorro energético es mayor.</p>
+</section>
+<section id="objetivos">
+<h2>1.3. Objetivos<a class="headerlink" href="#objetivos" title="Link to this heading">#</a></h2>
+<section id="objetivo-general">
+<h3>1.3.1. Objetivo general<a class="headerlink" href="#objetivo-general" title="Link to this heading">#</a></h3>
+<p>Desarrollar y validar un modelo de regresión para la predicción de la demanda de bicicletas compartidas en Bogotá, a partir de variables climáticas, temporales y de calendario, que sea interpretable para los tomadores de decisión y sirva como insumo para diseñar políticas de movilidad sostenible orientadas a la reducción de emisiones y a la mejora de la eficiencia energética del sistema de transporte.</p>
+</section>
+<section id="objetivos-especificos">
+<h3>1.3.2. Objetivos específicos<a class="headerlink" href="#objetivos-especificos" title="Link to this heading">#</a></h3>
+<p>Construir y depurar una base de datos integrada que combine información de uso del sistema de bicicletas compartidas con variables meteorológicas, temporales y de calendario relevantes para la ciudad de Bogotá, asegurando su calidad para el análisis estadístico.</p>
+<p>Formular, estimar y seleccionar modelos de regresión para la predicción de la demanda de bicicletas, priorizando especificaciones que sean estadísticamente sólidas y al mismo tiempo interpretables para los tomadores de decisión, mediante el análisis detallado de coeficientes, efectos marginales y visualizaciones explicativas.</p>
+<p>Validar rigurosamente el desempeño y la robustez del modelo seleccionado mediante técnicas de validación fuera de muestra, métodos robustos para datos temporales y ejercicios de simulación, cuantificando la incertidumbre de las predicciones y verificando la estabilidad de los resultados bajo diferentes configuraciones de datos.</p>
+</section>
 </section>
 </section>
 
@@ -462,6 +486,12 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retos">1.1.2 Retos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-politicas-publicas-de-movilidad-sostenible">1.1.3. Evaluación de políticas públicas de movilidad sostenible</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valor-como-sensor-urbano">1.2. Valor como sensor Urbano</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">1.3. Objetivos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-general">1.3.1. Objetivo general</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-especificos">1.3.2. Objetivos específicos</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
