@@ -15,7 +15,7 @@ La evidencia empírica en ciudades europeas muestra que sustituir desplazamiento
 
 Bogotá se ha posicionado históricamente como “capital de la bicicleta” en América Latina gracias a políticas pioneras como la Ciclovía dominical, los días sin carro y sin moto, y la expansión continua de su red de ciclorrutas. La ciudad supera los 630 km de infraestructura ciclable segregada, una de las redes más extensas de la región [@alcaldia2023_ciclorrutas_bogota; @tmc2022_cycling_infrastructure_bogota](10_referencias.md).
 
-## 1.1.2 Retos
+### 1.1.2 Retos
 
 Desde 2022, Bogotá cuenta con un sistema público de bicicletas compartidas en concesión con un operador privado. En pocos años el sistema superó los tres millones de viajes, mostrando que existe una demanda real por este tipo de servicio [@larepublica2024_tembici_bogota](10_referencias.md). Sin embargo, distintos análisis periodísticos y técnicos han señalado retos importantes: concentración espacial en áreas de renta media y alta, dificultades financieras del operador y baja participación relativa del sistema en el total de viajes urbanos [@eltiempo2022_retos_bicicletas_compartidas; @elpais2025_modelo_bicis_bogota](10_referencias.md).
 
@@ -23,7 +23,7 @@ Estos problemas muestran la necesidad de alinear mejor la oferta con la demanda 
 
 La literatura internacional sobre sistemas de bicicletas compartidas enfatiza que la demanda está fuertemente condicionada por factores meteorológicos, estacionales, de entorno construido, características socioeconómicas y condiciones de seguridad vial [@eren2020_review_bikesharing; @wang2021_spatial_regression_bikesharing](10_referencias.md). En consecuencia, disponer de modelos cuantitativos que capten la relación entre estas variables y el número de viajes en bicicleta resulta esencial para rediseñar y hacer sostenible el sistema bogotano.
 
-## 1.1.3. Evaluación de políticas públicas de movilidad sostenible
+### 1.1.3. Evaluación de políticas públicas de movilidad sostenible
 
 La capacidad de predecir la demanda de bicicletas también es fundamental para evaluar ex ante y ex post distintas políticas públicas de movilidad sostenible, tales como:
 
