@@ -44,8 +44,22 @@ La ingeniería de variables incoincorpora  transformaciones horarias y estaciona
 Desarrollar y validar un modelo de regresión para la predicción de la demanda de bicicletas compartidas en Bogotá, a partir de variables climáticas, temporales y de calendario, que sea interpretable para los tomadores de decisión y sirva como insumo para diseñar políticas de movilidad sostenible orientadas a la reducción de emisiones y a la mejora de la eficiencia energética del sistema de transporte.
 
 ### 1.3.2. Objetivos específicos
-Construir y depurar una base de datos integrada que combine información de uso del sistema de bicicletas compartidas con variables meteorológicas, temporales y de calendario relevantes para la ciudad de Bogotá, asegurando su calidad para el análisis estadístico.
+1. Construir y depurar una base de datos integrada que combine información de uso del sistema de bicicletas compartidas con variables meteorológicas, temporales y de calendario relevantes para la ciudad de Bogotá, asegurando su calidad para el análisis estadístico.
 
-Formular, estimar y seleccionar modelos de regresión para la predicción de la demanda de bicicletas, priorizando especificaciones que sean estadísticamente sólidas y al mismo tiempo interpretables para los tomadores de decisión, mediante el análisis detallado de coeficientes, efectos marginales y visualizaciones explicativas.
+2. Formular, estimar y seleccionar modelos de regresión para la predicción de la demanda de bicicletas, priorizando especificaciones que sean estadísticamente sólidas y al mismo tiempo interpretables para los tomadores de decisión, mediante el análisis detallado de coeficientes, efectos marginales y visualizaciones explicativas.
 
-Validar rigurosamente el desempeño y la robustez del modelo seleccionado mediante técnicas de validación fuera de muestra, métodos robustos para datos temporales y ejercicios de simulación, cuantificando la incertidumbre de las predicciones y verificando la estabilidad de los resultados bajo diferentes configuraciones de datos.
+3. Validar rigurosamente el desempeño y la robustez del modelo seleccionado mediante técnicas de validación fuera de muestra, métodos robustos para datos temporales y ejercicios de simulación, cuantificando la incertidumbre de las predicciones y verificando la estabilidad de los resultados bajo diferentes configuraciones de datos.
+
+## 1.4. Preguntas de investigación
+
+¿En qué medida las variables climáticas (temperatura, precipitación, humedad, velocidad del viento) y las variables temporales y de calendario (hora del día, día de la semana, temporada, festivos, eventos especiales) explican la variación en la demanda de bicicletas compartidas en Bogotá?
+
+¿Qué modelo de regresión ofrece el mejor equilibrio entre capacidad predictiva, interpretabilidad de los coeficientes y estabilidad de los resultados al predecir la demanda de bicicletas compartidas en Bogotá?
+
+¿Cómo pueden utilizarse las predicciones del modelo y la interpretación de sus parámetros para orientar decisiones de política pública en movilidad sostenible, particularmente en la reducción de emisiones asociadas al transporte y en la mejora de la eficiencia energética del sistema de movilidad bogotano?
+
+## 1.5. Justificación técnic
+Técnicamente, el estudio se justifica porque permite desarrollar y evaluar modelos cuantitativos de predicción de demanda en un contexto real de ciudad lainoamericana, con datos horarios y temporales que presentan autocorrelación, estacionalidad y posibles valores atípicos. El uso de diferentes especificaciones de regresión (clásicas, penalizadas y robustas) y de esquemas de validación fuera de muestra aporta evidencia sobre qué enfoques son más adecuados para datos de movilidad con estructura temporal. 
+Socialmente, entender qué condiciones fomentan o inhiben el uso de la bicicleta permite diseñar políticas e infraestructuras que reduzcan barreras de acceso  y promuevan una movilidad más equitativa. Un modelo robusto de demanda ayuda a focalizar intervenciones donde más beneficien a grupos vulnerables, a mejorar la confiabilidad del sistema de bicicletas compartidas y, en consecuencia, a consolidar la bicicleta como opción real de movilidad cotidiana.
+
+Desde el punto de vista ambiental, promover el uso de la bicicleta y de sistemas de micromovilidad implica la posibilidad de sustituir viajes en vehículo motorizado por un modo de muy baja huella de carbono. Para que esa sustitución sea efectiva, es necesario planear de forma estratégica la oferta de bicicletas, la infraestructura ciclable y la integración con el transporte público. El estudio aporta un instrumento para estimar cuánta demanda puede generarse bajo distintas condiciones y escenarios ayudando a cuantificar el potencial de reducción de emisiones y de mejora en la eficiencia energética del sistema de movilidad. De este modo, el modelo no solo describe el comportamiento actual, sino que se convierte en base técnica para diseñar políticas de movilidad sostenible coherentes con las metas climáticas y de calidad del aire de la ciudad.
