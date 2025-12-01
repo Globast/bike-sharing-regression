@@ -1,20 +1,27 @@
 # 0.1 Guía de reproducción
 
 ## 1. Requisitos de software
+Instalación de dependencias desde requirements.txt
+Ejecutar en la raíz del repositorio:
 
-Se recomienda crear un entorno virtual específico (por ejemplo con `venv` o `conda`) y luego instalar las dependencias listadas en `requirements.txt`.
-
-```{code-cell} python
-# Crear un entorno virtual con venv (ejecutar en una terminal de sistema)
-# python -m venv .venv
-# source .venv/bin/activate  # En Windows: .venv\Scripts\activate
-
-# Instalación de dependencias desde requirements.txt
-# Ejecutar en la raíz del repositorio:
-# pip install -r requirements.txt
-```
+pip install -r requirements.txt
 
 Las versiones concretas incluidas en `requirements.txt` buscan maximizar la reproducibilidad, aunque es posible que versiones futuras también funcionen.
+
+jupyter-book==1.0.2
+myst-nb>=1.1.0
+jupyterlab>=4.2
+pandas>=2.0
+numpy>=1.26
+matplotlib>=3.8
+seaborn>=0.13
+scikit-learn>=1.4
+statsmodels>=0.14
+scipy>=1.11
+kaggle>=1.6.17
+ghp-import>=2.1.0
+
+
 
 ## 2. Descarga y organización de los datos
 
