@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>0.2 Demostraciones solicitadas &#8212; Bike Sharing Regression</title>
+    <title>0 Demostraciones Solicitadas. &#8212; Bike Sharing Regression</title>
   
   
   
@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"tags": "ams", "useLabelIds": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/0_demostraciones';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -322,7 +324,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -333,11 +337,44 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>0.2 Demostraciones solicitadas</h1>
+    <h1>0 Demostraciones Solicitadas.</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-lineal-multiple">Modelo de regresión lineal múltiple</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grados-de-libertad-de-ss-res">0.1. Grados de libertad de <span class="math notranslate nohighlight">\(SS_{Res}\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea-principal"><strong>Idea Principal</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desarrollemos">Desarrollemos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bajo-normalidad">Bajo normalidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concluimos">Concluimos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ms-res-como-estimador-insesgado-de-sigma-2">0.2. <span class="math notranslate nohighlight">\(MS_{Res}\)</span> como estimador insesgado de <span class="math notranslate nohighlight">\(\sigma^2\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Desarrollemos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Concluimos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valor-esperado-del-cuadrado-medio-de-regresion">0.3. Valor esperado del cuadrado medio de regresión</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Idea principal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Desarrollemos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Concluimos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-no-central-de-f-0">0.4. Distribución no central de <span class="math notranslate nohighlight">\(F_0\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#planteamiento-y-notacion">Planteamiento y notación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-de-ss-reg-y-del-parametro-de-no-centralidad">Distribución de <span class="math notranslate nohighlight">\(SS_{Reg}\)</span> y del parámetro de no centralidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-de-ss-res-e-independencia">Distribución de <span class="math notranslate nohighlight">\(SS_{Res}\)</span> e independencia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-distribucion-no-central-de-f-0">Conclusión: distribución no central de <span class="math notranslate nohighlight">\(F_0\)</span></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -348,7 +385,340 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="demostraciones-solicitadas">
-<h1>0.2 Demostraciones solicitadas<a class="headerlink" href="#demostraciones-solicitadas" title="Link to this heading">#</a></h1>
+<h1>0 Demostraciones Solicitadas.<a class="headerlink" href="#demostraciones-solicitadas" title="Link to this heading">#</a></h1>
+<section id="modelo-de-regresion-lineal-multiple">
+<h2>Modelo de regresión lineal múltiple<a class="headerlink" href="#modelo-de-regresion-lineal-multiple" title="Link to this heading">#</a></h2>
+<p>Consideremos el modelo:</p>
+<div class="math notranslate nohighlight">
+\[
+y = X\beta + \epsilon
+\]</div>
+<p>donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y \)</span> es un vector <span class="math notranslate nohighlight">\(n \times 1 \)</span> de observaciones</p></li>
+<li><p><span class="math notranslate nohighlight">\(X \)</span> es una matriz <span class="math notranslate nohighlight">\(n \times p \)</span> de rango completo (por lo tanto, <span class="math notranslate nohighlight">\(X^\top X \)</span> es invertible)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta \)</span> es un vector <span class="math notranslate nohighlight">\(p \times 1 \)</span> de parámetros desconocidos</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon \)</span> es un vector <span class="math notranslate nohighlight">\(n \times 1 \)</span> de errores con <span class="math notranslate nohighlight">\(\mathbb{E}(\epsilon) = 0 \)</span> y <span class="math notranslate nohighlight">\(\text{Var}(\epsilon) = \sigma^2 I_n \)</span></p></li>
+</ul>
+<p>El estimador de mínimos cuadrados de <span class="math notranslate nohighlight">\(\beta \)</span> es:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\beta} = (X^\top X)^{-1} X^\top y
+\]</div>
+<p>El vector de residuos se define como:</p>
+<div class="math notranslate nohighlight">
+\[
+e = y - X\hat{\beta}
+\]</div>
+<p>Definimos:</p>
+<ul class="simple">
+<li><p><strong>Suma de cuadrados de los residuos</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+SS_{Res} = e^\top e = (y - X\hat{\beta})^\top (y - X\hat{\beta})
+\]</div>
+<ul class="simple">
+<li><p><strong>Cuadrado medio de los residuos</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+MS_{Res} = \frac{SS_{Res}}{n - p}
+\]</div>
+<p>En el contexto del modelo de regresión lineal múltiple <span class="math notranslate nohighlight">\(Y = X\beta + \epsilon \)</span>, donde <span class="math notranslate nohighlight">\(\epsilon \sim N(0, \sigma^2 I) \)</span></p>
+</section>
+<section id="grados-de-libertad-de-ss-res">
+<h2>0.1. Grados de libertad de <span class="math notranslate nohighlight">\(SS_{Res}\)</span><a class="headerlink" href="#grados-de-libertad-de-ss-res" title="Link to this heading">#</a></h2>
+<section id="idea-principal">
+<h3><strong>Idea Principal</strong><a class="headerlink" href="#idea-principal" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Las predicciones <span class="math notranslate nohighlight">\(X\hat{\beta}\)</span> viven en el subespacio columna de <span class="math notranslate nohighlight">\(X\)</span>, de dimensión <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Los residuos <span class="math notranslate nohighlight">\(e = y - X\hat{\beta}\)</span> son la proyección ortogonal de <span class="math notranslate nohighlight">\(y\)</span> sobre el complemento de ese subespacio.</p></li>
+<li><p>Por tanto, <span class="math notranslate nohighlight">\(e\)</span> vive en un espacio de dimensión <span class="math notranslate nohighlight">\(n - p\)</span>, lo que determina los grados de libertad de <span class="math notranslate nohighlight">\(SS_{Res} = e^\top e\)</span>.</p></li>
+</ul>
+</section>
+<section id="desarrollemos">
+<h3>Desarrollemos<a class="headerlink" href="#desarrollemos" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Definimos la matriz de proyección:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H = X(X^\top X)^{-1}X^\top
+\]</div>
+<ul class="simple">
+<li><p>Entonces:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = Hy, \quad e = y - \hat{y} = (I - H)y
+\]</div>
+<ul class="simple">
+<li><p>Sea <span class="math notranslate nohighlight">\(M = I - H\)</span>, entonces:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+SS_{Res} = e^\top e = y^\top M^\top M y = y^\top M y
+\]</div>
+<ul class="simple">
+<li><p>Propiedades de <span class="math notranslate nohighlight">\(M\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+M^\top = M, \quad M^2 = M, \quad \text{rango}(M) = n - p
+\]</div>
+</section>
+<section id="bajo-normalidad">
+<h3>Bajo normalidad<a class="headerlink" href="#bajo-normalidad" title="Link to this heading">#</a></h3>
+<p>Si <span class="math notranslate nohighlight">\( \epsilon \sim N(0, \sigma^2 I_n) \)</span>, entonces:</p>
+<div class="math notranslate nohighlight">
+\[
+y = X\beta + \epsilon \quad \Rightarrow \quad e = My = M\epsilon
+\]</div>
+<p>Como <span class="math notranslate nohighlight">\(M\)</span> es un proyector de rango <span class="math notranslate nohighlight">\(n - p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{SS_{Res}}{\sigma^2} = \frac{\epsilon^\top M \epsilon}{\sigma^2} \sim \chi^2_{n - p}
+\]</div>
+</section>
+<section id="concluimos">
+<h3>Concluimos<a class="headerlink" href="#concluimos" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(SS_{Res}\)</span> tiene <span class="math notranslate nohighlight">\(n - p\)</span> grados de libertad porque los residuos viven en un subespacio de dimensión <span class="math notranslate nohighlight">\(n - p\)</span>.</p></li>
+<li><p>Bajo normalidad, esta cantidad sigue una distribución <span class="math notranslate nohighlight">\(\chi^2_{n - p}\)</span>, confirmando los grados de libertad.</p></li>
+</ul>
+</section>
+</section>
+<section id="ms-res-como-estimador-insesgado-de-sigma-2">
+<h2>0.2. <span class="math notranslate nohighlight">\(MS_{Res}\)</span> como estimador insesgado de <span class="math notranslate nohighlight">\(\sigma^2\)</span><a class="headerlink" href="#ms-res-como-estimador-insesgado-de-sigma-2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Objetivo:</strong> Mostrar que <span class="math notranslate nohighlight">\(MS_{Res} = \dfrac{SS_{Res}}{n - p}\)</span> estima en promedio el verdadero <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
+</ul>
+<section id="id1">
+<h3>Desarrollemos<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Matriz de proyección y residuos:</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H = X(X^\top X)^{-1}X^\top, \quad M = I - H, \quad e = My.
+\]</div>
+<p>Dado <span class="math notranslate nohighlight">\(y = X\beta + \epsilon\)</span> y <span class="math notranslate nohighlight">\(MX\beta = 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+e = M\epsilon.
+\]</div>
+<ul class="simple">
+<li><p><strong>Suma de cuadrados de residuos como forma cuadrática:</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+SS_{Res} = e^\top e = \epsilon^\top M \epsilon.
+\]</div>
+<ul class="simple">
+<li><p><strong>Esperanza de una forma cuadrática con ruido homocedástico:</strong></p></li>
+</ul>
+<p>Si <span class="math notranslate nohighlight">\(\mathbb{E}(\epsilon) = 0\)</span> y <span class="math notranslate nohighlight">\(\operatorname{Var}(\epsilon) = \sigma^2 I_n\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(SS_{Res}) = \mathbb{E}(\epsilon^\top M \epsilon)
+= \operatorname{tr}\!\left(M\,\mathbb{E}(\epsilon\epsilon^\top)\right)
+= \operatorname{tr}(M\,\sigma^2 I_n)
+= \sigma^2 \operatorname{tr}(M).
+\]</div>
+<p>Como <span class="math notranslate nohighlight">\(M\)</span> es simétrica, idempotente y <span class="math notranslate nohighlight">\(\operatorname{rank}(M) = n - p\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\operatorname{tr}(M) = n - p \quad \Rightarrow \quad \mathbb{E}(SS_{Res}) = (n - p)\sigma^2.
+\]</div>
+<ul class="simple">
+<li><p><strong>Insesgadez de <span class="math notranslate nohighlight">\(MS_{Res}\)</span>:</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+MS_{Res} = \frac{SS_{Res}}{n - p}
+\quad \Rightarrow \quad
+\mathbb{E}(MS_{Res}) = \frac{\mathbb{E}(SS_{Res})}{n - p} = \sigma^2.
+\]</div>
+</section>
+<section id="id2">
+<h3>Concluimos<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Resultado:</strong> <span class="math notranslate nohighlight">\(MS_{Res}\)</span> es un estimador insesgado de <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
+<li><p><strong>Razón:</strong> La esperanza de <span class="math notranslate nohighlight">\(SS_{Res}\)</span> es <span class="math notranslate nohighlight">\((n - p)\sigma^2\)</span> porque proyecta <span class="math notranslate nohighlight">\(\epsilon\)</span> sobre un subespacio de dimensión <span class="math notranslate nohighlight">\(n - p\)</span>; al dividir por <span class="math notranslate nohighlight">\(n - p\)</span>, se obtiene exactamente <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="valor-esperado-del-cuadrado-medio-de-regresion">
+<h2>0.3. Valor esperado del cuadrado medio de regresión<a class="headerlink" href="#valor-esperado-del-cuadrado-medio-de-regresion" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>Idea principal<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>El cuadrado medio de regresión <span class="math notranslate nohighlight">\(MSR\)</span> mide cuánta variabilidad explica el modelo.</p></li>
+<li><p>Su valor esperado tiene dos componentes:</p>
+<ul>
+<li><p>La <strong>variabilidad aleatoria</strong> del error: <span class="math notranslate nohighlight">\(\sigma^2\)</span></p></li>
+<li><p>La <strong>variabilidad explicada</strong> por el modelo: depende de <span class="math notranslate nohighlight">\(\beta^*\)</span> y de la estructura de <span class="math notranslate nohighlight">\(X_c\)</span></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h3>Desarrollemos<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Sea <span class="math notranslate nohighlight">\(X_c\)</span> la matriz de diseño centrada (sin la constante), de dimensión <span class="math notranslate nohighlight">\(n \times k\)</span>, y <span class="math notranslate nohighlight">\(\beta^*\)</span> el vector de coeficientes asociado.</p></li>
+<li><p>El modelo es:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+y = X_c \beta^* + \epsilon, \quad \epsilon \sim N(0, \sigma^2 I)
+\]</div>
+<ul class="simple">
+<li><p>La suma de cuadrados de regresión es:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+SS_{Reg} = \hat{y}^\top \hat{y} - n\bar{y}^2
+\]</div>
+<p>Pero en modelos centrados (sin intercepto), se usa:</p>
+<div class="math notranslate nohighlight">
+\[
+SS_{Reg} = \hat{y}^\top \hat{y} = y^\top H y
+\quad \text{donde} \quad H = X_c (X_c^\top X_c)^{-1} X_c^\top
+\]</div>
+<ul class="simple">
+<li><p>Entonces:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+MSR = \frac{SS_{Reg}}{k} = \frac{y^\top H y}{k}
+\]</div>
+<ul class="simple">
+<li><p>Como <span class="math notranslate nohighlight">\(y = X_c \beta^* + \epsilon\)</span>, sustituimos:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+y^\top H y = (X_c \beta^* + \epsilon)^\top H (X_c \beta^* + \epsilon)
+\]</div>
+<p>Expandimos:</p>
+<div class="math notranslate nohighlight">
+\[
+= \beta^{*\top} X_c^\top H X_c \beta^* 
++ 2 \beta^{*\top} X_c^\top H \epsilon 
++ \epsilon^\top H \epsilon
+\]</div>
+<p>Usamos propiedades de <span class="math notranslate nohighlight">\(H\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H X_c = X_c\)</span>, porque <span class="math notranslate nohighlight">\(H\)</span> proyecta sobre <span class="math notranslate nohighlight">\(\mathcal{C}(X_c)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(H\)</span> es simétrica e idempotente</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}(\epsilon) = 0\)</span>, <span class="math notranslate nohighlight">\(\mathbb{E}(\epsilon \epsilon^\top) = \sigma^2 I\)</span></p></li>
+</ul>
+<p>Entonces:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}(2 \beta^{*\top} X_c^\top H \epsilon) = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}(\epsilon^\top H \epsilon) = \sigma^2 \operatorname{tr}(H) = \sigma^2 k\)</span></p></li>
+</ul>
+<p>Y:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(y^\top H y) = \beta^{*\top} X_c^\top X_c \beta^* + \sigma^2 k
+\]</div>
+<p>Por tanto:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(MSR) = \frac{1}{k} \mathbb{E}(y^\top H y) 
+= \frac{1}{k} \left( \beta^{*\top} X_c^\top X_c \beta^* + \sigma^2 k \right)
+= \sigma^2 + \frac{1}{k} \beta^{*\top} X_c^\top X_c \beta^*
+\]</div>
+</section>
+<section id="id5">
+<h3>Concluimos<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>El cuadrado medio de regresión <span class="math notranslate nohighlight">\(MSR\)</span> tiene como valor esperado la suma de:</p>
+<ul class="simple">
+<li><p>La varianza del error <span class="math notranslate nohighlight">\(\sigma^2\)</span></p></li>
+<li><p>Una componente que refleja la magnitud del efecto de los regresores: <span class="math notranslate nohighlight">\(\frac{1}{k} \beta^{*\top} X_c^\top X_c \beta^*\)</span></p></li>
+</ul>
+</section>
+</section>
+<section id="distribucion-no-central-de-f-0">
+<h2>0.4. Distribución no central de <span class="math notranslate nohighlight">\(F_0\)</span><a class="headerlink" href="#distribucion-no-central-de-f-0" title="Link to this heading">#</a></h2>
+<section id="planteamiento-y-notacion">
+<h3>Planteamiento y notación<a class="headerlink" href="#planteamiento-y-notacion" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Modelo con intercepto:</strong> <span class="math notranslate nohighlight">\(y = \alpha \mathbf{1} + X_c \beta^* + \epsilon\)</span>, con <span class="math notranslate nohighlight">\(\epsilon \sim N(0, \sigma^2 I_n)\)</span>, y <span class="math notranslate nohighlight">\(X_c\)</span> centrada de dimensión <span class="math notranslate nohighlight">\(n \times k\)</span>.</p></li>
+<li><p><strong>Proyectores:</strong></p>
+<ul>
+<li><p><strong>Modelo completo:</strong> <span class="math notranslate nohighlight">\(H = X(X^\top X)^{-1}X^\top\)</span>, donde <span class="math notranslate nohighlight">\(X = [\mathbf{1}, X_c]\)</span> tiene rango <span class="math notranslate nohighlight">\(k+1\)</span>.</p></li>
+<li><p><strong>Modelo nulo (solo intercepto):</strong> <span class="math notranslate nohighlight">\(H_0 = \dfrac{1}{n}\mathbf{1}\mathbf{1}^\top\)</span>.</p></li>
+<li><p><strong>Residuos:</strong> <span class="math notranslate nohighlight">\(M = I - H\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Sumas de cuadrados:</strong></p>
+<ul>
+<li><p><strong>Regresión:</strong> <span class="math notranslate nohighlight">\(SS_{Reg} = y^\top (H - H_0) y\)</span>, de rango <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><strong>Residuos:</strong> <span class="math notranslate nohighlight">\(SS_{Res} = y^\top M y\)</span>, de rango <span class="math notranslate nohighlight">\(n - k - 1\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Cuadrados medios:</strong> <span class="math notranslate nohighlight">\(MSR = SS_{Reg}/k\)</span>, <span class="math notranslate nohighlight">\(MS_{Res} = SS_{Res}/(n - k - 1)\)</span>.</p></li>
+</ul>
+</section>
+<section id="distribucion-de-ss-reg-y-del-parametro-de-no-centralidad">
+<h3>Distribución de <span class="math notranslate nohighlight">\(SS_{Reg}\)</span> y del parámetro de no centralidad<a class="headerlink" href="#distribucion-de-ss-reg-y-del-parametro-de-no-centralidad" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Descomposición de <span class="math notranslate nohighlight">\(y\)</span>:</strong> <span class="math notranslate nohighlight">\(y = \alpha \mathbf{1} + X_c \beta^* + \epsilon\)</span>.</p></li>
+<li><p><strong>Anulación del intercepto en <span class="math notranslate nohighlight">\(SS_{Reg}\)</span>:</strong> <span class="math notranslate nohighlight">\((H - H_0)\mathbf{1} = 0\)</span>, de modo que
+$<span class="math notranslate nohighlight">\(
+SS_{Reg} = y^\top (H - H_0) y
+= (X_c \beta^* + \epsilon)^\top (H - H_0) (X_c \beta^* + \epsilon).
+\)</span>$</p></li>
+<li><p><strong>Propiedad clave:</strong> <span class="math notranslate nohighlight">\((H - H_0) X_c = X_c\)</span> y <span class="math notranslate nohighlight">\((H - H_0)\)</span> es simétrica e idempotente con <span class="math notranslate nohighlight">\(\operatorname{rank}(H - H_0) = k\)</span>.</p></li>
+<li><p><strong>Forma cuadrática gaussiana no central:</strong>
+$<span class="math notranslate nohighlight">\(
+\frac{SS_{Reg}}{\sigma^2}
+= \frac{(X_c \beta^* + \epsilon)^\top (H - H_0) (X_c \beta^* + \epsilon)}{\sigma^2}
+\sim \chi^2_k\!\left(\lambda\right),
+\)</span><span class="math notranslate nohighlight">\(
+con
+\)</span><span class="math notranslate nohighlight">\(
+\lambda = \frac{1}{\sigma^2}\beta^{*\top} X_c^\top X_c \beta^*.
+\)</span>$</p></li>
+</ul>
+</section>
+<section id="distribucion-de-ss-res-e-independencia">
+<h3>Distribución de <span class="math notranslate nohighlight">\(SS_{Res}\)</span> e independencia<a class="headerlink" href="#distribucion-de-ss-res-e-independencia" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Residuos:</strong> <span class="math notranslate nohighlight">\(SS_{Res} = y^\top M y = \epsilon^\top M \epsilon\)</span>, pues <span class="math notranslate nohighlight">\(MX = 0\)</span>.</p></li>
+<li><p><strong>Distribución central:</strong>
+$<span class="math notranslate nohighlight">\(
+\frac{SS_{Res}}{\sigma^2} \sim \chi^2_{\,n - k - 1},
+\)</span><span class="math notranslate nohighlight">\(
+ya que \)</span>M<span class="math notranslate nohighlight">\( es simétrica, idempotente y \)</span>\operatorname{rank}(M) = n - k - 1$.</p></li>
+<li><p><strong>Independencia:</strong> <span class="math notranslate nohighlight">\((H - H_0)M = 0\)</span> (proyectores ortogonales). Para normales, formas cuadráticas con proyectores ortogonales son independientes; por tanto, <span class="math notranslate nohighlight">\(SS_{Reg}\)</span> y <span class="math notranslate nohighlight">\(SS_{Res}\)</span> son independientes.</p></li>
+</ul>
+</section>
+<section id="conclusion-distribucion-no-central-de-f-0">
+<h3>Conclusión: distribución no central de <span class="math notranslate nohighlight">\(F_0\)</span><a class="headerlink" href="#conclusion-distribucion-no-central-de-f-0" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Estadístico:</strong>
+$<span class="math notranslate nohighlight">\(
+F_0 = \frac{MSR}{MS_{Res}}
+= \frac{SS_{Reg}/k}{SS_{Res}/(n - k - 1)}.
+\)</span>$</p></li>
+<li><p><strong>Resultado:</strong>
+$<span class="math notranslate nohighlight">\(
+F_0 \sim F_{\,k,\;n - k - 1}\!\left(\lambda\right),
+\qquad
+\lambda = \frac{1}{\sigma^2}\beta^{*\top} X_c^\top X_c \beta^*.
+\)</span>$</p></li>
+<li><p><strong>Interpretación:</strong></p>
+<ul>
+<li><p>Bajo <span class="math notranslate nohighlight">\(H_0\)</span> (<span class="math notranslate nohighlight">\(\beta^* = 0\)</span>), <span class="math notranslate nohighlight">\(\lambda = 0\)</span> y <span class="math notranslate nohighlight">\(F_0 \sim F_{k,\,n-k-1}\)</span> central.</p></li>
+<li><p>Bajo <span class="math notranslate nohighlight">\(H_1\)</span>, <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> y <span class="math notranslate nohighlight">\(F_0\)</span> sigue una <span class="math notranslate nohighlight">\(F\)</span> no central con el parámetro indicado.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -405,6 +775,46 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-lineal-multiple">Modelo de regresión lineal múltiple</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grados-de-libertad-de-ss-res">0.1. Grados de libertad de <span class="math notranslate nohighlight">\(SS_{Res}\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea-principal"><strong>Idea Principal</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desarrollemos">Desarrollemos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bajo-normalidad">Bajo normalidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concluimos">Concluimos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ms-res-como-estimador-insesgado-de-sigma-2">0.2. <span class="math notranslate nohighlight">\(MS_{Res}\)</span> como estimador insesgado de <span class="math notranslate nohighlight">\(\sigma^2\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Desarrollemos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Concluimos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valor-esperado-del-cuadrado-medio-de-regresion">0.3. Valor esperado del cuadrado medio de regresión</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Idea principal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Desarrollemos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Concluimos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-no-central-de-f-0">0.4. Distribución no central de <span class="math notranslate nohighlight">\(F_0\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#planteamiento-y-notacion">Planteamiento y notación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-de-ss-reg-y-del-parametro-de-no-centralidad">Distribución de <span class="math notranslate nohighlight">\(SS_{Reg}\)</span> y del parámetro de no centralidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-de-ss-res-e-independencia">Distribución de <span class="math notranslate nohighlight">\(SS_{Res}\)</span> e independencia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-distribucion-no-central-de-f-0">Conclusión: distribución no central de <span class="math notranslate nohighlight">\(F_0\)</span></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
