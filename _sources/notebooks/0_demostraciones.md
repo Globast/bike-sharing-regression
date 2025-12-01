@@ -164,14 +164,14 @@ $$
 
 ### 0.2.4. Valor esperado del cuadrado medio de regresión
 
-### Idea principal
+**Idea principal**
 
 - El cuadrado medio de regresión $MSR$ mide cuánta variabilidad explica el modelo.
 - Su valor esperado tiene dos componentes:
   - La **variabilidad aleatoria** del error: $\sigma^2$
   - La **variabilidad explicada** por el modelo: depende de $\beta^*$ y de la estructura de $X_c$
 
-### Desarrollemos
+**Desarrollemos**
 
 - Sea $X_c$ la matriz de diseño centrada (sin la constante), de dimensión $n \times k$, y $\beta^*$ el vector de coeficientes asociado.
 - El modelo es:
@@ -239,13 +239,13 @@ $$
 $$
 
 
-### Concluimos
+**Concluimos**
 
 El cuadrado medio de regresión $MSR$ tiene como valor esperado la suma de:
 - La varianza del error $\sigma^2$
 - Una componente que refleja la magnitud del efecto de los regresores: $\frac{1}{k} \beta^{*\top} X_c^\top X_c \beta^*$
 
-#### 0.2.4.1. Distribución no central de $F_0$
+### 0.2.5. Distribución no central de $F_0$
 
 **Planteamiento y notación**
 
@@ -259,7 +259,7 @@ El cuadrado medio de regresión $MSR$ tiene como valor esperado la suma de:
   - **Residuos:** $SS_{Res} = y^\top M y$, de rango $n - k - 1$.
 - **Cuadrados medios:** $MSR = SS_{Reg}/k$, $MS_{Res} = SS_{Res}/(n - k - 1)$.
 
-#### 0.2.4.2. Distribución de $SS_{Reg}$ y del parámetro de no centralidad
+### 0.2.6. Distribución de $SS_{Reg}$ y del parámetro de no centralidad
 
 - **Descomposición de $y$:** $y = \alpha \mathbf{1} + X_c \beta^* + \epsilon$.
 - **Anulación del intercepto en $SS_{Reg}$:** $(H - H_0)\mathbf{1} = 0$, de modo que
@@ -279,7 +279,7 @@ El cuadrado medio de regresión $MSR$ tiene como valor esperado la suma de:
   \lambda = \frac{1}{\sigma^2}\beta^{*\top} X_c^\top X_c \beta^*.
   $$
 
-#### 0.2.4.3. Distribución de $SS_{Res}$ e independencia
+### 0.2.7. Distribución de $SS_{Res}$ e independencia
 
 - **Residuos:** $SS_{Res} = y^\top M y = \epsilon^\top M \epsilon$, pues $MX = 0$.
 - **Distribución central:**
