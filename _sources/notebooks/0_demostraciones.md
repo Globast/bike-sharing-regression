@@ -6,9 +6,9 @@ kernelspec: {name: python3, display_name: Python 3}
 ---
 
 
-# 0 Demostraciones Solicitadas.
+## 0.2 Demostraciones Solicitadas.
 
-## Modelo de regresión lineal múltiple
+### 0.2.1 Modelo de regresión lineal múltiple
 
 Consideremos el modelo:
 
@@ -52,16 +52,16 @@ $$
 
 En el contexto del modelo de regresión lineal múltiple $Y = X\beta + \epsilon $, donde $\epsilon \sim N(0, \sigma^2 I) $
 
-## 0.1. Grados de libertad de $SS_{Res}$
+### 0.2.2 Grados de libertad de $SS_{Res}$
 
-### **Idea Principal**
+**Idea Principal**
 
 - Las predicciones $X\hat{\beta}$ viven en el subespacio columna de $X$, de dimensión $p$.
 - Los residuos $e = y - X\hat{\beta}$ son la proyección ortogonal de $y$ sobre el complemento de ese subespacio.
 - Por tanto, $e$ vive en un espacio de dimensión $n - p$, lo que determina los grados de libertad de $SS_{Res} = e^\top e$.
 
 
-### Desarrollemos
+**Desarrollemos**
 
 - Definimos la matriz de proyección:
 
@@ -87,7 +87,7 @@ $$
 M^\top = M, \quad M^2 = M, \quad \text{rango}(M) = n - p
 $$
 
-### Bajo normalidad
+**Bajo normalidad**
 
 Si $ \epsilon \sim N(0, \sigma^2 I_n) $, entonces:
 
@@ -102,17 +102,17 @@ $$
 $$
 
 
-### Concluimos 
+**Concluimos**
 
 - $SS_{Res}$ tiene $n - p$ grados de libertad porque los residuos viven en un subespacio de dimensión $n - p$.
 - Bajo normalidad, esta cantidad sigue una distribución $\chi^2_{n - p}$, confirmando los grados de libertad.
 
-## 0.2. $MS_{Res}$ como estimador insesgado de $\sigma^2$
+### 0.2.3. $MS_{Res}$ como estimador insesgado de $\sigma^2$
 
 - **Objetivo:** Mostrar que $MS_{Res} = \dfrac{SS_{Res}}{n - p}$ estima en promedio el verdadero $\sigma^2$.
 
 
-### Desarrollemos
+**Desarrollemos**
 
 - **Matriz de proyección y residuos:**
 
@@ -157,12 +157,12 @@ MS_{Res} = \frac{SS_{Res}}{n - p}
 \mathbb{E}(MS_{Res}) = \frac{\mathbb{E}(SS_{Res})}{n - p} = \sigma^2.
 $$
 
-### Concluimos
+**Concluimos**
 
 - **Resultado:** $MS_{Res}$ es un estimador insesgado de $\sigma^2$.
 - **Razón:** La esperanza de $SS_{Res}$ es $(n - p)\sigma^2$ porque proyecta $\epsilon$ sobre un subespacio de dimensión $n - p$; al dividir por $n - p$, se obtiene exactamente $\sigma^2$.
 
-## 0.3. Valor esperado del cuadrado medio de regresión
+### 0.2.4. Valor esperado del cuadrado medio de regresión
 
 ### Idea principal
 
@@ -245,9 +245,9 @@ El cuadrado medio de regresión $MSR$ tiene como valor esperado la suma de:
 - La varianza del error $\sigma^2$
 - Una componente que refleja la magnitud del efecto de los regresores: $\frac{1}{k} \beta^{*\top} X_c^\top X_c \beta^*$
 
-## 0.4. Distribución no central de $F_0$
+#### 0.2.4.1. Distribución no central de $F_0$
 
-### Planteamiento y notación
+**Planteamiento y notación**
 
 - **Modelo con intercepto:** $y = \alpha \mathbf{1} + X_c \beta^* + \epsilon$, con $\epsilon \sim N(0, \sigma^2 I_n)$, y $X_c$ centrada de dimensión $n \times k$.
 - **Proyectores:**
@@ -259,7 +259,7 @@ El cuadrado medio de regresión $MSR$ tiene como valor esperado la suma de:
   - **Residuos:** $SS_{Res} = y^\top M y$, de rango $n - k - 1$.
 - **Cuadrados medios:** $MSR = SS_{Reg}/k$, $MS_{Res} = SS_{Res}/(n - k - 1)$.
 
-### Distribución de $SS_{Reg}$ y del parámetro de no centralidad
+#### 0.2.4.2. Distribución de $SS_{Reg}$ y del parámetro de no centralidad
 
 - **Descomposición de $y$:** $y = \alpha \mathbf{1} + X_c \beta^* + \epsilon$.
 - **Anulación del intercepto en $SS_{Reg}$:** $(H - H_0)\mathbf{1} = 0$, de modo que
@@ -279,7 +279,7 @@ El cuadrado medio de regresión $MSR$ tiene como valor esperado la suma de:
   \lambda = \frac{1}{\sigma^2}\beta^{*\top} X_c^\top X_c \beta^*.
   $$
 
-### Distribución de $SS_{Res}$ e independencia
+#### 0.2.4.3. Distribución de $SS_{Res}$ e independencia
 
 - **Residuos:** $SS_{Res} = y^\top M y = \epsilon^\top M \epsilon$, pues $MX = 0$.
 - **Distribución central:**
@@ -289,7 +289,7 @@ El cuadrado medio de regresión $MSR$ tiene como valor esperado la suma de:
   ya que $M$ es simétrica, idempotente y $\operatorname{rank}(M) = n - k - 1$.
 - **Independencia:** $(H - H_0)M = 0$ (proyectores ortogonales). Para normales, formas cuadráticas con proyectores ortogonales son independientes; por tanto, $SS_{Reg}$ y $SS_{Res}$ son independientes.
 
-### Conclusión: distribución no central de $F_0$
+**Conclusión: distribución no central de $F_0$**
 
 - **Estadístico:**
   $$
