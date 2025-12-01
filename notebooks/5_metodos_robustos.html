@@ -350,24 +350,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">5.1. Importacion de librerias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">5.2. Lectura de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">5.3 Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">5.4 Errores estándar HAC (Newey–West).</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">Modelo OLS</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">Estimador HAC</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">Parámetros</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">5.4 Errores estándar HAC (Newey–West).</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-m-robust-huber-y-tukey">5.5 Estimadores M Robust (Huber y Tukey)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-sobre-un-modelo-ols">Aplicación sobre un modelo OLS</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-m-general">Estimador M general</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-de-huber">Estimador de Huber</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-tukey-bisquare-biweight">Estimador Tukey Bisquare (Biweight)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">5.5.1 Metodo Huber y Tukey</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">5.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-de-la-longitud-de-bloque-ell">Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">5.6 Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">
@@ -459,18 +445,13 @@ tamaño set de prueba: (220, 17)
 </section>
 <section id="errores-estandar-hac-neweywest">
 <h2>5.4 Errores estándar HAC (Newey–West).<a class="headerlink" href="#errores-estandar-hac-neweywest" title="Link to this heading">#</a></h2>
-<section id="metodo-hac-neweywest">
-<h3>Método HAC (Newey–West)<a class="headerlink" href="#metodo-hac-neweywest" title="Link to this heading">#</a></h3>
+<p><strong>Método HAC (Newey–West)</strong></p>
 <p>El estimador de <strong>Errores estándar HAC (Heteroskedasticity and Autocorrelation Consistent)</strong> ajusta la matriz de varianzas y covarianzas de los coeficientes OLS para ser robusta frente a heterocedasticidad y autocorrelación.</p>
-<section id="modelo-ols">
-<h4>Modelo OLS<a class="headerlink" href="#modelo-ols" title="Link to this heading">#</a></h4>
-<div class="math notranslate nohighlight">
-\[
+<p><strong>Modelo OLS</strong>
+$<span class="math notranslate nohighlight">\(
 y_t = X_t \beta + u_t
-\]</div>
-</section>
-<section id="estimador-hac">
-<h4>Estimador HAC<a class="headerlink" href="#estimador-hac" title="Link to this heading">#</a></h4>
+\)</span>$</p>
+<p><strong>Estimador HAC</strong></p>
 <div class="math notranslate nohighlight">
 \[
 \widehat{V}_{HAC} = (X'X)^{-1} \, \widehat{S} \, (X'X)^{-1}
@@ -482,18 +463,14 @@ y_t = X_t \beta + u_t
 + \sum_{l=1}^{q} w_l \sum_{t=l+1}^{T} \hat{u}t \hat{u}{t-l} 
 \big( X_t X_{t-l}' + X_{t-l} X_t' \big)
 \]</div>
-</section>
-<section id="parametros">
-<h4>Parámetros<a class="headerlink" href="#parametros" title="Link to this heading">#</a></h4>
+<p><strong>Parámetros</strong></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\hat{u}_t\)</span>: residuos estimados del modelo OLS</p></li>
 <li><p><span class="math notranslate nohighlight">\(X_t\)</span>: vector de regresores en el tiempo <span class="math notranslate nohighlight">\(t\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(q\)</span>: número de rezagos (<code class="docutils literal notranslate"><span class="pre">maxlags</span></code>) especificado</p></li>
 <li><p><span class="math notranslate nohighlight">\(w_l = 1 - \frac{l}{q+1}\)</span>: pesos de Bartlett que decrecen linealmente con el rezago</p></li>
 </ul>
-</section>
-<section id="interpretacion">
-<h4>Interpretación<a class="headerlink" href="#interpretacion" title="Link to this heading">#</a></h4>
+<p><strong>Interpretación</strong></p>
 <ul class="simple">
 <li><p>El primer término corrige la <strong>heterocedasticidad</strong>.</p></li>
 <li><p>El segundo término corrige la <strong>autocorrelación</strong> hasta el rezago <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
@@ -540,7 +517,7 @@ Dep. Variable:                    cnt   R-squared:                       0.818
 Model:                            OLS   Adj. R-squared:                  0.814
 Method:                 Least Squares   F-statistic:                     207.0
 Date:                Mon, 01 Dec 2025   Prob (F-statistic):          1.25e-170
-Time:                        03:18:08   Log-Likelihood:                -4055.4
+Time:                        03:21:42   Log-Likelihood:                -4055.4
 No. Observations:                 511   AIC:                             8133.
 Df Residuals:                     500   BIC:                             8179.
 Df Model:                          10                                         
@@ -573,12 +550,9 @@ Notes:
 </div>
 </div>
 </section>
-</section>
-</section>
 <section id="estimadores-m-robust-huber-y-tukey">
 <h2>5.5 Estimadores M Robust (Huber y Tukey)<a class="headerlink" href="#estimadores-m-robust-huber-y-tukey" title="Link to this heading">#</a></h2>
-<section id="aplicacion-sobre-un-modelo-ols">
-<h3>Aplicación sobre un modelo OLS<a class="headerlink" href="#aplicacion-sobre-un-modelo-ols" title="Link to this heading">#</a></h3>
+<p><strong>Aplicación sobre un modelo OLS</strong></p>
 <p>Cuando hacemos regresión OLS, los coeficientes se estiman minimizando:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -586,9 +560,7 @@ Notes:
 \]</div>
 <p>Esto hace que OLS sea <strong>muy sensible a valores atípicos</strong>, porque los residuos grandes se elevan al cuadrado.</p>
 <p>Los <strong>estimadores M</strong> reducen la influencia de estos valores usando una función de pérdida <span class="math notranslate nohighlight">\( \rho(\cdot) \)</span> que penaliza menos a los outliers.</p>
-</section>
-<section id="estimador-m-general">
-<h3>Estimador M general<a class="headerlink" href="#estimador-m-general" title="Link to this heading">#</a></h3>
+<p><strong>Estimador M general</strong></p>
 <p>Los estimadores M encuentran los coeficientes resolviendo:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -604,9 +576,7 @@ Notes:
 \[
 \sum_{i=1}^n \psi(r_i)x_i = 0
 \]</div>
-</section>
-<section id="estimador-de-huber">
-<h3>Estimador de Huber<a class="headerlink" href="#estimador-de-huber" title="Link to this heading">#</a></h3>
+<p><strong>Estimador de Huber</strong></p>
 <p>La función de pérdida es:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -626,9 +596,7 @@ c \,\text{sign}(r) &amp; |r| &gt; c
 \end{cases}
 \end{split}\]</div>
 <p>Reduce la influencia de outliers moderados sin descartarlos.</p>
-</section>
-<section id="estimador-tukey-bisquare-biweight">
-<h3>Estimador Tukey Bisquare (Biweight)<a class="headerlink" href="#estimador-tukey-bisquare-biweight" title="Link to this heading">#</a></h3>
+<p><strong>Estimador Tukey Bisquare (Biweight)</strong></p>
 <p>Función de pérdida:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -648,7 +616,6 @@ r \left(1 - \left(\frac{r}{c}\right)^2\right)^2 &amp; |r| \le c \\
 \end{cases}
 \end{split}\]</div>
 <p>Los outliers muy extremos reciben peso <span class="math notranslate nohighlight">\(0\)</span> (se excluyen del ajuste).</p>
-</section>
 <section id="metodo-huber-y-tukey">
 <h3>5.5.1 Metodo Huber y Tukey<a class="headerlink" href="#metodo-huber-y-tukey" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -693,7 +660,7 @@ Norm:                          HuberT
 Scale Est.:                       mad                                         
 Cov Type:                          H1                                         
 Date:                Mon, 01 Dec 2025                                         
-Time:                        03:18:08                                         
+Time:                        03:21:42                                         
 No. Iterations:                     9                                         
 ================================================================================
                    coef    std err          z      P&gt;|z|      [0.025      0.975]
@@ -722,7 +689,7 @@ Norm:                   TukeyBiweight
 Scale Est.:                       mad                                         
 Cov Type:                          H1                                         
 Date:                Mon, 01 Dec 2025                                         
-Time:                        03:18:08                                         
+Time:                        03:21:42                                         
 No. Iterations:                    12                                         
 ================================================================================
                    coef    std err          z      P&gt;|z|      [0.025      0.975]
@@ -757,9 +724,8 @@ If the model instance has been used for another fit with different fit parameter
 <li><p>Repetimos esto <span class="math notranslate nohighlight">\(B\)</span> veces (para el ejercicio <span class="math notranslate nohighlight">\(B=2000\)</span>), y para cada muestra bootstrap re-estimamos el modelo OLS y guardamos los coeficientes.</p></li>
 <li><p>Las inferencias se hacen sobre la distribución empírica de los coeficientes media, desviación estándar, intervalos percentiles, y demas.</p></li>
 </ul>
-</section>
-<section id="eleccion-de-la-longitud-de-bloque-ell">
-<h3>Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span><a class="headerlink" href="#eleccion-de-la-longitud-de-bloque-ell" title="Link to this heading">#</a></h3>
+<p><strong>Elección de la longitud de bloque</strong>
+<span class="math notranslate nohighlight">\(\ell\)</span></p>
 <ul class="simple">
 <li><p>Regla de pulgar común: <span class="math notranslate nohighlight">\(\ell \approx T^{1/3}\)</span></p></li>
 </ul>
@@ -1472,24 +1438,10 @@ holiday_1
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">5.1. Importacion de librerias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">5.2. Lectura de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-set-training-and-test">5.3 Split data set (Training and test)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">5.4 Errores estándar HAC (Newey–West).</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-hac-neweywest">Método HAC (Newey–West)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-ols">Modelo OLS</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-hac">Estimador HAC</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">Parámetros</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-estandar-hac-neweywest">5.4 Errores estándar HAC (Newey–West).</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-m-robust-huber-y-tukey">5.5 Estimadores M Robust (Huber y Tukey)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-sobre-un-modelo-ols">Aplicación sobre un modelo OLS</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-m-general">Estimador M general</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-de-huber">Estimador de Huber</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimador-tukey-bisquare-biweight">Estimador Tukey Bisquare (Biweight)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-huber-y-tukey">5.5.1 Metodo Huber y Tukey</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-temporal-moving-block-bootstrap-2000-replicas">5.5.2. Bootstrap temporal (Moving Block Bootstrap) — 2000 réplicas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-de-la-longitud-de-bloque-ell">Elección de la longitud de bloque  <span class="math notranslate nohighlight">\(\ell\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-robustez-de-los-coeficientes-por-metodo">5.6 Tabla comparativa, robustez de los coeficientes por metodo</a><ul class="nav section-nav flex-column">

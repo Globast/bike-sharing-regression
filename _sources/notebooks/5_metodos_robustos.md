@@ -59,16 +59,16 @@ print("tamaño set de prueba:", test.shape)
 
 ## 5.4 Errores estándar HAC (Newey–West).  
 
-### Método HAC (Newey–West)  
+**Método HAC (Newey–West)**
 
 El estimador de **Errores estándar HAC (Heteroskedasticity and Autocorrelation Consistent)** ajusta la matriz de varianzas y covarianzas de los coeficientes OLS para ser robusta frente a heterocedasticidad y autocorrelación.
 
-#### Modelo OLS
+**Modelo OLS**
 $$
 y_t = X_t \beta + u_t
 $$
 
-#### Estimador HAC
+**Estimador HAC**
 
 $$
 \widehat{V}_{HAC} = (X'X)^{-1} \, \widehat{S} \, (X'X)^{-1}
@@ -86,13 +86,13 @@ $$
 
 
 
-#### Parámetros
+**Parámetros**
 - $\hat{u}_t$: residuos estimados del modelo OLS  
 - $X_t$: vector de regresores en el tiempo $t$  
 - $q$: número de rezagos (`maxlags`) especificado  
 - $w_l = 1 - \frac{l}{q+1}$: pesos de Bartlett que decrecen linealmente con el rezago
 
-#### Interpretación
+**Interpretación**
 - El primer término corrige la **heterocedasticidad**.  
 - El segundo término corrige la **autocorrelación** hasta el rezago $q$.  
 - Los coeficientes $\beta$ no cambian, pero los errores estándar y las pruebas de significancia se ajustan.
@@ -129,7 +129,7 @@ print(modelo_hac.summary())
 ```
 
 ## 5.5 Estimadores M Robust (Huber y Tukey)  
-#### Aplicación sobre un modelo OLS
+**Aplicación sobre un modelo OLS**
 
 Cuando hacemos regresión OLS, los coeficientes se estiman minimizando:
 
@@ -141,7 +141,7 @@ Esto hace que OLS sea **muy sensible a valores atípicos**, porque los residuos 
 
 Los **estimadores M** reducen la influencia de estos valores usando una función de pérdida $ \rho(\cdot) $ que penaliza menos a los outliers.
 
-#### Estimador M general
+**Estimador M general**
 
 Los estimadores M encuentran los coeficientes resolviendo:
 
@@ -160,7 +160,7 @@ $$
 \sum_{i=1}^n \psi(r_i)x_i = 0
 $$
 
-#### Estimador de Huber
+**Estimador de Huber**
 
 La función de pérdida es:
 
@@ -184,7 +184,7 @@ $$
 
 Reduce la influencia de outliers moderados sin descartarlos.
 
-#### Estimador Tukey Bisquare (Biweight)
+**Estimador Tukey Bisquare (Biweight)**
 
 Función de pérdida:
 
@@ -249,7 +249,8 @@ En el **Moving Block Bootstrap (MBB)**:
 - Repetimos esto $B$ veces (para el ejercicio $B=2000$), y para cada muestra bootstrap re-estimamos el modelo OLS y guardamos los coeficientes.
 - Las inferencias se hacen sobre la distribución empírica de los coeficientes media, desviación estándar, intervalos percentiles, y demas.
 
-### Elección de la longitud de bloque  $\ell$
+**Elección de la longitud de bloque**
+  $\ell$
 - Regla de pulgar común: $\ell \approx T^{1/3}$ 
 
 ```{code-cell} ipython3
